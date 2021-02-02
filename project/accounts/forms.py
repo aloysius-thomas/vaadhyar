@@ -28,3 +28,5 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("invalid credentials")
 
         return super(LoginForm, self).clean()
+class CourseForm(forms.Form):
+    course = forms.CharField(max_length=120)
