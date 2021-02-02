@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from accounts.choices import AVAILABLE_TIME_CHOICES
+from accounts.choices import DEPARTMENT_CHOICES
 from accounts.choices import USER_TYPE
 from accounts.validations import phone_regex
 
@@ -8,6 +10,7 @@ from accounts.validations import phone_regex
 class User(AbstractUser):
     user_type = models.CharField(choices=USER_TYPE, max_length=16, default='admin')
     created_at = models.DateTimeField(auto_now_add=True)
+    email = models.EmailField(unique=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='profile-pic/')
     mobile_number = models.CharField(validators=[phone_regex], max_length=20, blank=True, null=True)
@@ -15,7 +18,7 @@ class User(AbstractUser):
     address = models.TextField(blank=True, null=True)
     place = models.CharField(max_length=62, blank=True, null=True)
     pin_code = models.IntegerField(blank=True, null=True)
-    department = models.CharField(max_length=32)
+    department = models.CharField(max_length=64, choices=DEPARTMENT_CHOICES)
     gender = models.CharField(max_length=6, blank=True, null=True)
 
     def __str__(self):
@@ -50,7 +53,7 @@ class Teacher(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     qualification = models.CharField(max_length=128)
     experience = models.CharField(max_length=128)
-    available_time = models.CharField(max_length=32)
+    available_time = models.CharField(max_length=32, choices=AVAILABLE_TIME_CHOICES)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE)
     salary = models.IntegerField()
 
@@ -78,6 +81,7 @@ class Trainers(models.Model):
     experience = models.CharField(max_length=128)
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
     salary = models.IntegerField()
+    available_time = models.CharField(max_length=32, choices=AVAILABLE_TIME_CHOICES)
 
     def __str__(self):
         return f'{self.user} profile'

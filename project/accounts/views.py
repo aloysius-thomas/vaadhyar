@@ -16,7 +16,7 @@ def dashboard_view(request):
 def hod_list_view(request):
     title = 'HOD'
     hod_list = User.objects.filter(user_type='hod')
-    context = {'title': title, 'list_items': hod_list, }
+    context = {'title': title, 'list_items': hod_list, 'btn_text': "Add HOD"}
     return render(request, 'accounts/hod-list.html', context)
 
 
@@ -31,7 +31,7 @@ def teachers_list_view(request):
             teacher_list = User.objects.filter(user_type='teacher', department=request.user.department)
     else:
         teacher_list = User.objects.filter(user_type='teacher')
-    context = {'title': title, 'list_items': teacher_list, }
+    context = {'title': title, 'list_items': teacher_list, 'btn_text': "Add Teacher"}
     return render(request, 'accounts/teachers-list.html', context)
 
 
@@ -46,7 +46,7 @@ def students_list_view(request):
             user_list = User.objects.filter(user_type='student', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='student')
-    context = {'title': title, 'list_items': user_list, }
+    context = {'title': title, 'list_items': user_list}
     return render(request, 'accounts/students-list.html', context)
 
 
@@ -61,7 +61,7 @@ def trainees_list_view(request):
             user_list = User.objects.filter(user_type='trainee', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='trainee')
-    context = {'title': title, 'list_items': user_list, }
+    context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainee"}
     return render(request, 'accounts/trainees-list.html', context)
 
 

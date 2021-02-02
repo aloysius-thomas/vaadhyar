@@ -1,7 +1,7 @@
 from django.urls import path
 
-from accounts.views import home_view
+from accounts.views import hod_list_view
 
 urlpatterns = [
-    path('hod/', home_view, name='home'),
+    path('hod/list/', hod_list_view, name='hod-list'),
 ]
