@@ -13,6 +13,38 @@ def dashboard_view(request):
     return render(request, 'dashboard.html', {})
 
 
+def login_view(request):
+    pass
+
+
+def logout_view(request):
+    pass
+
+
+def change_password(request):
+    pass
+
+
+def hod_creation_view(request):
+    pass
+
+
+def teacher_creation_view(request):
+    pass
+
+
+def trainer_creation_view(request):
+    pass
+
+
+def student_register_view(request):
+    pass
+
+
+def trainee_register_view(request):
+    pass
+
+
 def hod_list_view(request):
     title = 'HOD'
     hod_list = User.objects.filter(user_type='hod')
@@ -61,7 +93,7 @@ def trainees_list_view(request):
             user_list = User.objects.filter(user_type='trainee', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='trainee')
-    context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainee"}
+    context = {'title': title, 'list_items': user_list}
     return render(request, 'accounts/user-list.html', context)
 
 
@@ -76,5 +108,5 @@ def trainers_list_view(request):
             user_list = User.objects.filter(user_type='trainer', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='trainer')
-    context = {'title': title, 'list_items': user_list, }
+    context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainers"}
     return render(request, 'accounts/user-list.html', context)
