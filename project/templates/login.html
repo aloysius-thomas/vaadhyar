@@ -26,16 +26,19 @@
             <form action="{% url 'login' %}" method="POST">
 
                 {% csrf_token %}
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger" role="alert">
+
+                <span class="login100-form-title">
+						LOGIN
+                </span>
+                <span>
+						{% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
                         {% for error in form.non_field_errors %}
                             {{ error }}
                         {% endfor %}
-                    </div>
-                {% endif %}
-                <span class="login100-form-title">
-						LOGIN
-					</span>
+                            </div>
+                        {% endif %}
+                </span>
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <input class="input100" type="email" name="email" placeholder="Email" required>
                     <span class="focus-input100"></span>

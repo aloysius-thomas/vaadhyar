@@ -19,7 +19,10 @@ def dashboard_view(request):
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        print(form.is_valid(), 'iiiiiiiiiiiiiiiiii')
+        print(form.errors, 'iiiiiiiiiiiiiiiiii')
         if form.is_valid():
+            print('form valid')
             email = form.cleaned_data.get('email')
             user = User.objects.get(email=email)
             auth.login(request, user)

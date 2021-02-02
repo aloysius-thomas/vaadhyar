@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from accounts.models import User
 
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(max_length=120, widget=forms.PasswordInput())
 
