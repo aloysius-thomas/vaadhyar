@@ -3,9 +3,11 @@
     <div class="product-status-wrap drp-lst">
         <h4>{{ title }}</h4>
         {% if user.is_superuser %}
-            <div class="add-product">
-                <a href="#">Add HOD</a>
-            </div>
+            {% if btn_text %}
+                <div class="add-product">
+                    <a href="#">{{ btn_text }}</a>
+                </div>
+            {% endif %}
         {% endif %}
 
         <div class="asset-inner">
