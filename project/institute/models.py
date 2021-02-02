@@ -98,3 +98,11 @@ class Attendance(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     date = models.DateField()
     status = models.CharField(max_length=12, choices=STATUS)
+
+
+class Interview(models.Model):
+    company = models.CharField(max_length=128)
+    description = models.TextField()
+    date = models.DateField()
+    time = models.TimeField()
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
