@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from accounts.models import User
+from accounts.forms import CourseForm
+from accounts.models import User, Course
+from django.contrib.auth.decorators import login_required
 
 tuition_departments = []
 
@@ -110,3 +112,30 @@ def trainers_list_view(request):
         user_list = User.objects.filter(user_type='trainer')
     context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainers"}
     return render(request, 'accounts/user-list.html', context)
+
+def courses(request):
+    title = 'Courses'
+    if request.user.is_superuser:
+        cours = Course.objects.all().order_by('-id')
+    return render(request,'courses/courses_list.html',{"courses":cours,"title":title})
+
+@login_required
+def course_add(request):
+    form = CourseForm()
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('course')
+            print("F",name)
+
+            obj=Course(name=name)
+            obj.save()
+            return redirect('/accounts/courses/list/')
+        else:
+            print("not valid form")
+
+    else:
+        print("else")
+        form = CourseForm()
+    return render(request,'courses/add-course.html',{"form":form})
+
