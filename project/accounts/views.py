@@ -1,5 +1,8 @@
+from django.contrib import auth
+from django.shortcuts import redirect
 from django.shortcuts import render
 
+from accounts.forms import LoginForm
 from accounts.models import User
 
 tuition_departments = []
@@ -14,7 +17,16 @@ def dashboard_view(request):
 
 
 def login_view(request):
-    pass
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            user = User.objects.get(email=email)
+            auth.login(request, user)
+            return redirect('dashboard')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
 
 def logout_view(request):

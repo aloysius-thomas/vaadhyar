@@ -6,11 +6,15 @@ from django.urls import path
 
 from accounts.views import home_view
 from accounts.views import dashboard_view
+from accounts.views import login_view
+from accounts.views import logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
-    path('dashboard/', dashboard_view, name='home'),
+    path('dashboard/', dashboard_view, name='dashboard'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('accounts/', include('accounts.urls')),
 ]
 
