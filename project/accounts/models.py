@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from project.accounts.choices import USER_TYPE
-from project.accounts.validations import phone_regex
+from accounts.choices import USER_TYPE
+from accounts.validations import phone_regex
 
 
 class User(AbstractUser):
@@ -11,12 +11,12 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='profile-pic/')
     mobile_number = models.CharField(validators=[phone_regex], max_length=20, blank=True, null=True)
-    date_of_birth = models.DateField()
-    address = models.TextField()
-    place = models.CharField(max_length=62)
-    pin_code = models.IntegerField()
+    date_of_birth = models.DateField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    place = models.CharField(max_length=62, blank=True, null=True)
+    pin_code = models.IntegerField(blank=True, null=True)
     department = models.CharField(max_length=12)
-    gender = models.CharField(max_length=6)
+    gender = models.CharField(max_length=6, blank=True, null=True)
 
     def __str__(self):
         return self.get_full_name() if self.get_full_name() else self.username
