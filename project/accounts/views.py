@@ -1,4 +1,6 @@
 from django.contrib import auth
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
 
@@ -12,6 +14,7 @@ def home_view(request):
     return render(request, 'home.html', {})
 
 
+@login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html', {})
 
@@ -19,8 +22,6 @@ def dashboard_view(request):
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        print(form.is_valid(), 'iiiiiiiiiiiiiiiiii')
-        print(form.errors, 'iiiiiiiiiiiiiiiiii')
         if form.is_valid():
             print('form valid')
             email = form.cleaned_data.get('email')
@@ -33,7 +34,8 @@ def login_view(request):
 
 
 def logout_view(request):
-    pass
+    logout(request)
+    return redirect('dashboard')
 
 
 def change_password(request):
