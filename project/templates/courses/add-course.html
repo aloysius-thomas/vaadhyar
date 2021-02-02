@@ -1,0 +1,22 @@
+{% extends 'base-admin.html' %}
+{% block contents %}
+    <div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+             <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Course</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p class="col-md-8 mt-8"> Course : {{form.course}}
+                            <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Create</button>
+</p>
+
+                    </form>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

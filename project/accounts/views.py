@@ -132,11 +132,13 @@ def trainers_list_view(request):
     context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainers"}
     return render(request, 'accounts/user-list.html', context)
 
+
 def courses(request):
     title = 'Courses'
     if request.user.is_superuser:
         cours = Course.objects.all().order_by('-id')
-    return render(request,'courses/courses_list.html',{"courses":cours,"title":title})
+    return render(request, 'courses/courses_list.html', {"courses": cours, "title": title})
+
 
 @login_required
 def course_add(request):
@@ -145,9 +147,8 @@ def course_add(request):
         form = CourseForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data.get('course')
-            print("F",name)
 
-            obj=Course(name=name)
+            obj = Course(name=name)
             obj.save()
             return redirect('/accounts/courses/list/')
         else:
@@ -156,5 +157,18 @@ def course_add(request):
     else:
         print("else")
         form = CourseForm()
-    return render(request,'courses/add-course.html',{"form":form})
+    return render(request, 'courses/add-course.html', {"form": form})
 
+
+def edit_course(request, id):
+    obj = Course.objects.get(id=id)
+    form = CourseForm(request.POST, obj)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            obj.name = form.cleaned_data.get('course')
+            obj.save()
+            return redirect('/accounts/courses/list/')
+    form = CourseForm()
+
+    return render(request, 'courses/edit-course.html', {"form": form, "obj": obj})

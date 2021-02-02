@@ -7,6 +7,7 @@ from accounts.views import trainees_list_view
 from accounts.views import trainers_list_view
 from accounts.views import courses
 from accounts.views import course_add
+from accounts.views import edit_course
 
 urlpatterns = [
     path('hod/list/', hod_list_view, name='hod-list'),
@@ -16,4 +17,5 @@ urlpatterns = [
     path('trainers/list/', trainers_list_view, name='trainers-list'),
     path('courses/list/', courses, name='courses-list'),
     path('courses/add/', course_add, name='course_add'),
+    path('edit_course/<int:id>/', edit_course, name='edit_course'),
 ]
