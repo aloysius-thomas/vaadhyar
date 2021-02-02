@@ -1,7 +1,8 @@
 USER_TYPE = (
-    (1, "HOD"),
-    (2, "Teacher"),
-    (3, "Student"),
-    (4, "Trainer"),
-    (5, "Trainee")
+    ('hod', "HOD"),
+    ('teacher', "Teacher"),
+    ('student', "Student"),
+    ('trainer', "Trainer"),
+    ('trainee', "Trainee"),
+    ('admin', "Admin")
 )

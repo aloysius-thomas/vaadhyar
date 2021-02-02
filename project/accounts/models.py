@@ -6,7 +6,7 @@ from accounts.validations import phone_regex
 
 
 class User(AbstractUser):
-    user_type = models.IntegerField(choices=USER_TYPE)
+    user_type = models.CharField(choices=USER_TYPE, max_length=16, default='admin')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='profile-pic/')
@@ -15,7 +15,7 @@ class User(AbstractUser):
     address = models.TextField(blank=True, null=True)
     place = models.CharField(max_length=62, blank=True, null=True)
     pin_code = models.IntegerField(blank=True, null=True)
-    department = models.CharField(max_length=12)
+    department = models.CharField(max_length=32)
     gender = models.CharField(max_length=6, blank=True, null=True)
 
     def __str__(self):
