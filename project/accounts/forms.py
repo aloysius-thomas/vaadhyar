@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 
+from accounts.models import Subject
 from accounts.models import User
 
 
@@ -28,5 +29,13 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("invalid credentials")
 
         return super(LoginForm, self).clean()
+
+
 class CourseForm(forms.Form):
     course = forms.CharField(max_length=120)
+
+
+class SubjectForm(forms.ModelForm):
+    class Meta:
+        model = Subject
+        fields = "__all__"

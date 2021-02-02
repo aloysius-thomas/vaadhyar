@@ -1,15 +1,16 @@
-from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from accounts.forms import LoginForm
-from accounts.models import User
 from accounts.forms import CourseForm
-from accounts.models import User, Course
-from django.contrib.auth.decorators import login_required
+from accounts.forms import LoginForm
+from accounts.forms import SubjectForm
+from accounts.models import Course
+from accounts.models import Subject
+from accounts.models import User
 
 tuition_departments = []
 
@@ -172,3 +173,25 @@ def edit_course(request, id):
     form = CourseForm()
 
     return render(request, 'courses/edit-course.html', {"form": form, "obj": obj})
+
+
+def subject_create_list_view(request, subject_id=0):
+    if subject_id != 0:
+        try:
+            subject = Subject.objects.get(id=subject_id)
+        except Subject.DoesNotExist:
+            return HttpResponseNotFound()
+
+        form = SubjectForm(request.POST, instance=subject)
+    else:
+        form = SubjectForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('subject-create-list')
+    context = {
+        'title': 'Subjects',
+        'form': form,
+        'btn_text': "Add Subject",
+        'list_items': Subject.objects.all(),
+    }
+    return render(request, 'accounts/subject-list.html', context)
