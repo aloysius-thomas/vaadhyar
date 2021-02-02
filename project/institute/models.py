@@ -106,3 +106,6 @@ class Interview(models.Model):
     date = models.DateField()
     time = models.TimeField()
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('-id',)

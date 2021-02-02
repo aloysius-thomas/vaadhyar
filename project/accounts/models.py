@@ -24,6 +24,20 @@ class User(AbstractUser):
     def __str__(self):
         return self.get_full_name() if self.get_full_name() else self.username
 
+    def get_profile(self):
+        if self.user_type == 'hod':
+            return HOD.objects.get(user=self)
+        elif self.user_type == 'teacher':
+            return Teacher.objects.get(user=self)
+        elif self.user_type == 'student':
+            return Student.objects.get(user=self)
+        elif self.user_type == 'trainer':
+            return Trainers.objects.get(user=self)
+        elif self.user_type == 'trainee':
+            return Trainee.objects.get(user=self)
+        else:
+            return None
+
 
 class Course(models.Model):
     name = models.CharField(max_length=128)
