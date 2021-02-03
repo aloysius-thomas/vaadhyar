@@ -194,13 +194,13 @@ class StudentRegistrationForm(UserForm):
 
 
 class TraineeRegistrationForm(UserForm):
+    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES[1:])
     father_name = forms.CharField()
     mother_name = forms.CharField()
     guardian_number = forms.IntegerField()
     course = forms.ModelChoiceField(queryset=Course.objects.all())
     board = forms.CharField()
     school_name = forms.CharField()
-    fee = forms.IntegerField()
 
     def save_user(self):
         from accounts.models import Trainee
@@ -213,9 +213,8 @@ class TraineeRegistrationForm(UserForm):
         course = self.cleaned_data.get('course')
         board = self.cleaned_data.get('board')
         school_name = self.cleaned_data.get('school_name')
-        fee = self.cleaned_data.get('fee', None)
         profile = Trainee(user=user, father_name=father_name, mother_name=mother_name,
-                          guardian_number=guardian_number, course=course, board=board, school_name=school_name, fee=fee)
+                          guardian_number=guardian_number, course=course, board=board, school_name=school_name)
         profile.save()
         return user
 
