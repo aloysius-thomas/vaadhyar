@@ -63,7 +63,11 @@
                                             <li class="nav-item">
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
                                                    class="nav-link dropdown-toggle">
-                                                    <img src="{% static 'img/product/pro4.jpg' %}" alt=""/>
+                                                    {% if user.image %}
+                                                        <img src="{{ user.image.url }}" alt=""/>
+                                                    {% else %}
+                                                        <img src="{% static 'images/blank-profile.jpg' %}" alt="" height="50px" width="50px"/>
+                                                    {% endif %}
                                                     <span class="admin-name">{{ user }}</span>
                                                     <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                 </a>
