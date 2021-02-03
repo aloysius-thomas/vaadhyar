@@ -1,0 +1,107 @@
+{% extends 'base-admin.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>{{ title }}</h4>
+                        {% if not user.is_superuser %}
+                            {% if btn_text %}
+                                <div class="add-product">
+                                    <a type="button" class="btn btn-primary" data-toggle="modal"
+                                       data-target="#myModal">{{ btn_text }}</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">{{ btn_text }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {% if form.non_field_errors %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {% for error in form.non_field_errors %}
+                                                        {{ error }}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 mb-0">
+
+
+                                                    <div id="div_id_from_date" class="form-group">
+                                                        <label for="id_from_date" class="control-label  requiredField">
+                                                            From date<span class="asteriskField">*</span>
+                                                        </label>
+                                                        <div class="controls ">
+                                                            <input type="date" name="from_date"
+                                                                   class="dateinput form-control" required=""
+                                                                   id="id_from_date">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-0">
+                                                    <div id="div_id_to_date" class="form-group">
+                                                        <label for="id_to_date" class="control-label  requiredField">
+                                                            To date<span class="asteriskField">*</span>
+                                                        </label>
+                                                        <div class="controls ">
+                                                            <input type="date" name="to_date"
+                                                                   class="dateinput form-control" required=""
+                                                                   id="id_to_date">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-12 mb-0">
+                                                    {{ form.reason|as_crispy_field }}
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                    <th>Reason</th>
+                                    <th>Response</th>
+                                    <th>Status</th>
+                                </tr>
+                                {% for item in list_items %}
+                                    <tr>
+                                        <td>{{ item.from_date|date }}</td>
+                                        <td>{{ item.to_date|date }}</td>
+                                        <td>{{ item.Reason }}</td>
+                                        <td>
+                                            {% if item.response %}
+                                                {{ item.response }}
+                                            {% else %}
+                                                No Response yet
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ item.get_status_display }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

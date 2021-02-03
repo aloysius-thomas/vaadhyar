@@ -2,6 +2,7 @@ from django import forms
 
 from institute.models import Complaint
 from institute.models import Interview
+from institute.models import Leave
 from institute.models import StudyMaterial
 
 
@@ -31,4 +32,14 @@ class ComplaintForm(forms.ModelForm):
         fields = {
             'complaint_to',
             'complaint',
+        }
+
+
+class LeaveForm(forms.ModelForm):
+    class Meta:
+        model = Leave
+        fields = {
+            'from_date',
+            'to_date',
+            'reason',
         }

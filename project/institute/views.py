@@ -5,9 +5,11 @@ from django.shortcuts import render
 
 from institute.forms import ComplaintForm
 from institute.forms import InterviewForm
+from institute.forms import LeaveForm
 from institute.forms import StudyMaterialForm
 from institute.models import Complaint
 from institute.models import Interview
+from institute.models import Leave
 from institute.models import StudyMaterial
 
 
@@ -87,7 +89,7 @@ def complaint_create_list_view(request):
             complaint = form.save(commit=False)
             complaint.user = request.user
             complaint.save()
-            return redirect('', )
+            return redirect('complaint-create-list')
     else:
         form = ComplaintForm()
     list_items = Complaint.objects.filter(user=user)
@@ -111,3 +113,26 @@ def complaint_list_view(request, user_type):
         'list_items': list_items,
     }
     return render(request, 'institute/complaint-list.html', context)
+
+
+@login_required()
+def leave_create_list_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = LeaveForm(request.POST, request.FILES)
+        if form.is_valid():
+            leave = form.save(commit=False)
+            leave.user = request.user
+            leave.status = 'pending'
+            leave.save()
+            return redirect('leave-request-create-list')
+    else:
+        form = LeaveForm()
+    list_items = Leave.objects.filter(user=user)
+    context = {
+        'form': form,
+        'title': "Leave Request",
+        'list_items': list_items,
+        'btn_text': f"New",
+    }
+    return render(request, 'institute/leave-request-list.html', context)
