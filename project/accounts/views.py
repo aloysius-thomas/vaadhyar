@@ -178,7 +178,10 @@ def hod_list_view(request):
 def teachers_list_view(request):
     title = 'Teachers'
     if request.user.user_type == 'student':
-        teacher_list = User.objects.filter(user_type='teacher', department=request.user.department)
+        profile = request.user.get_profile()
+        selected_classes = profile.get_subjects_selected()
+        teacher_list = [obj.teacher.id for obj in selected_classes]
+        teacher_list = User.objects.filter(id__in=teacher_list)
     elif request.user.user_type == 'hod':
         if request.user.department == 'tuition':
             teacher_list = User.objects.filter(user_type='teacher', department__in=tuition_departments)

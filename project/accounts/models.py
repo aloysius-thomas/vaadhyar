@@ -107,7 +107,7 @@ class Student(models.Model):
 
     def get_subjects_selected(self):
         subjects = SelectedClass.objects.filter(student=self.user)
-        return [subject.id for subject in subjects]
+        return subjects
 
 
 class SelectedClass(models.Model):

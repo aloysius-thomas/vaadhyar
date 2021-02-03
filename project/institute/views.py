@@ -66,7 +66,7 @@ def study_material_list_add_view(request, material_type):
         list_items = list_items.filter(course=profile.course)
     elif user.user_type == 'student':
         profile = user.get_profile()
-        subjects = profile.get_subjects_selected()
+        subjects = [subject.id for subject in profile.get_subjects_selected()]
         list_items = list_items.filter(subject_id__in=subjects)
     elif user.user_type == 'trainee':
         profile = user.get_profile()
