@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 
 from accounts.choices import ADMIN_DEPARTMENT_CHOICES
 from accounts.choices import AVAILABLE_TIME_CHOICES
+from accounts.choices import DEPARTMENT_CHOICES
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
@@ -58,8 +59,6 @@ class ChangePasswordForm(forms.ModelForm):
         super(ChangePasswordForm, self).__init__(*args, **kwargs)
 
     def clean(self, *args, **kwargs):
-        print(self.cleaned_data)
-        print(';;;;;;;;;;;;;;;;;;')
         current_password = self.cleaned_data["current_password"]
         new_password = self.cleaned_data["new_password"]
         confirm_password = self.cleaned_data["confirm_password"]
@@ -81,6 +80,8 @@ class ChangePasswordForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    first_name = forms.CharField()
+    last_name = forms.CharField()
 
     class Meta:
         model = User
@@ -162,6 +163,32 @@ class TeacherForm(UserForm):
         subject = self.cleaned_data.get('subject')
         profile = Teacher(user=user, experience=experience, qualification=qualification,
                           salary=salary, available_time=available_time, subject=subject)
+        profile.save()
+        return user
+
+
+class StudentRegistrationForm(UserForm):
+    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES[1:])
+    father_name = forms.CharField()
+    mother_name = forms.CharField()
+    guardian_number = forms.IntegerField()
+    standard = forms.CharField()
+    board = forms.CharField()
+    school_name = forms.CharField()
+
+    def save_user(self):
+        from accounts.models import Student
+        user = get_user_instance(self.cleaned_data)
+        user.user_type = 'student'
+        user.save()
+        father_name = self.cleaned_data.get('father_name')
+        mother_name = self.cleaned_data.get('mother_name')
+        guardian_number = self.cleaned_data.get('guardian_number')
+        standard = self.cleaned_data.get('standard')
+        board = self.cleaned_data.get('board')
+        school_name = self.cleaned_data.get('school_name')
+        profile = Student(user=user, father_name=father_name, mother_name=mother_name,
+                          guardian_number=guardian_number, standard=standard, board=board, school_name=school_name)
         profile.save()
         return user
 

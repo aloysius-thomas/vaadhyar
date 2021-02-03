@@ -1,19 +1,24 @@
 from django.urls import path
 
+from accounts.views import course_add
+from accounts.views import courses
+from accounts.views import edit_course
 from accounts.views import hod_creation_view
 from accounts.views import hod_list_view
+from accounts.views import student_register_view
 from accounts.views import students_list_view
 from accounts.views import subject_create_list_view
 from accounts.views import teacher_creation_view
 from accounts.views import teachers_list_view
+from accounts.views import trainee_register_view
 from accounts.views import trainees_list_view
 from accounts.views import trainer_creation_view
 from accounts.views import trainers_list_view
-from accounts.views import courses
-from accounts.views import course_add
-from accounts.views import edit_course
 
 urlpatterns = [
+
+    path('student/register/', student_register_view, name='student-register'),
+    path('trainee/register/', trainee_register_view, name='trainee-register'),
     path('hod/list/', hod_list_view, name='hod-list'),
     path('hod/create/', hod_creation_view, name='hod-create'),
     path('teachers/list/', teachers_list_view, name='teachers-list'),

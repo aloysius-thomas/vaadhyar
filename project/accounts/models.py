@@ -39,6 +39,13 @@ class User(AbstractUser):
         else:
             return None
 
+    @property
+    def is_class_selected(self):
+        if SelectedClass.objects.filter(user=self).count() == 0:
+            return False
+        else:
+            return True
+
 
 class Course(models.Model):
     name = models.CharField(max_length=128)
@@ -85,10 +92,16 @@ class Student(models.Model):
     standard = models.CharField(max_length=20, blank=True, null=True)
     board = models.CharField(max_length=20, blank=True, null=True)
     school_name = models.CharField(max_length=256)
-    fee = models.IntegerField()
+    fee = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.user} profile'
+
+
+class SelectedClass(models.Model):
+    student = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='class_teacher')
 
 
 class Trainers(models.Model):

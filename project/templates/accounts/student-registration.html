@@ -1,0 +1,135 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static 'css/registration-style.css' %}" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+            <h3>Welcome</h3>
+            <p>If you already have an account please login</p>
+            <a href="{% url 'login' %}">
+                <input type="submit" name="" value="Login"/></a><br/>
+        </div>
+        <div class="col-md-9 register-right">
+            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="{% url 'student-register' %}"
+                       role="tab"
+                       aria-controls="home" aria-selected="true">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="{% url 'trainee-register' %}"
+                       role="tab"
+                       aria-controls="profile" aria-selected="false">Trainee</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Apply as a Student</h3>
+                    <span>
+						{% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                            </div>
+                        {% endif %}
+                    </span>
+                    <div class=" register-form">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ form.username|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form.first_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form.last_name|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.password|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {{ form.email|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form.mobile_number|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form.image|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form.father_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form.mother_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form.guardian_number|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form.department|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            {{ form.gender|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-2">
+                                            {{ form.standard|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-5">
+                                            {{ form.school_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ form.board|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10"></div>
+                                    <div class="col-2 float-right">
+                                        <input type="submit" class="btn btn-primary float-left " value="Register"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
