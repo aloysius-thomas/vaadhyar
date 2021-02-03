@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
 
+from institute.forms import ComplaintForm
 from institute.forms import InterviewForm
 from institute.forms import StudyMaterialForm
+from institute.models import Complaint
 from institute.models import Interview
 from institute.models import StudyMaterial
 
@@ -74,3 +76,25 @@ def study_material_list_add_view(request, material_type):
         'btn_text': f"Add {title}",
     }
     return render(request, 'institute/study-materials-create-list.html', context)
+
+
+@login_required()
+def complaint_create_list_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST, request.FILES)
+        if form.is_valid():
+            complaint = form.save(commit=False)
+            complaint.user = request.user
+            complaint.save()
+            return redirect('', )
+    else:
+        form = ComplaintForm()
+    list_items = Complaint.objects.filter(user=user)
+    context = {
+        'form': form,
+        'title': "Register a Complaint",
+        'list_items': list_items,
+        'btn_text': f"New",
+    }
+    return render(request, 'institute/complaint-create-list.html', context)

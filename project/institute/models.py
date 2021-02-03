@@ -30,8 +30,9 @@ class Feedback(models.Model):
 
 
 class Complaint(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='complaint_from')
-    to = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='complaint_to')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    complaint_to = models.CharField(max_length=16,
+                                    choices=(('hod', 'HOD'), ('teacher', 'Teacher'), ('trainer', 'Trainer')))
     complaint = models.TextField()
     response = models.TextField(blank=True, null=True)
 
