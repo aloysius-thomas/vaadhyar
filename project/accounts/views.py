@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from accounts.choices import TUITION_DEPARTMENTS
-from accounts.forms import CourseForm
+from accounts.forms import CourseForm, TraineeRegistrationForm
 from accounts.forms import HODForm
 from accounts.forms import LoginForm
 from accounts.forms import StudentRegistrationForm
@@ -162,7 +162,19 @@ def select_class_view(request, teacher_id):
 
 
 def trainee_register_view(request):
-    return render(request, 'accounts/trainee-registration.html', {})
+    if request.method == 'POST':
+        form = TraineeRegistrationForm(request.POST, request.FILES)
+        print(form.errors)
+        if form.is_valid():
+            form.save_user()
+            messages.success(request, 'Account created successfully')
+            return redirect('home')
+    else:
+        form = TraineeRegistrationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/trainee-registration.html', context)
 
 
 @login_required()
