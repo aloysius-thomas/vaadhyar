@@ -105,6 +105,10 @@ class Student(models.Model):
     def __str__(self):
         return f'{self.user} profile'
 
+    def get_subjects_selected(self):
+        subjects = SelectedClass.objects.filter(student=self.user)
+        return [subject.id for subject in subjects]
+
 
 class SelectedClass(models.Model):
     student = models.ForeignKey(to=User, on_delete=models.CASCADE)
