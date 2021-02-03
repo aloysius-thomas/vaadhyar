@@ -13,6 +13,7 @@ from accounts.forms import HODForm
 from accounts.forms import LoginForm
 from accounts.forms import SubjectForm
 from accounts.forms import TeacherForm
+from accounts.forms import TrainerForm
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
@@ -91,7 +92,19 @@ def teacher_creation_view(request):
 
 
 def trainer_creation_view(request):
-    pass
+    if request.method == 'POST':
+        form = TrainerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save_user()
+            messages.success(request, 'Account created successfully')
+            return redirect('trainers-list')
+    else:
+        form = TrainerForm()
+    context = {
+        'title': 'Register Trainer',
+        'form': form
+    }
+    return render(request, 'accounts/forms/trainers-form.html', context)
 
 
 def student_register_view(request):
@@ -102,6 +115,7 @@ def trainee_register_view(request):
     pass
 
 
+@login_required()
 def hod_list_view(request):
     title = 'HOD'
     hod_list = User.objects.filter(user_type='hod')
@@ -156,6 +170,7 @@ def trainees_list_view(request):
     return render(request, 'accounts/user-list.html', context)
 
 
+@login_required()
 def trainers_list_view(request):
     title = 'Trainers'
     if request.user.user_type == 'trainee':
@@ -167,7 +182,8 @@ def trainers_list_view(request):
             user_list = User.objects.filter(user_type='trainer', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='trainer')
-    context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainers"}
+    url = reverse('trainers-create')
+    context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainers", 'add_url': url}
     return render(request, 'accounts/user-list.html', context)
 
 
