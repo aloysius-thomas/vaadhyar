@@ -56,6 +56,7 @@ class Salary(models.Model):
 
 
 class StudyMaterial(models.Model):
+    name = models.CharField(max_length=32)
     material_type = models.CharField(choices=STUDY_MATERIAL_TYPE, max_length=16)
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)

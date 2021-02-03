@@ -59,6 +59,7 @@ def change_password(request):
     return render(request, 'change-password.html', context)
 
 
+@login_required()
 def hod_creation_view(request):
     if request.method == 'POST':
         form = HODForm(request.POST, request.FILES)
@@ -75,6 +76,7 @@ def hod_creation_view(request):
     return render(request, 'accounts/forms/hod-form.html', context)
 
 
+@login_required()
 def teacher_creation_view(request):
     if request.method == 'POST':
         form = TeacherForm(request.POST, request.FILES)
@@ -91,6 +93,7 @@ def teacher_creation_view(request):
     return render(request, 'accounts/forms/teacher-form.html', context)
 
 
+@login_required()
 def trainer_creation_view(request):
     if request.method == 'POST':
         form = TrainerForm(request.POST, request.FILES)
@@ -124,6 +127,7 @@ def hod_list_view(request):
     return render(request, 'accounts/user-list.html', context)
 
 
+@login_required()
 def teachers_list_view(request):
     title = 'Teachers'
     if request.user.user_type == 'student':
@@ -140,6 +144,7 @@ def teachers_list_view(request):
     return render(request, 'accounts/user-list.html', context)
 
 
+@login_required()
 def students_list_view(request):
     title = 'Students'
     if request.user.user_type == 'teacher':
@@ -155,6 +160,7 @@ def students_list_view(request):
     return render(request, 'accounts/user-list.html', context)
 
 
+@login_required()
 def trainees_list_view(request):
     title = 'Trainees'
     if request.user.user_type == 'trainer':
@@ -228,6 +234,7 @@ def edit_course(request, id):
     return render(request, 'courses/edit-course.html', {"form": form, "obj": obj})
 
 
+@login_required()
 def subject_create_list_view(request, subject_id=0):
     if subject_id != 0:
         try:
