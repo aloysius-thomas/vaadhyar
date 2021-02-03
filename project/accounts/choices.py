@@ -23,6 +23,15 @@ DEPARTMENT_CHOICES = (
     ('computer-science-engineering', 'Computer Science Engineering'),
 )
 
+ADMIN_DEPARTMENT_CHOICES = (
+    ('tuition', 'Tuition'),
+    ('b.com/m.com', 'B.com/ M.com'),
+    ('civil-engineering', 'Civil Engineering'),
+    ('mechanical-engineering', 'Mechanical Engineering'),
+    ('electrical&electronics-engineering', 'Electrical&Electronics Engineering'),
+    ('computer-science-engineering', 'Computer Science Engineering'),
+)
+
 AVAILABLE_TIME_CHOICES = (
     ('4-5', '4 PM to 5 PM'),
     ('5-6', '5 PM to 6 PM'),
@@ -30,4 +39,9 @@ AVAILABLE_TIME_CHOICES = (
     ('7-8', '7 PM to 8 PM'),
     ('8-9', '8 PM to 9 PM'),
     ('9-10', '9 PM to 10 PM'),
+)
+
+GENDER_CHOICE = (
+    ('male', 'Male'),
+    ('female', 'Female'),
 )

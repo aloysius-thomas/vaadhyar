@@ -3,6 +3,7 @@ from django.db import models
 
 from accounts.choices import AVAILABLE_TIME_CHOICES
 from accounts.choices import DEPARTMENT_CHOICES
+from accounts.choices import GENDER_CHOICE
 from accounts.choices import USER_TYPE
 from accounts.validations import phone_regex
 
@@ -19,7 +20,7 @@ class User(AbstractUser):
     place = models.CharField(max_length=62, blank=True, null=True)
     pin_code = models.IntegerField(blank=True, null=True)
     department = models.CharField(max_length=64, choices=DEPARTMENT_CHOICES)
-    gender = models.CharField(max_length=6, blank=True, null=True)
+    gender = models.CharField(max_length=6, blank=True, null=True, choices=GENDER_CHOICE)
 
     def __str__(self):
         return self.get_full_name() if self.get_full_name() else self.username

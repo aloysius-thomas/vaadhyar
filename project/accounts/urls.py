@@ -1,5 +1,6 @@
 from django.urls import path
 
+from accounts.views import hod_creation_view
 from accounts.views import hod_list_view
 from accounts.views import students_list_view
 from accounts.views import subject_create_list_view
@@ -12,6 +13,7 @@ from accounts.views import edit_course
 
 urlpatterns = [
     path('hod/list/', hod_list_view, name='hod-list'),
+    path('hod/create/', hod_creation_view, name='hod-create'),
     path('teachers/list/', teachers_list_view, name='teachers-list'),
     path('students/list/', students_list_view, name='students-list'),
     path('trainees/list/', trainees_list_view, name='trainees-list'),

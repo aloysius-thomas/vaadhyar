@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 
+from accounts.choices import ADMIN_DEPARTMENT_CHOICES
 from accounts.models import Subject
 from accounts.models import User
 
@@ -74,3 +75,67 @@ class ChangePasswordForm(forms.ModelForm):
         new_password = self.cleaned_data["new_password"]
         user.set_password(new_password)
         user.save()
+
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = {
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'image',
+            'mobile_number',
+            'date_of_birth',
+            'address',
+            'place',
+            'pin_code',
+            'department',
+            'gender',
+        }
+
+
+def get_user_instance(data):
+    username = data.get('username')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    password = data.get('password')
+    address = data.get('address', None)
+    image = data.get('image', None)
+    date_of_birth = data.get('date_of_birth', None)
+    place = data.get('place', None)
+    pin_code = data.get('pin_code', None)
+    department = data.get('department')
+    gender = data.get('gender')
+    mobile_number = data.get('mobile_number', None)
+    email = data.get('email')
+
+    user = User(username=username, first_name=first_name, last_name=last_name,
+                address=address, mobile_number=mobile_number, email=email, image=image, date_of_birth=date_of_birth,
+                place=place, pin_code=pin_code, department=department, gender=gender)
+    user.set_password(password)
+    user.save()
+    return user
+
+
+class HODForm(UserForm):
+    department = forms.ChoiceField(choices=ADMIN_DEPARTMENT_CHOICES)
+    qualification = forms.CharField(required=False)
+    experience = forms.CharField(required=False)
+    salary = forms.IntegerField()
+
+    def save_user(self):
+        from accounts.models import HOD
+        user = get_user_instance(self.cleaned_data)
+        user.user_type = 'hod'
+        user.save()
+        qualification = self.cleaned_data.get('qualification', None)
+        experience = self.cleaned_data.get('experience', None)
+        salary = self.cleaned_data.get('salary', None)
+        profile = HOD(user=user, experience=experience, qualification=qualification,
+                      salary=salary)
+        profile.save()
+        return user

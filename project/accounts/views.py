@@ -1,12 +1,15 @@
 from django.contrib import auth
+from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse
 
 from accounts.forms import ChangePasswordForm
 from accounts.forms import CourseForm
+from accounts.forms import HODForm
 from accounts.forms import LoginForm
 from accounts.forms import SubjectForm
 from accounts.models import Course
@@ -55,7 +58,19 @@ def change_password(request):
 
 
 def hod_creation_view(request):
-    pass
+    if request.method == 'POST':
+        form = HODForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save_user()
+            messages.success(request, 'Account created successfully')
+            return redirect('hod-list')
+    else:
+        form = HODForm()
+    context = {
+        'title': 'Register HOD',
+        'form': form
+    }
+    return render(request, 'accounts/forms/hod-form.html', context)
 
 
 def teacher_creation_view(request):
@@ -77,7 +92,8 @@ def trainee_register_view(request):
 def hod_list_view(request):
     title = 'HOD'
     hod_list = User.objects.filter(user_type='hod')
-    context = {'title': title, 'list_items': hod_list, 'btn_text': "Add HOD"}
+    url = reverse('hod-create')
+    context = {'title': title, 'list_items': hod_list, 'btn_text': "Add HOD", 'add_url': url}
     return render(request, 'accounts/user-list.html', context)
 
 
