@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 
 from accounts.choices import ADMIN_DEPARTMENT_CHOICES
+from accounts.choices import AVAILABLE_TIME_CHOICES
 from accounts.models import Subject
 from accounts.models import User
 
@@ -137,5 +138,28 @@ class HODForm(UserForm):
         salary = self.cleaned_data.get('salary', None)
         profile = HOD(user=user, experience=experience, qualification=qualification,
                       salary=salary)
+        profile.save()
+        return user
+
+
+class TeacherForm(UserForm):
+    qualification = forms.CharField(required=False)
+    experience = forms.CharField(required=False)
+    available_time = forms.ChoiceField(choices=AVAILABLE_TIME_CHOICES)
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all())
+    salary = forms.IntegerField()
+
+    def save_user(self):
+        from accounts.models import Teacher
+        user = get_user_instance(self.cleaned_data)
+        user.user_type = 'teacher'
+        user.save()
+        qualification = self.cleaned_data.get('qualification', None)
+        experience = self.cleaned_data.get('experience', None)
+        salary = self.cleaned_data.get('salary', None)
+        available_time = self.cleaned_data.get('available_time')
+        subject = self.cleaned_data.get('subject')
+        profile = Teacher(user=user, experience=experience, qualification=qualification,
+                          salary=salary, available_time=available_time, subject=subject)
         profile.save()
         return user

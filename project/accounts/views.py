@@ -12,6 +12,7 @@ from accounts.forms import CourseForm
 from accounts.forms import HODForm
 from accounts.forms import LoginForm
 from accounts.forms import SubjectForm
+from accounts.forms import TeacherForm
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
@@ -74,7 +75,19 @@ def hod_creation_view(request):
 
 
 def teacher_creation_view(request):
-    pass
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save_user()
+            messages.success(request, 'Account created successfully')
+            return redirect('teachers-list')
+    else:
+        form = TeacherForm()
+    context = {
+        'title': 'Register Teacher',
+        'form': form
+    }
+    return render(request, 'accounts/forms/teacher-form.html', context)
 
 
 def trainer_creation_view(request):
@@ -108,7 +121,8 @@ def teachers_list_view(request):
             teacher_list = User.objects.filter(user_type='teacher', department=request.user.department)
     else:
         teacher_list = User.objects.filter(user_type='teacher')
-    context = {'title': title, 'list_items': teacher_list, 'btn_text': "Add Teacher"}
+    url = reverse('teachers-create')
+    context = {'title': title, 'list_items': teacher_list, 'btn_text': "Add Teacher", 'add_url': url}
     return render(request, 'accounts/user-list.html', context)
 
 
