@@ -5,6 +5,7 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.shortcuts import render
 
+from accounts.forms import ChangePasswordForm
 from accounts.forms import CourseForm
 from accounts.forms import LoginForm
 from accounts.forms import SubjectForm
@@ -44,7 +45,13 @@ def logout_view(request):
 
 
 def change_password(request):
-    pass
+    title = 'Change Password'
+    form = ChangePasswordForm(request.POST or None, request=request)
+    if form.is_valid():
+        form.save_password()
+        return redirect('home')
+    context = {'form': form, 'title': title}
+    return render(request, 'change-password.html', context)
 
 
 def hod_creation_view(request):

@@ -39,3 +39,38 @@ class SubjectForm(forms.ModelForm):
     class Meta:
         model = Subject
         fields = "__all__"
+
+
+class ChangePasswordForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = {}
+
+    current_password = forms.PasswordInput()
+    new_password = forms.PasswordInput()
+    confirm_password = forms.PasswordInput()
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
+
+    def clean(self, *args, **kwargs):
+        print(self.cleaned_data)
+        print(';;;;;;;;;;;;;;;;;;')
+        current_password = self.cleaned_data["current_password"]
+        new_password = self.cleaned_data["new_password"]
+        confirm_password = self.cleaned_data["confirm_password"]
+        user = self.request.user
+        user = authenticate(username=user.username, password=current_password)
+        if not user:
+            raise forms.ValidationError("invalid password")
+        if new_password != confirm_password:
+            raise forms.ValidationError("The password doesn't match")
+
+        return super(ChangePasswordForm, self).clean()
+
+    def save_password(self):
+        user = self.request.user
+        new_password = self.cleaned_data["new_password"]
+        user.set_password(new_password)
+        user.save()
