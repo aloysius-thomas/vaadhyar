@@ -87,6 +87,7 @@ class Teacher(models.Model):
     available_time = models.CharField(max_length=32, choices=AVAILABLE_TIME_CHOICES)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE)
     salary = models.IntegerField()
+    student_limit = models.IntegerField(default=5)
 
     def __str__(self):
         return f'{self.user} profile'
@@ -123,6 +124,7 @@ class Trainers(models.Model):
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
     salary = models.IntegerField()
     available_time = models.CharField(max_length=32, choices=AVAILABLE_TIME_CHOICES)
+    student_limit = models.IntegerField(default=5)
 
     def __str__(self):
         return f'{self.user} profile'
