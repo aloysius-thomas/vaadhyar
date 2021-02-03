@@ -1,65 +1,66 @@
 {% extends 'base-admin.html' %}
 {% load crispy_forms_tags %}
 {% block contents %}
-    <div class="product-status-wrap drp-lst">
-        <h4>{{ title }}</h4>
-        {% if user.is_superuser %}
-            {% if btn_text %}
-                <div class="add-product">
-                    <a type="button" class="btn btn-primary" data-toggle="modal"
-                       data-target="#myModal">{{ btn_text }}</a>
+<div class="product-status-wrap drp-lst">
+    <h4>{{ title }}</h4>
+    {% if user.is_superuser %}
+    {% if btn_text %}
+    <div class="add-product">
+        <a type="button" class="btn btn-primary" data-toggle="modal"
+           data-target="#myModal">{{ btn_text }}</a>
+    </div>
+    {% endif %}
+    {% endif %}
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ btn_text }}</h4>
                 </div>
-            {% endif %}
-        {% endif %}
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{ btn_text }}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            {% if form.non_field_errors %}
-                                <div class="alert alert-danger" role="alert">
-                                    {% for error in form.non_field_errors %}
-                                        {{ error }}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                            <div class="form-row">
-                                {{ form|crispy }}
-                                <div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-row">
+                            {{ form|crispy }}
+                            <div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <p align="right">
+    </div>
+    <p align="right">
         <button type="button" class="btn btn-light"><a href="/accounts/subjects/add/">Add Subject</a></button>
     </p>
-        <div class="asset-inner">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Subject</th>
-                    <th>Department</th>
-<!--                    <th>Action</th>-->
-                </tr>
-                {% for item in list_items %}
-                    <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.department }}</td>
-                        <td></td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+    <div class="asset-inner">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+            {% for item in list_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.department }}</td>
+                <td><a href="{% url 'edit_subject' item.id %}">Edit</a></td>
+                <td> <button class="btn btn-danger"><a href="{% url 'delete_subject' item.id %}">Delete</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
+</div>
 {% endblock %}

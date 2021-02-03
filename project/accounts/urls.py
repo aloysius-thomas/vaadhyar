@@ -5,6 +5,9 @@ from accounts.views import course_add
 from accounts.views import subject_add
 from accounts.views import courses
 from accounts.views import edit_course
+from accounts.views import edit_subject
+from accounts.views import delete_subject
+from accounts.views import delete_course
 from accounts.views import hod_creation_view
 from accounts.views import hod_list_view
 from accounts.views import select_class_view
@@ -34,6 +37,9 @@ urlpatterns = [
     path('courses/add/', course_add, name='course-add'),
     path('subjects/add/', subject_add, name='subject-add'),
     path('edit_course/<int:id>/', edit_course, name='edit_course'),
+    path('delete_course/<int:id>/', delete_course, name='delete_course'),
+    path('edit_subject/<int:id>/', edit_subject, name='edit_subject'),
+    path('delete_subject/<int:id>/', delete_subject, name='delete_subject'),
     path('subjects/', subject_create_list_view, name='subject-create-list'),
     path('available-class/', available_class_view, name='available-class'),
     path('select_class_view/<int:teacher_id>/', select_class_view, name='select-class'),
