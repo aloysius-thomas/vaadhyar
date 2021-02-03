@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -16,6 +17,7 @@ from accounts.forms import SubjectForm
 from accounts.forms import TeacherForm
 from accounts.forms import TrainerForm
 from accounts.models import Course
+from accounts.models import SelectedClass
 from accounts.models import Subject
 from accounts.models import User
 
@@ -141,6 +143,22 @@ def available_class_view(request):
         'list_items': teachers.filter(id__in=teacher_id_list)
     }
     return render(request, 'accounts/available-class.html', context)
+
+
+def select_class_view(request, teacher_id):
+    try:
+        teacher = User.objects.get(id=teacher_id)
+    except User.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        user = request.user
+        if user.user_type == 'student':
+            selected = SelectedClass.objects.create(student=user, subject=teacher.get_profile().subject,
+                                                    teacher=teacher)
+            selected.save()
+            messages.success(request, "Class selected")
+        messages.success(request, "Something went wrong")
+    return redirect('dashboard')
 
 
 def trainee_register_view(request):

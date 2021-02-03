@@ -6,6 +6,7 @@ from accounts.views import courses
 from accounts.views import edit_course
 from accounts.views import hod_creation_view
 from accounts.views import hod_list_view
+from accounts.views import select_class_view
 from accounts.views import student_register_view
 from accounts.views import students_list_view
 from accounts.views import subject_create_list_view
@@ -33,4 +34,5 @@ urlpatterns = [
     path('edit_course/<int:id>/', edit_course, name='edit_course'),
     path('subjects/', subject_create_list_view, name='subject-create-list'),
     path('available-class/', available_class_view, name='available-class'),
+    path('select_class_view/<int:teacher_id>/', select_class_view, name='select-class'),
 ]

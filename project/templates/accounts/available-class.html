@@ -10,7 +10,8 @@
                             <div class="courses-inner res-mg-b-30">
                                 <div class="courses-title">
                                     <a href="#"><img src="{{ item.image.url }}" alt="" width="100%"></a>
-                                    <h2>{{ item.get_subject }}<small>{{ item.get_subject.get_department_display }}</small></h2>
+                                    <h2>{{ item.get_subject }}<small>{{ item.get_subject.get_department_display }}</small>
+                                    </h2>
 
                                 </div>
                                 <div class="courses-alaltic">
@@ -28,7 +29,9 @@
                                         <b>Qualification:</b> {{ item.get_profile.qualification }}</p>
                                 </div>
                                 <div class="product-buttons">
-                                    <button type="button" class="button-default cart-btn">Select Class</button>
+                                    <a href="{% url 'select-class' item.id %}">
+                                        <button type="button" class="button-default cart-btn">Select Class</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
