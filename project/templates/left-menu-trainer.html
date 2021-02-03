@@ -69,10 +69,22 @@
                         </a>
                     </li>
                     <li>
-                        <a title="Complaint" href="#">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Complaint</span>
+                        <a title="Complaints" class="has-arrow" href="#">
+                            <span class="fa fa-stop-circle icon-wrap"></span>
+                            <span class="mini-click-non">Complaints</span>
                         </a>
+                        <ul class="submenu-angle" aria-expanded="true">
+                            <li>
+                                <a title="Register a Complaint" href="{% url 'complaint-create-list-' %}">
+                                    <span class="mini-sub-pro">Register a Complaint</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Students Complaints" href="{% url 'complaint-list' 'trainee' %}">
+                                    <span class="mini-sub-pro">Trainees Complaint</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a title="Feedback" href="#">

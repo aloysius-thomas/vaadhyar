@@ -76,22 +76,22 @@
                         </a>
                         <ul class="submenu-angle" aria-expanded="true">
                             <li>
-                                <a title="Students Complaints" href="#">
+                                <a title="Students Complaints" href="{% url 'complaint-list' 'student' %}">
                                     <span class="mini-sub-pro">Students</span>
                                 </a>
                             </li>
                             <li>
-                                <a title="Trainees Complaints" href="#">
+                                <a title="Trainees Complaints" href="{% url 'complaint-list' 'trainee' %}">
                                     <span class="mini-sub-pro">Trainees</span>
                                 </a>
                             </li>
                             <li>
-                                <a title="Teachers Complaints" href="#">
+                                <a title="Teachers Complaints" href="{% url 'complaint-list' 'teacher' %}">
                                     <span class="mini-sub-pro">Teachers</span>
                                 </a>
                             </li>
                             <li>
-                                <a title="Trainers Complaints" href="#">
+                                <a title="Trainers Complaints" href="{% url 'complaint-list' 'trainer' %}">
                                     <span class="mini-sub-pro">Trainers</span>
                                 </a>
                             </li>
