@@ -193,6 +193,33 @@ class StudentRegistrationForm(UserForm):
         return user
 
 
+class TraineeRegistrationForm(UserForm):
+    father_name = forms.CharField()
+    mother_name = forms.CharField()
+    guardian_number = forms.IntegerField()
+    course = forms.ModelChoiceField(queryset=Course.objects.all())
+    board = forms.CharField()
+    school_name = forms.CharField()
+    fee = forms.IntegerField()
+
+    def save_user(self):
+        from accounts.models import Trainee
+        user = get_user_instance(self.cleaned_data)
+        user.user_type = 'trainee'
+        user.save()
+        father_name = self.cleaned_data.get('father_name')
+        mother_name = self.cleaned_data.get('mother_name')
+        guardian_number = self.cleaned_data.get('guardian_number')
+        course = self.cleaned_data.get('course')
+        board = self.cleaned_data.get('board')
+        school_name = self.cleaned_data.get('school_name')
+        fee = self.cleaned_data.get('fee', None)
+        profile = Trainee(user=user, father_name=father_name, mother_name=mother_name,
+                          guardian_number=guardian_number, course=course, board=board, school_name=school_name, fee=fee)
+        profile.save()
+        return user
+
+
 class TrainerForm(UserForm):
     qualification = forms.CharField(required=False)
     experience = forms.CharField(required=False)
@@ -214,3 +241,5 @@ class TrainerForm(UserForm):
                            salary=salary, available_time=available_time, course=course)
         profile.save()
         return user
+
+
