@@ -282,6 +282,23 @@ def course_add(request):
     return render(request, 'courses/add-course.html', {"form": form})
 
 
+@login_required
+def subject_add(request):
+    form = SubjectForm()
+    if request.method == "POST":
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('subject-create-list')
+        else:
+            print("not valid form")
+
+    else:
+        print("else")
+        form = SubjectForm()
+    return render(request, 'subjects/add-subject.html', {"form": form})
+
+
 def edit_course(request, id):
     obj = Course.objects.get(id=id)
     form = CourseForm(request.POST, obj)

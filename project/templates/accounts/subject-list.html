@@ -40,17 +40,22 @@
                 </div>
             </div>
         </div>
+        <p align="right">
+        <button type="button" class="btn btn-light"><a href="/accounts/subjects/add/">Add Subject</a></button>
+    </p>
         <div class="asset-inner">
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Subject</th>
-                    <th>Action</th>
+                    <th>Department</th>
+<!--                    <th>Action</th>-->
                 </tr>
                 {% for item in list_items %}
                     <tr>
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
+                        <td>{{ item.department }}</td>
                         <td></td>
                     </tr>
                 {% endfor %}
