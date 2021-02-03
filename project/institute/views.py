@@ -40,6 +40,7 @@ def interview_create_list_view(request):
 def study_material_list_add_view(request, material_type):
     title = material_type.replace('-', ' ')
     title = title.title()
+    user = request.user
     if request.method == 'POST':
         form = StudyMaterialForm(request.POST, request.FILES)
         if form.is_valid():
@@ -51,9 +52,24 @@ def study_material_list_add_view(request, material_type):
     else:
         form = StudyMaterialForm()
     list_items = StudyMaterial.objects.filter(material_type=material_type)
+    if user.user_type == 'teacher':
+        profile = user.get_profile
+        list_items = list_items.filter(subject=profile.subject)
+    elif user.user_type == 'trainer':
+        profile = user.get_profile
+        list_items = list_items.filter(course=profile.course)
+    elif user.user_type == 'student':
+        profile = user.get_profile
+        list_items = list_items.filter(subject=profile.subject)
+    elif user.user_type == 'trainee':
+        profile = user.get_profile
+        list_items = list_items.filter(course=profile.course)
+    else:
+        list_items = list_items
     context = {
         'form': form,
         'title': title,
+        'material_type': material_type,
         'list_items': list_items,
         'btn_text': f"Add {title}",
     }

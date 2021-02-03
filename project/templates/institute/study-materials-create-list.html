@@ -8,12 +8,24 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap drp-lst">
                         <h4>{{ title }}</h4>
-                        {% if user.is_superuser %}
-                            {% if btn_text %}
-                                <div class="add-product">
-                                    <a type="button" class="btn btn-primary" data-toggle="modal"
-                                       data-target="#myModal">{{ btn_text }}</a>
-                                </div>
+                        {% if  material_type == 'video' %}
+                            {% if user.is_superuser %}
+                                {% if btn_text %}
+                                    <div class="add-product">
+                                        <a type="button" class="btn btn-primary" data-toggle="modal"
+                                           data-target="#myModal">{{ btn_text }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                        {% if  material_type == 'note' or 'question-paper' %}
+                            {% if user.user_type == 'teacher' or  user.user_type == 'trainer'%}
+                                {% if btn_text %}
+                                    <div class="add-product">
+                                        <a type="button" class="btn btn-primary" data-toggle="modal"
+                                           data-target="#myModal">{{ btn_text }}</a>
+                                    </div>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                         <div class="modal fade" id="myModal" role="dialog">
