@@ -88,7 +88,6 @@ class Result(models.Model):
 
 
 class TimeTable(models.Model):
-    student = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='student_field')
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     teacher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='teacher_field')

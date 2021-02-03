@@ -1,8 +1,11 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
 
+from accounts.choices import TUITION_DEPARTMENTS
 from institute.forms import ComplaintForm
 from institute.forms import ExamForm
 from institute.forms import InterviewForm
@@ -13,6 +16,8 @@ from institute.models import Exam
 from institute.models import Interview
 from institute.models import Leave
 from institute.models import StudyMaterial
+from institute.models import TimeTable
+from institute.utils import generate_time_table
 
 
 @login_required
@@ -166,3 +171,20 @@ def exam_create_list_view(request):
         'btn_text': f"New",
     }
     return render(request, 'institute/exam-create-list.html', context)
+
+
+@login_required()
+def time_table_view(request):
+    today = datetime.now().date()
+    generate_time_table()
+    user = request.user
+    if user.department == 'tuition':
+        time_table = TimeTable.objects.filter(teacher__department__in=TUITION_DEPARTMENTS, date=today)
+    else:
+        time_table = TimeTable.objects.filter(teacher__department=user.department, date=today)
+
+    context = {
+        'title': f'Time Table of {user.department} Department: {today.strftime("%d %B %Y")}',
+        'list_items': time_table
+    }
+    return render(request, 'institute/time-table.html', context)

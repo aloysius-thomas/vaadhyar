@@ -6,6 +6,7 @@ from institute.views import exam_create_list_view
 from institute.views import interview_create_list_view
 from institute.views import leave_create_list_view
 from institute.views import study_material_list_add_view
+from institute.views import time_table_view
 
 urlpatterns = [
     path('interviews/', interview_create_list_view, name='interviews'),
@@ -14,4 +15,5 @@ urlpatterns = [
     path('complaints/', complaint_create_list_view, name='complaint-create-list'),
     path('complaints/<str:user_type>/', complaint_list_view, name='complaint-list'),
     path('exams/', exam_create_list_view, name='exam-create-list'),
+    path('time-table/', time_table_view, name='time-table'),
 ]
