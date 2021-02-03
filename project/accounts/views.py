@@ -127,8 +127,21 @@ def student_register_view(request):
     }
     return render(request, 'accounts/student-registration.html', context)
 
-def select_class_view(request):
-    pass
+
+def available_class_view(request):
+    subjects = Subject.objects.filter(department=request.user.department)
+    teachers = User.objects.filter(user_type='teacher')
+    teacher_id_list = []
+    for teacher in teachers:
+        if teacher.get_subject in subjects:
+            teacher_id_list.append(teacher.id)
+
+    context = {
+        'title': f'available classes for {request.user}',
+        'list_items': teachers.filter(id__in=teacher_id_list)
+    }
+    return render(request, 'accounts/available-class.html', context)
+
 
 def trainee_register_view(request):
     return render(request, 'accounts/trainee-registration.html', {})

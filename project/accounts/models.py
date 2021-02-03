@@ -46,6 +46,13 @@ class User(AbstractUser):
         else:
             return True
 
+    @property
+    def get_subject(self):
+        if self.user_type != 'teacher':
+            return None
+        profile = self.get_profile()
+        return profile.subject
+
 
 class Course(models.Model):
     name = models.CharField(max_length=128)
@@ -56,6 +63,7 @@ class Course(models.Model):
 
 
 class Subject(models.Model):
+    department = models.CharField(choices=DEPARTMENT_CHOICES[1:], max_length=36)
     name = models.CharField(max_length=128)
 
     def __str__(self):

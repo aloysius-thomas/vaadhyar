@@ -1,5 +1,6 @@
 from django.urls import path
 
+from accounts.views import available_class_view
 from accounts.views import course_add
 from accounts.views import courses
 from accounts.views import edit_course
@@ -31,4 +32,5 @@ urlpatterns = [
     path('courses/add/', course_add, name='course-add'),
     path('edit_course/<int:id>/', edit_course, name='edit_course'),
     path('subjects/', subject_create_list_view, name='subject-create-list'),
+    path('available-class/', available_class_view, name='available-class'),
 ]
