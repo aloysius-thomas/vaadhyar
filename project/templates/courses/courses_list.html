@@ -1,41 +1,45 @@
 {% extends 'base-admin.html' %}
 {% block contents %}
-    <title>courses</title>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    </head>
-    <h4 class="active">{{ title }}</h4>
-    <p align="right">
-        <button type="button" class="btn btn-light"><a href="/accounts/courses/add/">Add Course</a></button>
-    </p>
-    <div class="table">
-        <table class="table table-hove" align="centre">
-            <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Action
-                </th>
+<title>courses</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<h4 class="active">{{ title }}</h4>
+<p align="right">
+    <button type="button" class="btn btn-light"><a href="/accounts/courses/add/">Add Course</a></button>
+</p>
+<div class="table">
+    <table class="table table-hove" align="centre">
+        <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Action
+            </th>
 
-            </tr>
-            </thead>
-            {% for i in courses %}
-                <tbody>
-                <tr>
-                    <td>{{ i.name }}</td>
-                    <td><a href="{% url 'edit_course' i.id %}">Edit</a></td>
-                </tr>
-                </tbody>
+        </tr>
+        </thead>
+        <tbody>
 
-            {% endfor %}
-        </table>
+        {% for i in courses %}
+        <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.name }}</td>
+            <td><a href="{% url 'edit_course' i.id %}">Edit</a></td>
+            <td><a href="{% url 'delete_course' i.id %}">Delete</a></td>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+
+    </table>
 
 
-    </div>
+</div>
 {% endblock %}

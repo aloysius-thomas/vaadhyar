@@ -282,6 +282,23 @@ def course_add(request):
     return render(request, 'courses/add-course.html', {"form": form})
 
 
+@login_required
+def subject_add(request):
+    form = SubjectForm()
+    if request.method == "POST":
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('subject-create-list')
+        else:
+            print("not valid form")
+
+    else:
+        print("else")
+        form = SubjectForm()
+    return render(request, 'subjects/form-subject.html', {"form": form})
+
+
 def edit_course(request, id):
     obj = Course.objects.get(id=id)
     form = CourseForm(request.POST, obj)
@@ -294,6 +311,34 @@ def edit_course(request, id):
     form = CourseForm()
 
     return render(request, 'courses/edit-course.html', {"form": form, "obj": obj})
+
+
+def delete_course(request, id):
+    obj = Course.objects.get(id=id)
+    obj.delete()
+    return redirect('courses-list')
+
+
+
+def edit_subject(request, id):
+    obj = Subject.objects.get(id=id)
+    form = SubjectForm(request.POST, obj)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            obj.department = form.cleaned_data.get('department')
+            obj.name = form.cleaned_data.get('name')
+            obj.save()
+            return redirect('subject-create-list')
+    form = SubjectForm()
+
+    return render(request, 'subjects/edit-subject.html', {"form": form, "obj": obj})
+
+
+def delete_subject(request, id):
+    obj = Subject.objects.get(id=id)
+    obj.delete()
+    return redirect('subject-create-list')
 
 
 @login_required()

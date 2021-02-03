@@ -139,7 +139,7 @@ class Trainee(models.Model):
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
     board = models.CharField(max_length=20, blank=True, null=True)
     school_name = models.CharField(max_length=256)
-    fee = models.IntegerField()
+    fee = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.user} profile'
