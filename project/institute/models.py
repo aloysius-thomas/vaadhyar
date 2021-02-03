@@ -3,6 +3,7 @@ from django.db import models
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
+from institute.choices import ATTENDANCE_STATUS
 from institute.choices import FEES_CHOICES
 from institute.choices import MONTH_CHOICES
 from institute.choices import STATUS
@@ -98,7 +99,7 @@ class TimeTable(models.Model):
 class Attendance(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     date = models.DateField()
-    status = models.CharField(max_length=12, choices=STATUS)
+    status = models.CharField(max_length=12, choices=ATTENDANCE_STATUS)
 
 
 class Interview(models.Model):

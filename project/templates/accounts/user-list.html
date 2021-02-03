@@ -18,20 +18,20 @@
                         <div class="asset-inner">
                             <table>
                                 <tr>
-                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile Number</th>
                                     <th>Department</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                                 {% for item in list_items %}
                                     <tr>
-                                        <td><img src="{{ item.image.url }}" width="250px" alt=""></td>
                                         <td>{{ item }}</td>
                                         <td>{{ item.email }}</td>
                                         <td>{{ item.mobile_number }}</td>
                                         <td>{{ item.get_department_display }}</td>
+                                        <td><img src="{{ item.image.url }}" width="250px" alt=""></td>
                                         <td>
                                             <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

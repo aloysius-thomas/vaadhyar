@@ -30,3 +30,10 @@ STATUS = (
     ('approved', 'Approved'),
     ('rejected', 'Rejected')
 )
+
+ATTENDANCE_STATUS = (
+    ('pending', 'Pending'),
+    ('recommended', 'Recommended'),
+    ('approved', 'Approved'),
+    ('rejected', 'Rejected')
+)
