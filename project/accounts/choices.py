@@ -8,9 +8,9 @@ USER_TYPE = (
 )
 DEPARTMENT_CHOICES = (
     ('tuition', 'Tuition'),
-    ('1-4', '1-4'),
-    ('5-7', '5-7'),
-    ('8-10', '8-10'),
+    ('1-4', ' Lower Primary'),
+    ('5-7', 'Upper Primary'),
+    ('8-10', 'High School'),
     ('+1-science', '+1 Science'),
     ('+2-science', '+2 science'),
     ('+1-commerce', '+1 Commerce'),
@@ -45,3 +45,5 @@ GENDER_CHOICE = (
     ('male', 'Male'),
     ('female', 'Female'),
 )
+
+TUITION_DEPARTMENTS = ['1-4', '5-7', '8-10', '+1-science', '+2-science', '+1-commerce', '+2-commerce']

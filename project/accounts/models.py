@@ -42,6 +42,7 @@ class User(AbstractUser):
 
 class Course(models.Model):
     name = models.CharField(max_length=128)
+    department = models.CharField(choices=DEPARTMENT_CHOICES, max_length=64)
 
     def __str__(self):
         return self.name

@@ -2,12 +2,12 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseNotFound
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from accounts.forms import ChangePasswordForm
+from accounts.choices import TUITION_DEPARTMENTS
 from accounts.forms import CourseForm
 from accounts.forms import HODForm
 from accounts.forms import LoginForm
@@ -18,7 +18,7 @@ from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
 
-tuition_departments = []
+tuition_departments = TUITION_DEPARTMENTS
 
 
 def home_view(request):
@@ -46,12 +46,13 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('dashboard')
+    return redirect('home')
 
 
+@login_required()
 def change_password(request):
     title = 'Change Password'
-    form = ChangePasswordForm(request.POST or None, request=request)
+    form = PasswordChangeForm(request.POST or None, request=request)
     if form.is_valid():
         form.save_password()
         return redirect('home')
@@ -235,16 +236,8 @@ def edit_course(request, id):
 
 
 @login_required()
-def subject_create_list_view(request, subject_id=0):
-    if subject_id != 0:
-        try:
-            subject = Subject.objects.get(id=subject_id)
-        except Subject.DoesNotExist:
-            return HttpResponseNotFound()
-
-        form = SubjectForm(request.POST, instance=subject)
-    else:
-        form = SubjectForm(request.POST or None)
+def subject_create_list_view(request, ):
+    form = SubjectForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('subject-create-list')

@@ -49,10 +49,14 @@
 
                             </ul>
                         </li>
-                        <li class="main_nav_item"><a href="{% url 'login' %}">Login</a></li>
-                        </li>
-
                         <li class="main_nav_item"><a href="#">Contact Us</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="main_nav_item"><a href="{% url 'logout' %}">Logout</a></li>
+
+                        {% else %}
+                            <li class="main_nav_item"><a href="{% url 'login' %}">Login</a></li>
+
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
