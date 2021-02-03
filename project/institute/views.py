@@ -98,3 +98,16 @@ def complaint_create_list_view(request):
         'btn_text': f"New",
     }
     return render(request, 'institute/complaint-create-list.html', context)
+
+
+@login_required()
+def complaint_list_view(request, user_type):
+    list_items = Complaint.objects.filter(user__user_type=user_type)
+    if request.user.user_type in ['hod', 'teacher', 'trainer']:
+        list_items = list_items.filter(user__department=request.user.department)
+
+    context = {
+        'title': f"Complaints of {user_type.title()}",
+        'list_items': list_items,
+    }
+    return render(request, 'institute/complaint-list.html', context)
