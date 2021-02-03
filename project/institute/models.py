@@ -71,9 +71,9 @@ class Exam(models.Model):
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
     conducted_by = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
-    conducted_on = models.DateTimeField()
     # Time in minutes
     date = models.DateField()
+    time = models.TimeField(blank=True, null=True)
     max_time = models.IntegerField()
     max_score = models.IntegerField()
 

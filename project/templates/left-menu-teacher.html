@@ -10,32 +10,32 @@
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Dashboard" href="#">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Dashboard</span>
+                        <a title="Dashboard" href="{% url 'dashboard' %}">
+                            <span class="fa fa-home"></span>
+                            <span class="mini-click-non">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a title="Students" href="{% url 'students-list' %}">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Students</span>
+                            <span class="fa fa-child"></span>
+                            <span class="mini-click-non">Students</span>
                         </a>
                     </li>
                     <li>
                         <a title="Trainees" href="#">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Class Details</span>
+                            <span class="fa fa-tablet"></span>
+                            <span class="mini-click-non">Class Details</span>
                         </a>
                     </li>
                     <li>
-                        <a title="Interviews" href="#">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Exams</span>
+                        <a title="Exam" href="{% url 'exam-create-list' %}">
+                            <span class="fa fa-book"></span>
+                            <span class="mini-click-non">Exams</span>
                         </a>
                     </li>
                     <li>
                         <a title="Study Materials" class="has-arrow" href="#">
-                            <span class="educate-icon educate-home icon-wrap"></span>
+                            <span class="fa fa-compass"></span>
                             <span class="mini-click-non">Study Materials</span>
                         </a>
                         <ul class="submenu-angle" aria-expanded="true">
@@ -58,14 +58,14 @@
                     </li>
                     <li>
                         <a title="Apply Leave" href="{% url 'leave-request-create-list' %}">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Apply Leave</span>
+                            <span class="fa fa-sign-out"></span>
+                            <span class="mini-click-non">Apply Leave</span>
                         </a>
                     </li>
 
                     <li>
                         <a title="Complaints" class="has-arrow" href="#">
-                            <span class="fa fa-stop-circle icon-wrap"></span>
+                            <span class="fa fa-stop-circle"></span>
                             <span class="mini-click-non">Complaints</span>
                         </a>
                         <ul class="submenu-angle" aria-expanded="true">
@@ -82,9 +82,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Feedback" href="#">
-                            <span class="educate-icon educate-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Salary</span>
+                        <a title="Salary" href="#">
+                            <span class="fa fa-money"></span>
+                            <span class="mini-click-non">Salary</span>
                         </a>
                     </li>
                 </ul>

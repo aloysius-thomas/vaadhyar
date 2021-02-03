@@ -2,6 +2,7 @@ from django.urls import path
 
 from institute.views import complaint_create_list_view
 from institute.views import complaint_list_view
+from institute.views import exam_create_list_view
 from institute.views import interview_create_list_view
 from institute.views import leave_create_list_view
 from institute.views import study_material_list_add_view
@@ -12,4 +13,5 @@ urlpatterns = [
     path('leave-request/', leave_create_list_view, name='leave-request-create-list'),
     path('complaints/', complaint_create_list_view, name='complaint-create-list'),
     path('complaints/<str:user_type>/', complaint_list_view, name='complaint-list'),
+    path('exams/', exam_create_list_view, name='exam-create-list'),
 ]

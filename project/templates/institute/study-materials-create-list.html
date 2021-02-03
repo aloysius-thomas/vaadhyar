@@ -17,9 +17,8 @@
                                     </div>
                                 {% endif %}
                             {% endif %}
-                        {% endif %}
-                        {% if  material_type == 'note' or 'question-paper' %}
-                            {% if user.user_type == 'teacher' or  user.user_type == 'trainer'%}
+                        {% else %}
+                            {% if user.user_type == 'teacher' or  user.user_type == 'trainer' %}
                                 {% if btn_text %}
                                     <div class="add-product">
                                         <a type="button" class="btn btn-primary" data-toggle="modal"

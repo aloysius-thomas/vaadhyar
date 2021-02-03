@@ -1,6 +1,7 @@
 from django import forms
 
 from institute.models import Complaint
+from institute.models import Exam
 from institute.models import Interview
 from institute.models import Leave
 from institute.models import StudyMaterial
@@ -42,4 +43,19 @@ class LeaveForm(forms.ModelForm):
             'from_date',
             'to_date',
             'reason',
+        }
+
+
+class ExamForm(forms.ModelForm):
+    time = forms.TimeField()
+
+    class Meta:
+        model = Exam
+        fields = {
+            'course',
+            'subject',
+            'date',
+            'time',
+            'max_time',
+            'max_score',
         }

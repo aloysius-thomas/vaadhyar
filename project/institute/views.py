@@ -4,10 +4,12 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 
 from institute.forms import ComplaintForm
+from institute.forms import ExamForm
 from institute.forms import InterviewForm
 from institute.forms import LeaveForm
 from institute.forms import StudyMaterialForm
 from institute.models import Complaint
+from institute.models import Exam
 from institute.models import Interview
 from institute.models import Leave
 from institute.models import StudyMaterial
@@ -57,16 +59,16 @@ def study_material_list_add_view(request, material_type):
         form = StudyMaterialForm()
     list_items = StudyMaterial.objects.filter(material_type=material_type)
     if user.user_type == 'teacher':
-        profile = user.get_profile
+        profile = user.get_profile()
         list_items = list_items.filter(subject=profile.subject)
     elif user.user_type == 'trainer':
-        profile = user.get_profile
+        profile = user.get_profile()
         list_items = list_items.filter(course=profile.course)
     elif user.user_type == 'student':
-        profile = user.get_profile
+        profile = user.get_profile()
         list_items = list_items.filter(subject=profile.subject)
     elif user.user_type == 'trainee':
-        profile = user.get_profile
+        profile = user.get_profile()
         list_items = list_items.filter(course=profile.course)
     else:
         list_items = list_items
@@ -136,3 +138,30 @@ def leave_create_list_view(request):
         'btn_text': f"New",
     }
     return render(request, 'institute/leave-request-list.html', context)
+
+
+@login_required()
+def exam_create_list_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ExamForm(request.POST, request.FILES)
+        if form.is_valid():
+            exam = form.save(commit=False)
+            exam.conducted_by = request.user
+            exam.save()
+            return redirect('exam-create-list')
+    else:
+        form = ExamForm()
+    if user.user_type in ['teacher', 'trainer']:
+        list_items = Exam.objects.filter(conducted_by=user)
+    elif user.user_type in ['student', 'trainee']:
+        list_items = Exam.objects.filter(conducted_by__department=user.department)
+    else:
+        list_items = []
+    context = {
+        'form': form,
+        'title': "Exams",
+        'list_items': list_items,
+        'btn_text': f"New",
+    }
+    return render(request, 'institute/exam-create-list.html', context)
