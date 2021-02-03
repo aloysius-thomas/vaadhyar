@@ -56,7 +56,7 @@ class User(AbstractUser):
 
 class Course(models.Model):
     name = models.CharField(max_length=128)
-    department = models.CharField(choices=DEPARTMENT_CHOICES, max_length=64)
+    department = models.CharField(choices=DEPARTMENT_CHOICES[1:], max_length=64)
 
     def __str__(self):
         return self.name
@@ -114,6 +114,7 @@ class Student(models.Model):
 class SelectedClass(models.Model):
     student = models.ForeignKey(to=User, on_delete=models.CASCADE)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE)
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
     teacher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='class_teacher')
 
 

@@ -15,7 +15,6 @@ DEPARTMENT_CHOICES = (
     ('+2-science', '+2 science'),
     ('+1-commerce', '+1 Commerce'),
     ('+2-commerce', '+2 Commerce'),
-    ('+2-commerce', '+2 Commerce'),
     ('b.com/m.com', 'B.com/ M.com'),
     ('civil-engineering', 'Civil Engineering'),
     ('mechanical-engineering', 'Mechanical Engineering'),

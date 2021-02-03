@@ -3,7 +3,7 @@ from django.db import models
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
-from institute.choices import ATTENDANCE_STATUS
+from institute.choices import LEAVE_STATUS
 from institute.choices import FEES_CHOICES
 from institute.choices import MONTH_CHOICES
 from institute.choices import STATUS
@@ -16,7 +16,7 @@ class Leave(models.Model):
     to_date = models.DateField()
     reason = models.TextField()
     response = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=16, choices=STATUS)
+    status = models.CharField(max_length=16, choices=LEAVE_STATUS)
 
     def __str__(self):
         return f'Leave request of {self.user}'
@@ -25,6 +25,7 @@ class Leave(models.Model):
 class Feedback(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     feedback = models.TextField()
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f'Feedback from {self.user}'
@@ -33,7 +34,7 @@ class Feedback(models.Model):
 class Complaint(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     complaint_to = models.CharField(max_length=16,
-                                    choices=(('hod', 'HOD'), ('teacher', 'Teacher'), ('trainer', 'Trainer')))
+                                    choices=(('hod', 'HOD'), ('admin', 'Admin')))
     complaint = models.TextField()
     response = models.TextField(blank=True, null=True)
 
@@ -63,9 +64,8 @@ class StudyMaterial(models.Model):
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
     file = models.FileField(upload_to='study-material')
-    uploaded_by = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
+    teacher = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
     uploaded_on = models.DateTimeField(auto_now_add=True)
-    video_approved = models.BooleanField(default=False)
 
 
 class Exam(models.Model):
@@ -99,7 +99,7 @@ class TimeTable(models.Model):
 class Attendance(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     date = models.DateField()
-    status = models.CharField(max_length=12, choices=ATTENDANCE_STATUS)
+    status = models.CharField(max_length=12, choices=STATUS)
 
 
 class Interview(models.Model):
