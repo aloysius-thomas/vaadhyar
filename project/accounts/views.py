@@ -439,3 +439,19 @@ def user_profile_view(request, user_id):
             'fee_form': FeeForm()
         }
         return render(request, 'accounts/user-profile.html', context)
+
+
+@login_required()
+def update_student_limit(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        limit = request.POST.get('limit')
+        user.get_profile().student_limit = limit
+        user.get_profile().save()
+        if user.user_type == 'teacher':
+            return redirect('teachers-list')
+        else:
+            return redirect('trainers-list')

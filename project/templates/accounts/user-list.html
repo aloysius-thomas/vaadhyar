@@ -14,7 +14,6 @@
                                 </div>
                             {% endif %}
                         {% endif %}
-
                         <div class="asset-inner">
                             <table>
                                 <tr>
@@ -26,6 +25,37 @@
                                     <th>Action</th>
                                 </tr>
                                 {% for item in list_items %}
+                                    <div class="modal fade" id="myModal" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">Change Limit</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="" method="post" enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        {% if form.non_field_errors %}
+                                                            <div class="alert alert-danger" role="alert">
+                                                                {% for error in form.non_field_errors %}
+                                                                    {{ error }}
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endif %}
+                                                        <div class="form-row">
+                                                            <div class="form-group col-12">
+                                                                <input name="limit" placeholder="Limit" type="number" max="50" min="2"
+                                                                          required>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <tr>
                                         <td>{{ item }}</td>
                                         <td>{{ item.email }}</td>
@@ -38,6 +68,11 @@
                                                         class="fa fa-eye" aria-hidden="true"></i> View
                                                 </button>
                                             </a>
+                                            {% if item.user_type == 'teacher' %}
+                                                <a type="button" class="btn btn-info" data-toggle="modal"
+                                                   data-target="#myModal">Update Student Limit
+                                                </a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}
