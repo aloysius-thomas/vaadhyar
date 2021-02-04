@@ -27,14 +27,18 @@ from institute.models import TimeTable
 from institute.utils import generate_attendance
 from institute.utils import generate_time_table
 
+
 def viewteacher(request):
     return render(request, "publicapp/viewteacher.html", {})
+
 
 def courseslist(request):
     return render(request, "publicapp/courses.html", {})
 
+
 def civil(request):
     return render(request, "publicapp/civil.html", {})
+
 
 def cs(request):
     return render(request, "publicapp/cs.html", {})
@@ -47,8 +51,10 @@ def mech(request):
 def ec(request):
     return render(request, "publicapp/ec.html", {})
 
+
 def autocad(request):
     return render(request, "publicapp/autocad.html", {})
+
 
 def solid(request):
     return render(request, "publicapp/solid.html", {})
@@ -60,6 +66,7 @@ def ansys(request):
 
 def catia(request):
     return render(request, "publicapp/autocad.html", {})
+
 
 def ds(request):
     return render(request, "publicapp/ds.html", {})
@@ -154,9 +161,11 @@ def interview_create_list_view(request):
     user = request.user
     if user.is_superuser:
         list_items = Interview.objects.all()
-    elif user.user_type in ['trainer', 'trainee']:
+    elif user.user_type == 'trainer':
         profile = user.get_profile
         list_items = Interview.objects.filter(course=profile.course)
+    elif user.user_type == 'trainee':
+        list_items = Interview.objects.filter(course=user.get_course)
     else:
         list_items = []
     if request.method == 'POST':
@@ -637,4 +646,3 @@ def class_details_view(request):
         'list_items': time_table
     }
     return render(request, 'institute/time-table.html', context)
-
