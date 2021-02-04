@@ -228,7 +228,8 @@ def attendance_list_view(request, user_type):
     user = request.user
     date = request.GET.get('date', None)
     month_and_year = request.GET.get('month', None)
-    if month_and_year != '':
+    if month_and_year:
+        print(month_and_year)
         month = month_and_year[5:]
         month = int(month)
         year = month_and_year[:4]

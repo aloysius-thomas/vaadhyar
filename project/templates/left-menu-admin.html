@@ -105,10 +105,32 @@
                     </li>
 
                     <li>
-                        <a title="Attendance" href="{% url 'study-materials' 'video' %}">
-                            <span class="fa fa-toggle-right icon-wrap"></span>
+                        <a title="Attendance" class="has-arrow" href="#">
+                            <span class="fa fa-check icon-wrap"></span>
                             <span class="mini-click-non">Attendance</span>
                         </a>
+                        <ul class="submenu-angle" aria-expanded="true">
+                            <li>
+                                <a title="Students Complaints" href="{% url 'attendance-list-view' 'student' %}">
+                                    <span class="mini-sub-pro">Students</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Trainees Complaints" href="{% url 'attendance-list-view' 'trainee' %}">
+                                    <span class="mini-sub-pro">Trainees</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Teachers Complaints" href="{% url 'attendance-list-view' 'teacher' %}">
+                                    <span class="mini-sub-pro">Teachers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Trainers Complaints" href="{% url 'attendance-list-view' 'trainer' %}">
+                                    <span class="mini-sub-pro">Trainers</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
