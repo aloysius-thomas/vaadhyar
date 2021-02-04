@@ -209,8 +209,6 @@ def feedback_view(request):
         list_items = Feedback.objects.filter(user=user)
     elif user.user_type in ['trainer', 'teacher']:
         students = user.get_profile().my_students
-        print(students)
-        print(',,,,,,,,,')
         list_items = Feedback.objects.filter(user__in=students)
     else:
         list_items = []
@@ -229,19 +227,26 @@ def attendance_list_view(request, user_type):
     today = datetime.now().date()
     user = request.user
     date = request.GET.get('date', None)
-    month = request.GET.get('month', None)
-    year = request.GET.get('year', None)
+    month_and_year = request.GET.get('month', None)
+    if month_and_year != '':
+        month = month_and_year[5:]
+        month = int(month)
+        year = month_and_year[:4]
+        year = int(year)
+    else:
+        month = None
+        year = None
     department = request.GET.get('department', None)
-
+    attendance = Attendance.objects.filter(user__user_type=user_type, )
     if month or date or year or department:
         if month:
-            attendance = Attendance.objects.filter(user__user_type=user_type, date__month=month)
+            attendance = attendance.filter(date__month=month)
         if date:
-            attendance = Attendance.objects.filter(user__user_type=user_type, date__day=date)
+            attendance = attendance.filter(date__day=date)
         if year:
-            attendance = Attendance.objects.filter(user__user_type=user_type, date__year=year)
+            attendance = attendance.filter(date__year=year)
         if department:
-            attendance = Attendance.objects.filter(user__user_type=user_type, user__department=department)
+            attendance = attendance.filter(user__department=department)
     else:
         attendance = Attendance.objects.filter(date=today, user__user_type=user_type)
     if user.is_superuser:
@@ -261,6 +266,8 @@ def attendance_list_view(request, user_type):
 
     context = {
         "title": f"Attendance of {today.strftime('%d %B %Y')}",
-        "data_list": attendance
+        "list_items": attendance,
+        "user_type": user_type,
+        "btn_text": 'Filter',
     }
     return render(request, 'accounts/attendance-list.html', context)
