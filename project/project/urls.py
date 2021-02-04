@@ -13,7 +13,7 @@ from accounts.views import login_view
 from accounts.views import logout_view
 from accounts.views import online_courses
 from institute.views import viewteacher, nxcad, nxnas, nxcam, revitmep, prime, autocadec, ecrevit, ecprim, java, web, \
-    tu, python
+    tu, python, autocad, revit, googles, stadd, etab, vray, revitst, navis, prim
 from institute.views import courseslist
 from institute.views import civil
 from institute.views import cs
@@ -23,6 +23,7 @@ from institute.views import autocadmech
 from institute.views import catia
 from institute.views import solid
 from institute.views import ansys
+from institute.views import ds
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,6 +44,16 @@ urlpatterns = [
     url(r'^cs', cs, name='cs'),
     url(r'^mech', mech, name='mech'),
     url(r'^ec', ec, name='ec'),
+    url(r'^autocad', autocad, name='autocad'),
+    url(r'^ds', ds, name='ds'),
+    url(r'^revit', revit, name='revit'),
+    url(r'^googles', googles, name='googles'),
+    url(r'^stadd', stadd, name='stadd'),
+    url(r'^etab', etab, name='etab'),
+    url(r'^vray', vray, name='vray'),
+    url(r'^revitst', revitst, name='revitst'),
+    url(r'^navis', navis, name='navis'),
+    url(r'^prim', prim, name='prim'),
     url(r'^autocadmech', autocadmech, name='autocadmech'),
     url(r'^solid', solid, name='solid'),
     url(r'^catia', catia, name='catia'),
