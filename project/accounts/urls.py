@@ -20,9 +20,10 @@ from accounts.views import trainee_register_view
 from accounts.views import trainees_list_view
 from accounts.views import trainer_creation_view
 from accounts.views import trainers_list_view
+from accounts.views import user_profile_view
 
 urlpatterns = [
-
+    path('<int:user_id>/profile/', user_profile_view, name='user-profile-details'),
     path('student/register/', student_register_view, name='student-register'),
     path('trainee/register/', trainee_register_view, name='trainee-register'),
     path('hod/list/', hod_list_view, name='hod-list'),

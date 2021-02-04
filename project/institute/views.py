@@ -8,11 +8,13 @@ from django.shortcuts import render
 from accounts.choices import TUITION_DEPARTMENTS
 from institute.forms import ComplaintForm
 from institute.forms import ExamForm
+from institute.forms import FeedbackForm
 from institute.forms import InterviewForm
 from institute.forms import LeaveForm
 from institute.forms import StudyMaterialForm
 from institute.models import Complaint
 from institute.models import Exam
+from institute.models import Feedback
 from institute.models import Interview
 from institute.models import Leave
 from institute.models import StudyMaterial
@@ -188,3 +190,31 @@ def time_table_view(request):
         'list_items': time_table
     }
     return render(request, 'institute/time-table.html', context)
+
+
+def feedback_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST, request.FILES)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.user = request.user
+            feedback.save()
+            return redirect('feedback')
+    else:
+        form = FeedbackForm()
+    if user.user_type in ['trainee', 'student']:
+        list_items = Feedback.objects.filter(user=user)
+    elif user.user_type in ['trainer', 'teacher']:
+        students = user.get_profile().my_students
+        list_items = Feedback.objects.filter(user__in=students)
+    else:
+        list_items = []
+
+    context = {
+        'form': form,
+        'title': "Feedback",
+        'list_items': list_items,
+        'btn_text': f"Add Today's Feedback",
+    }
+    return render(request, 'institute/feedback.html', context)

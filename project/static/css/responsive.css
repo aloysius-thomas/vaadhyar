@@ -6,6 +6,11 @@
 	.mobile-menu-area{
 		display:none;
 	}
+	.chat-discussion .chat-message .message-avatar{
+		float:unset;
+		height:60px;
+		width:60px;
+	}
 	.logo-pro{
 		display:block;
 		text-align:center;
@@ -140,6 +145,11 @@
 @media (min-width: 768px) and (max-width: 991px) {
 	.left-sidebar-pro{
 		display:none;
+	}
+	.chat-discussion .chat-message .message-avatar{
+		float:unset;
+		height:60px;
+		width:60px;
 	}
 	.all-content-wrapper {
 		margin-left: 0px;

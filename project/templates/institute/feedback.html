@@ -1,0 +1,74 @@
+{% extends 'base-admin.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>{{ title }}</h4>
+                        {% if user.user_type == 'trainee' or user.user_type == 'student' %}
+                            {% if btn_text %}
+                                <div class="add-product">
+                                    <a type="button" class="btn btn-primary" data-toggle="modal"
+                                       data-target="#myModal">{{ btn_text }}</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">{{ btn_text }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            {% if form.non_field_errors %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {% for error in form.non_field_errors %}
+                                                        {{ error }}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="form-row">
+                                                {{ form|crispy }}
+                                                <div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="review-content-section">
+                                    <div class="chat-discussion" style="height: auto">
+                                        {% for item in list_items %}
+                                            <div class="chat-message">
+                                                <div class="profile-hdtc">
+                                                    <img class="message-avatar" src="{{ item.user.image.url }}" alt="">
+                                                </div>
+                                                <div class="message">
+                                                    <a class="message-author" href="#"> {{item.user}}</a>
+                                                    <span class="message-date"> {{item.date}} </span>
+                                                    <span class="message-content">{{ item.feedback }}.
+                                                </span>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

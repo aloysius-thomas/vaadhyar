@@ -376,3 +376,15 @@ def subject_create_list_view(request, ):
         'list_items': Subject.objects.all(),
     }
     return render(request, 'accounts/subject-list.html', context)
+
+
+def user_profile_view(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        context = {
+            'user_obj': user
+        }
+        return render(request, 'accounts/user-profile.html', context)

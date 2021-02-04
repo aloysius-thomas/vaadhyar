@@ -2,6 +2,7 @@ from django import forms
 
 from institute.models import Complaint
 from institute.models import Exam
+from institute.models import Feedback
 from institute.models import Interview
 from institute.models import Leave
 from institute.models import StudyMaterial
@@ -58,4 +59,12 @@ class ExamForm(forms.ModelForm):
             'time',
             'max_time',
             'max_score',
+        }
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = {
+            'feedback'
         }

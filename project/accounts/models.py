@@ -92,6 +92,12 @@ class Teacher(models.Model):
     def __str__(self):
         return f'{self.user} profile'
 
+    @property
+    def my_students(self):
+        my_class = SelectedClass.objects.filter(teacher=self)
+        student_id = [student.id for student in my_class]
+        return User.objects.filter(id__in=student_id)
+
 
 class Student(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
