@@ -211,10 +211,9 @@ class TraineeRegistrationForm(UserForm):
         mother_name = self.cleaned_data.get('mother_name')
         guardian_number = self.cleaned_data.get('guardian_number')
         course = self.cleaned_data.get('course')
-        board = self.cleaned_data.get('board')
         school_name = self.cleaned_data.get('school_name')
         profile = Trainee(user=user, father_name=father_name, mother_name=mother_name,
-                          guardian_number=guardian_number, course=course, board=board, school_name=school_name)
+                          guardian_number=guardian_number, course=course, school_name=school_name)
         profile.save()
         return user
 
@@ -240,5 +239,3 @@ class TrainerForm(UserForm):
                            salary=salary, available_time=available_time, course=course)
         profile.save()
         return user
-
-

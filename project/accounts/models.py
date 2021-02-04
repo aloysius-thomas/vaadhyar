@@ -113,8 +113,8 @@ class Student(models.Model):
 
 class SelectedClass(models.Model):
     student = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE)
-    course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
+    subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     teacher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='class_teacher')
 
 
@@ -137,7 +137,6 @@ class Trainee(models.Model):
     mother_name = models.CharField(max_length=128)
     guardian_number = models.CharField(validators=[phone_regex], max_length=20, blank=True, null=True)
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
-    board = models.CharField(max_length=20, blank=True, null=True)
     school_name = models.CharField(max_length=256)
     fee = models.IntegerField(blank=True, null=True)
 
