@@ -48,7 +48,7 @@ class User(AbstractUser):
 
     @property
     def selected_class(self):
-        return SelectedClass.objects.filter(user=self)
+        return SelectedClass.objects.filter(student=self)
 
     @property
     def get_subject(self):
