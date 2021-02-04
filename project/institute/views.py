@@ -21,6 +21,7 @@ from institute.models import Exam
 from institute.models import Feedback
 from institute.models import Interview
 from institute.models import Leave
+from institute.models import Salary
 from institute.models import StudyMaterial
 from institute.models import TimeTable
 from institute.utils import generate_attendance
@@ -368,6 +369,68 @@ def attendance_list_view(request, user_type):
 
 
 @login_required()
+def students_attendance_sheet(request):
+    today = datetime.now().date()
+    user = request.user
+    if user.user_type not in ['teacher', 'trainer']:
+        return HttpResponseNotFound('Access denied')
+    my_students = user.get_profile().my_students
+    attendance = Attendance.objects.filter(date=today)
+    if user.user_type == 'teacher':
+        attendance = attendance.filter(user__in=my_students, subject=user.get_subject)
+    elif user.user_type == 'trainer':
+        attendance = attendance.filter(user__in=my_students, subject=user.get_course)
+    else:
+        attendance = []
+    context = {
+        'title': f"Mark Attendance of {today.strftime('%d %B %Y')}",
+        "list_items": attendance,
+    }
+    return render(request, 'accounts/students-attendance-sheet.html', context)
+
+
+def teachers_attendance_sheet(request):
+    today = datetime.now().date()
+    user = request.user
+    if user.user_type == 'hod':
+        return HttpResponseNotFound()
+    attendance = Attendance.objects.filter(date=today, user__user_type__in=['teacher', 'trainer'])
+    if user.department == 'tuition':
+        attendance = attendance.filter(user__department__in=[TUITION_DEPARTMENTS])
+    else:
+        attendance = attendance.filter(user__department=user.department)
+    context = {
+        'title': f"Mark Attendance of {today.strftime('%d %B %Y')}",
+        "list_items": attendance,
+    }
+    return render(request, 'accounts/students-attendance-sheet.html', context)
+
+
+@login_required()
+def mark_as_present_view(request, attendance_id):
+    try:
+        attendance = Attendance.objects.get(id=attendance_id)
+    except Attendance.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        attendance.status = 'present'
+        attendance.save()
+        return redirect('students-attendance-sheet')
+
+
+@login_required()
+def mark_as_absent_view(request, attendance_id):
+    try:
+        attendance = Attendance.objects.get(id=attendance_id)
+    except Attendance.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        attendance.status = 'absent'
+        attendance.save()
+        return redirect('students-attendance-sheet')
+
+
+@login_required()
 def add_salary_view(request, user_id):
     if request.method == 'POST':
         form = SalaryForm(request.POST)
@@ -389,3 +452,12 @@ def add_fee_view(request, user_id):
             fee.save()
             return redirect('user-profile-details', int(user_id))
     return HttpResponseNotFound()
+
+
+@login_required()
+def salary_history(request):
+    context = {
+        'title': "My Salary History",
+        'list_items': request.user.salary_history
+    }
+    return render(request, 'institute/salary-history.html', context)

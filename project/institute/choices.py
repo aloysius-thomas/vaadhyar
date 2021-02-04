@@ -31,6 +31,12 @@ STATUS = (
     ('rejected', 'Rejected')
 )
 
+ATTENDANCE_STATUS = (
+    ('pending', 'Pending'),
+    ('present', 'Present'),
+    ('absent', 'Absent')
+)
+
 LEAVE_STATUS = (
     ('pending', 'Pending'),
     ('recommended', 'Recommended'),

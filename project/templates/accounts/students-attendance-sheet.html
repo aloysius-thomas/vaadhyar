@@ -1,0 +1,115 @@
+{% extends 'base-admin.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>{{ title }}</h4>
+
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>User Type</th>
+                                    <th>Department</th>
+                                    <th>Course</th>
+                                    <th>Attendance Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for item in list_items %}
+                                    <div class="modal fade" id="presentModal{{ item.id }}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">Mark as Present</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to mark {{ item.user }} as present?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'leave-approve-view' item.id %}"
+                                                       class="btn btn-primary">
+                                                        Yes
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="absentModal{{ item.id }}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">Mark as Absent</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to mark {{ item.user }} as absent?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'leave-approve-view' item.id %}"
+                                                       class="btn btn-primary">
+                                                        Yes Approve
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <tr>
+                                        <td>{{ item.date|date }}</td>
+                                        <td>{{ item.user }}</td>
+                                        <td>{{ item.user.get_user_type_display }}</td>
+                                        <td>{{ item.user.get_department_display }}</td>
+                                        <td>
+                                            {% if item.user.user_type == 'student' %}
+                                                {{ item.subject }}
+                                            {% elif item.user.user_type == 'trainee' %}
+                                                {{ item.course }}
+                                            {% elif item.user.user_type == 'teacher' %}
+                                                {{ item.user.get_subject }}
+                                            {% else %}
+                                                {{ item.user.get_course }}
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ item.get_status_display }}</td>
+                                        <td>
+                                            <div class="btn-group-sm">
+                                                {% if item.status != 'present' %}
+                                                    {% if item.status != 'absent' %}
+                                                        {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
+                                                            <a type="button" class="btn btn-success" data-toggle="modal"
+                                                               data-target="#presentModal{{ item.id }}">Present
+                                                            </a>
+                                                            <a type="button" class="btn btn-danger" data-toggle="modal"
+                                                               data-target="#absentModal{{ item.id }}">Absent
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <td colspan="6">
+                                        <div class="alert alert-info alert-st-two" role="alert">
+                                            <i class="fa fa-info-circle edu-inform admin-check-pro"
+                                               aria-hidden="true"></i>
+                                            <p class="message-mg-rt">Nothing found..</p>
+                                        </div>
+                                    </td>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -14,7 +14,12 @@ from institute.views import leave_create_list_view
 from institute.views import leave_recommend_view
 from institute.views import leave_reject_view
 from institute.views import leave_request_list_view
+from institute.views import mark_as_absent_view
+from institute.views import mark_as_present_view
+from institute.views import salary_history
+from institute.views import students_attendance_sheet
 from institute.views import study_material_list_add_view
+from institute.views import teachers_attendance_sheet
 from institute.views import time_table_view
 
 urlpatterns = [
@@ -32,6 +37,11 @@ urlpatterns = [
     path('time-table/', time_table_view, name='time-table'),
     path('feedback/', feedback_view, name='feedback'),
     path('attendance/list/<str:user_type>/', attendance_list_view, name='attendance-list-view'),
+    path('students-attendance-sheet/', students_attendance_sheet, name='students-attendance-sheet'),
+    path('teachers-attendance-sheet/', teachers_attendance_sheet, name='teachers-attendance-sheet'),
+    path('attendance/<int:attendance_id>mark-as-present/', mark_as_present_view, name='mark-as-present-view'),
+    path('attendance/<int:attendance_id>mark-as-absent/', mark_as_absent_view, name='mark-as-absent-view'),
     path('<int:user_id>/add-salary/', add_salary_view, name='add-salary-view'),
+    path('salary-history/', salary_history, name='salary-history'),
     path('<int:user_id>/add-fee/', add_fee_view, name='add-fee-view'),
 ]

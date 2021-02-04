@@ -3,10 +3,10 @@ from django.db import models
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
+from institute.choices import ATTENDANCE_STATUS
 from institute.choices import FEES_CHOICES
 from institute.choices import LEAVE_STATUS
 from institute.choices import MONTH_CHOICES
-from institute.choices import STATUS
 from institute.choices import STUDY_MATERIAL_TYPE
 
 
@@ -104,7 +104,7 @@ class Attendance(models.Model):
     date = models.DateField()
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
-    status = models.CharField(max_length=12, choices=STATUS, default='pending')
+    status = models.CharField(max_length=12, choices=ATTENDANCE_STATUS, default='pending')
 
 
 class Interview(models.Model):
