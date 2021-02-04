@@ -224,6 +224,9 @@ def select_class_view(request, teacher_id):
         if user.user_type == 'student':
             selected = SelectedClass.objects.create(student=user, subject=teacher.get_profile().subject,
                                                     teacher=teacher)
+        else:
+            selected = SelectedClass.objects.create(student=user, course=teacher.get_profile().course,
+                                                    teacher=teacher)
             selected.save()
             messages.success(request, "Class selected")
         messages.success(request, "Something went wrong")
