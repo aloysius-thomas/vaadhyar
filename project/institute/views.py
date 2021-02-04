@@ -194,7 +194,6 @@ def leave_request_list_view(request, user_type):
     context = {
         'title': f"{user_type.title()} Leave Request",
         'list_items': list_items,
-        'btn_text': f"New",
     }
     return render(request, 'institute/leave-list.html', context)
 
