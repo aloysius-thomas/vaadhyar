@@ -57,7 +57,6 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.department }}</td>
                 <td><a href="{% url 'edit_subject' item.id %}">Edit</a></td>
-                <td> <button class="btn btn-danger"><a href="{% url 'delete_subject' item.id %}">Delete</a></button></td>
             </tr>
             {% endfor %}
         </table>
