@@ -27,7 +27,7 @@
             <!-- Logo -->
             <div class="logo_container">
                 <div class="logo">
-                    <img src="{% static 'img/logos/logo.png' %}" alt="">
+                    <img src="{% static 'img/logos/log.PNG' %}" alt="">
                     <span>Vaadhyar</span>
                 </div>
             </div>
@@ -36,9 +36,8 @@
                 <div class="main_nav">
                     <ul class="main_nav_list">
                         <li class="main_nav_item"><a href="{% url 'home' %}"> Home</a></li>
-                        <li class="main_nav_item"><a href="#">About Us</a></li>
+                        <li class="main_nav_item"><a href="{% url 'about-us' %}">About Us</a></li>
                         <li class="main_nav_item"><a href="{% url 'student-register' %}">Register</a></li>
-
                         <li class="main_nav_item"><a href="#">Contact Us</a></li>
                         {% if user.is_authenticated %}
                             <li class="main_nav_item"><a href="{% url 'logout' %}">Logout</a></li>
@@ -62,7 +61,146 @@
         </div>
 
     </header>
+    <!-- Menu -->
+    <div class="menu_container menu_mm">
+
+        <!-- Menu Close Button -->
+        <div class="menu_close_container">
+            <div class="menu_close"></div>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="menu_inner menu_mm">
+            <div class="menu menu_mm">
+                <ul class="menu_list menu_mm">
+                    <li class="menu_item menu_mm"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'about-us' %}">About Us</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'student-register' %}">Register</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="menu_item menu_mm"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    {% else %}
+                        <li class="menu_item menu_mm"><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                    <li class="menu_item menu_mm"><a href="#">Contact Us</a></li>
+                </ul>
+
+                <!-- Menu Social -->
+
+                <div class="menu_social_container menu_mm">
+
+                </div>
+                <div class="menu_copyright menu_mm">Excellence Group of Company All rights reserved</div>
+            </div>
+        </div>
+    </div>
+
     {% block content %}
+    {% endblock %}
+    {% block service %}
+        {% include 'service-section.html' %}
+    {% endblock %}
+    {% block testimony %}
+        <!-- Testimonials -->
+
+        <div class="testimonials page_section">
+            <!-- <div class="testimonials_background" style="background-image:url(images/testimonials_background.jpg)"></div> -->
+            <div class="testimonials_background_container prlx_parent">
+                <div class="testimonials_background prlx"
+                     style="background-image:url(/static/img/logos/IMG1.png)"></div>
+            </div>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="section_title text-center">
+                            <h1>What our students say</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+
+                        <div class="testimonials_slider_container">
+
+                            <!-- Testimonials Slider -->
+                            <div class="owl-carousel owl-theme testimonials_slider">
+
+                                <!-- Testimonials Item -->
+                                <div class="owl-item">
+                                    <div class="testimonials_item text-center">
+                                        <div class="quote">“</div>
+                                        <p class="testimonials_text">"2 friends along with me enrolled for digital
+                                            marketing
+                                            course here. After 2/3 classes I felt not satisfied with the tutor and
+                                            teaching.
+                                            I addressed the issue to General manager Sandeep sir . He told me not to
+                                            worry
+                                            and within few weeks he appointed two well trained staff for us, Linta miss
+                                            and
+                                            Arun sir. They had really great method of teaching and showed me career path
+                                            and
+                                            possibilities. Placement assistance was given and amrutha (HR) helped me
+                                            throughout the process . I got selected as Digital Marketing Executive at a
+                                            Kenzine Garden centre and I am really excited to pursue my new journey. Had
+                                            a
+                                            great experience all together. Friendly approach towards the students make
+                                            them
+                                            stand out from other training centre's. My two other friends are also
+                                            satisfied
+                                            by the experience. At my first impression I felt the place is not that good
+                                            and
+                                            later I realised that "a big business starts small". All the best to Sandeep
+                                            sir
+                                            a really talented business man. Amidst the COVID -19 chaos their efforts to
+                                            educate students has really impressed me."</p>
+                                        <div class="testimonial_user">
+                                            <div class="testimonial_image mx-auto">
+                                                <img src="{% static 'images/c3.jpg' %}" alt="">
+                                            </div>
+                                            <div class="testimonial_name">Anoop Varghese,</div>
+                                            <div class="testimonial_title">Digital Marketing</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Testimonials Item -->
+                                <div class="owl-item">
+                                    <div class="testimonials_item text-center">
+                                        <div class="quote">“</div>
+                                        <p class="testimonials_text">Excellent student support service and Job oriented
+                                            training.Good classroom facilities,Good syllabus. Overall satisfaction.</p>
+                                        <div class="testimonial_user">
+                                            <div class="testimonial_image mx-auto">
+                                                <img src="{% static 'images/c5.jpg' %}" alt="">
+                                            </div>
+                                            <div class="testimonial_name">VIVEK RAM,</div>
+                                            <div class="testimonial_title">Autocad Student</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Testimonials Item -->
+                                <div class="owl-item">
+                                    <div class="testimonials_item text-center">
+                                        <div class="quote">“</div>
+                                        <p class="testimonials_text"> Good services and clear good communication of
+                                            customers excellent performance </p>
+                                        <div class="testimonial_user">
+                                            <div class="testimonial_image mx-auto">
+                                                <img src="{% static 'images/c2.jpg' %}" alt="">
+                                            </div>
+                                            <div class="testimonial_name">AIBIN BABU,</div>
+                                            <div class="testimonial_title">Python Student</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endblock %}
     <!-- Footer -->
 

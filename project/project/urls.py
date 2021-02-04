@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 
+from accounts.views import about_us
 from accounts.views import change_password
 from accounts.views import home_view
 from accounts.views import dashboard_view
@@ -16,6 +17,7 @@ urlpatterns = [
     path('dashboard/', dashboard_view, name='dashboard'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('about-us/', about_us, name='about-us'),
     path('change-password/', change_password, name='change-password'),
     path('accounts/', include('accounts.urls')),
     path('institute/', include('institute.urls')),

@@ -32,6 +32,48 @@ def home_view(request):
     return render(request, 'home.html', {})
 
 
+def about_us(request):
+    return render(request, 'site/about-us.html', {})
+
+
+# --------------------------------------------------------------------
+
+
+def contact_us(request):
+    return render(request, 'site/contact-us.html', {})
+
+
+def online_courses(request):
+    return render(request, 'site/online_courses.html', {})
+
+
+def on_job_training(request):
+    return render(request, 'site/on_job_training.html', {})
+
+
+def our_teachers(request):
+    return render(request, 'site/our_teachers.html', {})
+
+
+def civil_course(request):
+    return render(request, 'site/civil_course.html', {})
+
+
+def mechanical_course(request):
+    return render(request, 'site/mechanical_course.html', {})
+
+
+def electronic_electrical(request):
+    return render(request, 'site/electronic_electrical.html', {})
+
+
+def computer_science(request):
+    return render(request, 'site/computer_science.html', {})
+
+
+# --------------------------------------------------------------------
+
+
 @login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html', {})
