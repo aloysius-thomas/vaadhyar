@@ -9,17 +9,19 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from accounts.choices import TUITION_DEPARTMENTS
-from accounts.forms import CourseForm, TraineeRegistrationForm
+from accounts.forms import CourseForm
 from accounts.forms import HODForm
 from accounts.forms import LoginForm
 from accounts.forms import StudentRegistrationForm
 from accounts.forms import SubjectForm
 from accounts.forms import TeacherForm
+from accounts.forms import TraineeRegistrationForm
 from accounts.forms import TrainerForm
 from accounts.models import Course
 from accounts.models import SelectedClass
 from accounts.models import Subject
 from accounts.models import User
+from project.email import send_email
 
 tuition_departments = TUITION_DEPARTMENTS
 
@@ -68,7 +70,14 @@ def hod_creation_view(request):
     if request.method == 'POST':
         form = HODForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save_user()
+            user = form.save_user()
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            send_email(
+                subject="Your account created",
+                message=f"Hi {user} \b Your HOD account for Vaadhyar is created please login using credentials given below\n\n Username: {email}\n Password: {password}",
+                recipient_list=[user.email, ]
+            )
             messages.success(request, 'Account created successfully')
             return redirect('hod-list')
     else:
@@ -85,7 +94,14 @@ def teacher_creation_view(request):
     if request.method == 'POST':
         form = TeacherForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save_user()
+            user = form.save_user()
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            send_email(
+                subject="Your account created",
+                message=f"Hi {user} \b Your Teacher account for Vaadhyar is created please login using credentials given below\n\n Username: {email}\n Password: {password}",
+                recipient_list=[user.email, ]
+            )
             messages.success(request, 'Account created successfully')
             return redirect('teachers-list')
     else:
@@ -102,7 +118,14 @@ def trainer_creation_view(request):
     if request.method == 'POST':
         form = TrainerForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save_user()
+            user = form.save_user()
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            send_email(
+                subject="Your account created",
+                message=f"Hi {user} \b Your Trainer account for Vaadhyar is created please login using credentials given below\n\n Username: {email}\n Password: {password}",
+                recipient_list=[user.email, ]
+            )
             messages.success(request, 'Account created successfully')
             return redirect('trainers-list')
     else:
@@ -317,7 +340,6 @@ def delete_course(request, id):
     obj = Course.objects.get(id=id)
     obj.delete()
     return redirect('courses-list')
-
 
 
 def edit_subject(request, id):
