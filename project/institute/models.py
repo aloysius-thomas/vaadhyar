@@ -102,7 +102,9 @@ class TimeTable(models.Model):
 class Attendance(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     date = models.DateField()
-    status = models.CharField(max_length=12, choices=STATUS)
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
+    subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.CharField(max_length=12, choices=STATUS, default='pending')
 
 
 class Interview(models.Model):

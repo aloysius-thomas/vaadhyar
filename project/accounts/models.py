@@ -47,6 +47,10 @@ class User(AbstractUser):
             return True
 
     @property
+    def selected_class(self):
+        return SelectedClass.objects.filter(user=self)
+
+    @property
     def get_subject(self):
         if self.user_type != 'teacher':
             return None
