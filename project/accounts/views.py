@@ -227,8 +227,8 @@ def select_class_view(request, teacher_id):
         else:
             selected = SelectedClass.objects.create(student=user, course=teacher.get_profile().course,
                                                     teacher=teacher)
-            selected.save()
-            messages.success(request, "Class selected")
+        selected.save()
+        messages.success(request, "Class selected")
         messages.success(request, "Something went wrong")
     return redirect('dashboard')
 
