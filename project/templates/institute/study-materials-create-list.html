@@ -46,7 +46,23 @@
                                                 </div>
                                             {% endif %}
                                             <div class="form-row">
-                                                {{ form|crispy }}
+                                                <div class="form-group col-md-6 mb-0">
+                                                    {{ form.name|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-6 mb-0">
+                                                    {{ form.file|as_crispy_field }}
+                                                </div>
+                                                {% if user.is_superuser %}
+                                                    <div class="form-group col-md-6 mb-0">
+                                                        {{ form.course|as_crispy_field }}
+                                                    </div>
+                                                    <div class="form-group col-md-6 mb-0">
+                                                        {{ form.subject|as_crispy_field }}
+                                                    </div>
+                                                    <div class="form-group col-md-6 mb-0">
+                                                        {{ form.teacher|as_crispy_field }}
+                                                    </div>
+                                                {% endif %}
                                                 <div>
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>

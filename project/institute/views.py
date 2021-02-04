@@ -64,25 +64,29 @@ def study_material_list_add_view(request, material_type):
         if form.is_valid():
             material = form.save(commit=False)
             material.material_type = material_type
-            material.uploaded_by = request.user
+            if request.user.user_type == 'teacher':
+                material.subject = request.user.get_subject
+            elif request.user.user_type == 'trainer':
+                material.subject = request.user.get_course
+            else:
+                pass
+            if material_type != 'video':
+                material.teacher = request.user
             material.save()
             return redirect('study-materials', material_type)
     else:
         form = StudyMaterialForm()
     list_items = StudyMaterial.objects.filter(material_type=material_type)
-    if user.user_type == 'teacher':
-        profile = user.get_profile()
-        list_items = list_items.filter(subject=profile.subject)
-    elif user.user_type == 'trainer':
-        profile = user.get_profile()
-        list_items = list_items.filter(course=profile.course)
+    if user.user_type in ['teacher', 'trainer']:
+        list_items = list_items.filter(teacher=user)
     elif user.user_type == 'student':
         profile = user.get_profile()
         subjects = [subject.id for subject in profile.get_subjects_selected()]
         list_items = list_items.filter(subject_id__in=subjects)
     elif user.user_type == 'trainee':
         profile = user.get_profile()
-        list_items = list_items.filter(course=profile.course)
+        courses = [course.id for course in profile.get_subjects_selected()]
+        list_items = list_items.filter(course_id__in=courses)
     else:
         list_items = list_items
     context = {
@@ -146,7 +150,7 @@ def complaint_response(request, c_id):
     complaint.response = response
     complaint.save()
     messages.success(request, "Success")
-    return redirect('complaint-list',  complaint.user.user_type)
+    return redirect('complaint-list', complaint.user.user_type)
 
 
 @login_required()
@@ -216,6 +220,7 @@ def time_table_view(request):
     return render(request, 'institute/time-table.html', context)
 
 
+@login_required()
 def feedback_view(request):
     user = request.user
     if request.method == 'POST':
@@ -244,6 +249,7 @@ def feedback_view(request):
     return render(request, 'institute/feedback.html', context)
 
 
+@login_required()
 def attendance_list_view(request, user_type):
     generate_attendance()
     today = datetime.now().date()
@@ -251,7 +257,6 @@ def attendance_list_view(request, user_type):
     date = request.GET.get('date', None)
     month_and_year = request.GET.get('month', None)
     if month_and_year:
-        print(month_and_year)
         month = month_and_year[5:]
         month = int(month)
         year = month_and_year[:4]
@@ -296,6 +301,7 @@ def attendance_list_view(request, user_type):
     return render(request, 'accounts/attendance-list.html', context)
 
 
+@login_required()
 def add_salary_view(request, user_id):
     if request.method == 'POST':
         form = SalaryForm(request.POST)
@@ -307,6 +313,7 @@ def add_salary_view(request, user_id):
     return HttpResponseNotFound()
 
 
+@login_required()
 def add_fee_view(request, user_id):
     if request.method == 'POST':
         form = FeeForm(request.POST)

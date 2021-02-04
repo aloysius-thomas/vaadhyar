@@ -1,5 +1,6 @@
 from django import forms
 
+from accounts.models import User
 from institute.models import Complaint
 from institute.models import Exam
 from institute.models import Fee
@@ -17,6 +18,8 @@ class InterviewForm(forms.ModelForm):
 
 
 class StudyMaterialForm(forms.ModelForm):
+    teacher = forms.ModelChoiceField(queryset=User.objects.filter(user_type__in=['teacher', 'trainer']), required=False)
+
     class Meta:
         model = StudyMaterial
         fields = {
@@ -24,6 +27,7 @@ class StudyMaterialForm(forms.ModelForm):
             'course',
             'subject',
             'file',
+            'teacher',
         }
         help_texts = {
             'course': "Select any one of course or subject"
