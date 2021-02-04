@@ -32,7 +32,6 @@
             <td>{{ i.id }}</td>
             <td>{{ i.name }}</td>
             <td><a href="{% url 'edit_course' i.id %}">Edit</a></td>
-            <td><a href="{% url 'delete_course' i.id %}">Delete</a></td>
         </tr>
 
         {% endfor %}

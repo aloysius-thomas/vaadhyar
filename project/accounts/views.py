@@ -456,3 +456,5 @@ def update_student_limit(request, user_id):
             return redirect('teachers-list')
         else:
             return redirect('trainers-list')
+
+
