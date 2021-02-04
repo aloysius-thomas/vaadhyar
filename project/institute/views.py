@@ -165,7 +165,7 @@ def interview_create_list_view(request):
         profile = user.get_profile
         list_items = Interview.objects.filter(course=profile.course)
     elif user.user_type == 'trainee':
-        profile = user.get_profile
+        profile = user.get_profile()
         selected_subject = profile.get_subjects_selected()
         course_id_list = [course.course_id for course in selected_subject]
         list_items = Interview.objects.filter(course__in=course_id_list)
