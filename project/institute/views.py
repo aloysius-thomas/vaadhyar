@@ -177,6 +177,69 @@ def leave_create_list_view(request):
 
 
 @login_required()
+def leave_request_list_view(request, user_type):
+    list_items = Leave.objects.filter(user__user_type=user_type)
+    user = request.user
+    if user.user_type == 'hod':
+        list_items = list_items.filter(user__department=user.department)
+    elif user.user_type in ['teacher', 'trainer']:
+        profile = user.get_profile()
+        my_students = profile.my_students
+        list_items = list_items.filter(user__in=my_students)
+    elif user.is_superuser:
+        list_items = list_items
+    else:
+        list_items = []
+
+    context = {
+        'title': f"{user_type.title()} Leave Request",
+        'list_items': list_items,
+        'btn_text': f"New",
+    }
+    return render(request, 'institute/leave-list.html', context)
+
+
+@login_required()
+def leave_recommend_view(request, leave_id):
+    try:
+        leave = Leave.objects.get(id=leave_id)
+    except Leave.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        leave.status = 'recommended'
+        leave.response = f"Your leave is recommended {request.user}, please wait for the approval of HOD"
+        leave.save()
+        return redirect('leave-request-list', leave.user.user_type)
+
+
+@login_required()
+def leave_reject_view(request, leave_id):
+    try:
+        leave = Leave.objects.get(id=leave_id)
+    except Leave.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        leave.status = 'rejected'
+        reason = request.POST.get('reason')
+        leave.response = f"Your leave is rejected by {request.user} due to {reason}."
+        leave.save()
+        return redirect('leave-request-list', leave.user.user_type)
+
+
+@login_required()
+def leave_approve_view(request, leave_id):
+    try:
+        leave = Leave.objects.get(id=leave_id)
+    except Leave.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        leave.status = 'approved'
+        leave.response = f"Your leave is approved by {request.user}."
+        leave.save()
+        return redirect('leave-request-list', leave.user.user_type)
+
+
+@login_required()
 def exam_create_list_view(request):
     user = request.user
     if request.method == 'POST':

@@ -9,7 +9,11 @@ from institute.views import complaint_response
 from institute.views import exam_create_list_view
 from institute.views import feedback_view
 from institute.views import interview_create_list_view
+from institute.views import leave_approve_view
 from institute.views import leave_create_list_view
+from institute.views import leave_recommend_view
+from institute.views import leave_reject_view
+from institute.views import leave_request_list_view
 from institute.views import study_material_list_add_view
 from institute.views import time_table_view
 
@@ -17,6 +21,10 @@ urlpatterns = [
     path('interviews/', interview_create_list_view, name='interviews'),
     path('study-material/<str:material_type>/', study_material_list_add_view, name='study-materials'),
     path('leave-request/', leave_create_list_view, name='leave-request-create-list'),
+    path('leave-request/list/<str:user_type>/', leave_request_list_view, name='leave-request-list'),
+    path('leave-request/<int:leave_id>/recommend/', leave_recommend_view, name='leave-recommend-view'),
+    path('leave-request/<int:leave_id>/reject/', leave_reject_view, name='leave-reject-view'),
+    path('leave-request/<int:leave_id>/approve/', leave_approve_view, name='leave-approve-view'),
     path('complaints/', complaint_create_list_view, name='complaint-create-list'),
     path('complaints/<str:user_type>/', complaint_list_view, name='complaint-list'),
     path('complaint/<int:c_id>/response/', complaint_response, name='complaint-response'),
