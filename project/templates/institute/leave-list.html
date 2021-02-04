@@ -32,7 +32,8 @@
                                                     Are you sure you want to recommend leave request of {{ item.user }}
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{% url 'leave-recommend-view' item.id %}">
+                                                    <a href="{% url 'leave-recommend-view' item.id %}"
+                                                       class="btn btn-primary">
                                                         Yes Recommend
                                                     </a>
                                                 </div>
@@ -65,7 +66,8 @@
                                                                           required></textarea>
                                                             </div>
                                                             <div>
-                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                <button type="submit" class="btn btn-primary">Submit and
+                                                                    Reject
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -87,7 +89,8 @@
                                                     Are you sure you want to approve leave request of {{ item.user }}
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{% url 'leave-approve-view' item.id %}">
+                                                    <a href="{% url 'leave-approve-view' item.id %}"
+                                                       class="btn btn-primary">
                                                         Yes Approve
                                                     </a>
                                                 </div>
@@ -110,21 +113,24 @@
                                         </td>
                                         <td>
                                             <div class="btn-group-sm">
-                                                {% if item.status != 'approved' or item.status != 'rejected' %}
-                                                    {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
-                                                        {% if item.status != 'recommended' %}
-                                                            <a type="button" class="btn btn-info" data-toggle="modal"
-                                                               data-target="#recommendModal">Recommend
+                                                {% if item.status != 'approved' %}
+                                                    {% if item.status != 'rejected' %}
+                                                        {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
+                                                            {% if item.status != 'recommended' %}
+                                                                <a type="button" class="btn btn-info"
+                                                                   data-toggle="modal"
+                                                                   data-target="#recommendModal{{ item.id }}">Recommend
+                                                                </a>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <a type="button" class="btn btn-success" data-toggle="modal"
+                                                               data-target="#approveModal{{ item.id }}">Approve
                                                             </a>
                                                         {% endif %}
-                                                    {% else %}
-                                                        <a type="button" class="btn btn-success" data-toggle="modal"
-                                                           data-target="#approveModal">Approve
+                                                        <a type="button" class="btn btn-danger" data-toggle="modal"
+                                                           data-target="#rejectModal{{ item.id }}">Reject
                                                         </a>
                                                     {% endif %}
-                                                    <a type="button" class="btn btn-danger" data-toggle="modal"
-                                                       data-target="#rejectModal">Reject
-                                                    </a>
                                                 {% endif %}
                                             </div>
                                         </td>

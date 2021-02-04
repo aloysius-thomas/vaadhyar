@@ -181,7 +181,11 @@ def leave_request_list_view(request, user_type):
     list_items = Leave.objects.filter(user__user_type=user_type)
     user = request.user
     if user.user_type == 'hod':
-        list_items = list_items.filter(user__department=user.department)
+        if user.department == 'tuition':
+            list_items = list_items.filter(user__department__in=TUITION_DEPARTMENTS)
+        else:
+            list_items = list_items.filter(user__department=user.department)
+
     elif user.user_type in ['teacher', 'trainer']:
         profile = user.get_profile()
         my_students = profile.my_students
