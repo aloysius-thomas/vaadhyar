@@ -2,9 +2,11 @@ from django import forms
 
 from institute.models import Complaint
 from institute.models import Exam
+from institute.models import Fee
 from institute.models import Feedback
 from institute.models import Interview
 from institute.models import Leave
+from institute.models import Salary
 from institute.models import StudyMaterial
 
 
@@ -67,4 +69,26 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = {
             'feedback'
+        }
+
+
+class SalaryForm(forms.ModelForm):
+    class Meta:
+        model = Salary
+        fields = {
+            'month',
+            'amount',
+            'status',
+            'pending',
+        }
+
+
+class FeeForm(forms.ModelForm):
+    class Meta:
+        model = Fee
+        fields = {
+            'fee_type',
+            'amount',
+            'status',
+            'due',
         }

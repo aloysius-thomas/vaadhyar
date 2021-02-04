@@ -21,6 +21,8 @@ from accounts.models import Course
 from accounts.models import SelectedClass
 from accounts.models import Subject
 from accounts.models import User
+from institute.forms import FeeForm
+from institute.forms import SalaryForm
 from project.email import send_email
 
 tuition_departments = TUITION_DEPARTMENTS
@@ -385,6 +387,8 @@ def user_profile_view(request, user_id):
         return HttpResponseNotFound()
     else:
         context = {
-            'user_obj': user
+            'user_obj': user,
+            'salary_form': SalaryForm(),
+            'fee_form': FeeForm()
         }
         return render(request, 'accounts/user-profile.html', context)

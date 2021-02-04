@@ -64,6 +64,16 @@ class User(AbstractUser):
         profile = self.get_profile()
         return profile.course
 
+    @property
+    def salary_history(self):
+        from institute.models import Salary
+        return Salary.objects.filter(user=self).order_by('-id')
+
+    @property
+    def fee_history(self):
+        from institute.models import Fee
+        return Fee.objects.filter(user=self).order_by('-id')
+
 
 class Course(models.Model):
     name = models.CharField(max_length=128)

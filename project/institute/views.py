@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.shortcuts import render
 
@@ -9,8 +10,10 @@ from accounts.choices import TUITION_DEPARTMENTS
 from institute.forms import ComplaintForm
 from institute.forms import ExamForm
 from institute.forms import FeedbackForm
+from institute.forms import FeeForm
 from institute.forms import InterviewForm
 from institute.forms import LeaveForm
+from institute.forms import SalaryForm
 from institute.forms import StudyMaterialForm
 from institute.models import Attendance
 from institute.models import Complaint
@@ -272,3 +275,25 @@ def attendance_list_view(request, user_type):
         "btn_text": 'Filter',
     }
     return render(request, 'accounts/attendance-list.html', context)
+
+
+def add_salary_view(request, user_id):
+    if request.method == 'POST':
+        form = SalaryForm(request.POST)
+        if form.is_valid():
+            salary = form.save(commit=False)
+            salary.user_id = user_id
+            salary.save()
+            return redirect('user-profile-details', int(user_id))
+    return HttpResponseNotFound()
+
+
+def add_fee_view(request, user_id):
+    if request.method == 'POST':
+        form = FeeForm(request.POST)
+        if form.is_valid():
+            fee = form.save(commit=False)
+            fee.user_id = user_id
+            fee.save()
+            return redirect('user-profile-details', int(user_id))
+    return HttpResponseNotFound()

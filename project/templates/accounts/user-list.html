@@ -33,8 +33,11 @@
                                         <td>{{ item.get_department_display }}</td>
                                         <td><img src="{{ item.image.url }}" width="250px" alt=""></td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                            <a href="{% url 'user-profile-details' item.id %}">
+                                                <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i
+                                                        class="fa fa-eye" aria-hidden="true"></i> View
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
