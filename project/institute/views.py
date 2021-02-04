@@ -497,3 +497,22 @@ def update_mark(request, result_id):
         result.mark = mark
         result.save()
         return redirect('exam-mark-list', result.exam.id)
+
+
+@login_required()
+def class_details_view(request):
+    today = datetime.now().date()
+    generate_time_table()
+    user = request.user
+    if user.user_type in ['teacher', 'trainer']:
+        time_table = TimeTable.objects.filter(teacher=user, date=today)
+    else:
+        selected_class = user.get_profile().get_subjects_selected()
+        teacher_id_list = [c.teacher_id for c in selected_class]
+        time_table = TimeTable.objects.filter(teacher_id__in=teacher_id_list, date=today)
+
+    context = {
+        'title': f'My Class of {today}',
+        'list_items': time_table
+    }
+    return render(request, 'institute/time-table.html', context)

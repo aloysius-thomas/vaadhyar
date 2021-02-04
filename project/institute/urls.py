@@ -3,6 +3,7 @@ from django.urls import path
 from institute.views import add_fee_view
 from institute.views import add_salary_view
 from institute.views import attendance_list_view
+from institute.views import class_details_view
 from institute.views import complaint_create_list_view
 from institute.views import complaint_list_view
 from institute.views import complaint_response
@@ -48,4 +49,6 @@ urlpatterns = [
     path('<int:user_id>/add-salary/', add_salary_view, name='add-salary-view'),
     path('salary-history/', salary_history, name='salary-history'),
     path('<int:user_id>/add-fee/', add_fee_view, name='add-fee-view'),
+    path('class-details>/', class_details_view, name='class-details'),
+
 ]

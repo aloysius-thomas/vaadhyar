@@ -175,3 +175,7 @@ class Trainee(models.Model):
 
     def __str__(self):
         return f'{self.user} profile'
+
+    def get_subjects_selected(self):
+        subjects = SelectedClass.objects.filter(student=self.user)
+        return subjects

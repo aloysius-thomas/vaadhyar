@@ -21,6 +21,7 @@ from accounts.views import trainees_list_view
 from accounts.views import trainer_creation_view
 from accounts.views import trainers_list_view
 from accounts.views import user_profile_view
+from institute.views import class_details_view
 
 urlpatterns = [
     path('<int:user_id>/profile/', user_profile_view, name='user-profile-details'),
