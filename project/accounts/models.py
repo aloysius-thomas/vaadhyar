@@ -144,6 +144,9 @@ class SelectedClass(models.Model):
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     teacher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='class_teacher')
 
+    # class Meta: TODO:Uncomment
+    #     unique_together = ['student', 'teacher']
+
 
 class Trainers(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)

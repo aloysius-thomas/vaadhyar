@@ -637,3 +637,4 @@ def class_details_view(request):
         'list_items': time_table
     }
     return render(request, 'institute/time-table.html', context)
+

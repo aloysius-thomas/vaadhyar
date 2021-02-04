@@ -1,0 +1,130 @@
+{% extends 'base-main.html' %}
+{% block content %}
+
+    {% load static %}
+    <title>Contact</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" type="text/css" href="/static/publicapp/styles/contact_styles.css">
+
+    </head>
+    <body>
+    <style>
+        h2 {
+            color: #f7d410;
+            line-height: .7cm;
+        }
+    </style>
+    <div class="home">
+        <div class="hero_slide">
+            <div class="hero_slide_background" style="background-image:url(/static/images/ad.png);"></div>
+            <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Contact -->
+
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <!-- Contact Form -->
+                    <div class="contact_form">
+                        <div class="contact_title">Get in touch</div>
+
+                        <div class="contact_form_container">
+                            <form method="post" action="#">
+                                <input id="contact_form_name" class="form-control" type="text" placeholder="Name" required><br>
+                                <input class="form-control" type="email" placeholder="Email address" required><br>
+                                <textarea class="form-control " type="text" placeholder="Message" required></textarea><br>
+                                <button id="contact_send_btn" type="button" class="btn btn-primary"
+                                        value="Submit">send message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="about">
+                        <div class="about_title">Join Courses</div>
+                        <p class="about_text">
+                        <h2>Excellence has been the leading company in Kerala. Our efficient services has benefited
+                            well-known companies all over the world.Our Heartiest welcome goes to you.</h2></p>
+
+                        <div class="contact_info">
+                            <ul>
+                                <li class="contact_info_item">
+                                    <div class="contact_info_icon">
+                                        <img src="{% static 'images/placeholder.svg' %}" width="30" height="30" alt="https://www.flaticon.com/authors/lucy-g">
+                                    Devamatha Tower, 3rd Floor, St Thomas College Rd, opposite District Medical Office,
+                                    Thrissur, Kerala 680001.
+                                    </div>
+
+                                </li>
+                                <li class="contact_info_item">
+                                    <div class="contact_info_icon">
+                                        <img width="30" height="30"
+                                             src="{% static 'images/smartphone.svg' %}"
+                                             alt="https://www.flaticon.com/authors/lucy-g">
+                                           +917510722222
+                                    </div>
+
+
+
+
+                                </li>
+                                <li class="contact_info_item">
+                                    <div class="contact_info_icon">
+                                        <img class="img-fluid img-thumbnail" width="30" height="30" src="{% static 'images/envelope.svg' %}"
+                                             alt="https://www.flaticon.com/authors/lucy-g">   excellencegroupofcompanies@gmail.com
+                                    </div>
+
+                                </li>
+                                <li class="contact_info_item"><a
+                                        href="https://www.linkedin.com/in/excellence-group-of-companies-97176219b/"><b>LinkedIn </b><i
+                                        class="fab fa-linkedin-in"></i></a></li>
+                                <li class="contact_info_item"><a
+                                        href="https://www.instagram.com/excellence_thrissur/"><b>Instagram </b><i
+                                        class="fab fa-instagram"></i></a></li>
+                                <li class="contact_info_item"><a
+                                        href="https://www.facebook.com/excellencegroupofcompanies"><b>Facebook </b><i
+                                        class="fab fa-facebook-f"></i></a></li>
+                                <li class="contact_info_item"><a
+                                        href="https://twitter.com/ExcellenceTrai6"><b>twitter </b><i
+                                        class="fab fa-twitter"></i></a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <!-- Google Map -->
+        <div class="map-area mb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.716693986994!2d76.21817941431773!3d10.522965592493804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ee4bf2a95555%3A0xe647a7c23bf1a4ef!2sExcellence%20Group%20of%20Companies!5e0!3m2!1sen!2sin!4v1606976321953!5m2!1sen!2sin"
+                                width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                                aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+{% endblock %}
