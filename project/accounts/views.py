@@ -103,11 +103,16 @@ def logout_view(request):
 @login_required()
 def change_password(request):
     title = 'Change Password'
-    form = PasswordChangeForm(request.POST or None, request=request)
-    if form.is_valid():
-        form.save_password()
-        return redirect('home')
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Password Changed")
+            return redirect('home')
+    else:
+        form = PasswordChangeForm(request.user)
     context = {'form': form, 'title': title}
+
     return render(request, 'change-password.html', context)
 
 
@@ -456,5 +461,3 @@ def update_student_limit(request, user_id):
             return redirect('teachers-list')
         else:
             return redirect('trainers-list')
-
-
