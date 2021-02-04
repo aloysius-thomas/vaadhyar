@@ -55,11 +55,17 @@
                                                     <img class="message-avatar" src="{{ item.user.image.url }}" alt="">
                                                 </div>
                                                 <div class="message">
-                                                    <a class="message-author" href="#"> {{item.user}}</a>
-                                                    <span class="message-date"> {{item.date}} </span>
+                                                    <a class="message-author" href="#"> {{ item.user }}</a>
+                                                    <span class="message-date"> {{ item.date }} </span>
                                                     <span class="message-content">{{ item.feedback }}.
                                                 </span>
                                                 </div>
+                                            </div>
+                                        {% empty %}
+                                            <div class="alert alert-info alert-st-two" role="alert">
+                                                <i class="fa fa-info-circle edu-inform admin-check-pro"
+                                                   aria-hidden="true"></i>
+                                                <p class="message-mg-rt">No Feedback yet..</p>
                                             </div>
                                         {% endfor %}
                                     </div>

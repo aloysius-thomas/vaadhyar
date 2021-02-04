@@ -207,6 +207,8 @@ def feedback_view(request):
         list_items = Feedback.objects.filter(user=user)
     elif user.user_type in ['trainer', 'teacher']:
         students = user.get_profile().my_students
+        print(students)
+        print(',,,,,,,,,')
         list_items = Feedback.objects.filter(user__in=students)
     else:
         list_items = []
