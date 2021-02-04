@@ -21,7 +21,7 @@ from institute.models import Exam
 from institute.models import Feedback
 from institute.models import Interview
 from institute.models import Leave
-from institute.models import Salary
+from institute.models import Result
 from institute.models import StudyMaterial
 from institute.models import TimeTable
 from institute.utils import generate_attendance
@@ -461,3 +461,35 @@ def salary_history(request):
         'list_items': request.user.salary_history
     }
     return render(request, 'institute/salary-history.html', context)
+
+
+@login_required()
+def mark_list(request, exam_id):
+    try:
+        exam = Exam.objects.get(id=exam_id)
+    except Exam.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        my_students = exam.conducted_by.get_profile().my_students
+        for student in my_students:
+            Result.objects.get_or_create(exam=exam, attended_by=student)
+
+        context = {
+            'exam': exam,
+            'students_attended': Result.objects.filter(exam=exam)
+        }
+
+        return render(request, 'institute/mark-list.html', context)
+
+
+@login_required()
+def update_mark(request, result_id):
+    try:
+        result = Result.objects.get(id=result_id)
+    except Result.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        mark = request.POST.get('mark' or None)
+        result.mark = mark
+        result.save()
+        return redirect('exam-mark-list', result.exam.id)

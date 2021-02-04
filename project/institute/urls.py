@@ -16,11 +16,13 @@ from institute.views import leave_reject_view
 from institute.views import leave_request_list_view
 from institute.views import mark_as_absent_view
 from institute.views import mark_as_present_view
+from institute.views import mark_list
 from institute.views import salary_history
 from institute.views import students_attendance_sheet
 from institute.views import study_material_list_add_view
 from institute.views import teachers_attendance_sheet
 from institute.views import time_table_view
+from institute.views import update_mark
 
 urlpatterns = [
     path('interviews/', interview_create_list_view, name='interviews'),
@@ -34,6 +36,8 @@ urlpatterns = [
     path('complaints/<str:user_type>/', complaint_list_view, name='complaint-list'),
     path('complaint/<int:c_id>/response/', complaint_response, name='complaint-response'),
     path('exams/', exam_create_list_view, name='exam-create-list'),
+    path('exams/<int:exam_id>/mark-list/', mark_list, name='exam-mark-list'),
+    path('exams/<int:result_id>/update/', update_mark, name='update-mark-list'),
     path('time-table/', time_table_view, name='time-table'),
     path('feedback/', feedback_view, name='feedback'),
     path('attendance/list/<str:user_type>/', attendance_list_view, name='attendance-list-view'),

@@ -110,7 +110,7 @@
                                         <td>{{ item.max_time }} Minutes</td>
                                         <td>{{ item.date|date }}</td>
                                         <td>{{ item.time|time }}</td>
-                                        <td><a href="{{ item.file.url }}" class="btn btn-primary">Mark List</a></td>
+                                        <td><a href="{% url 'exam-mark-list'  item.id %}" class="btn btn-primary">Mark List</a></td>
                                     </tr>
                                 {% endfor %}
                             </table>

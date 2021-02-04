@@ -75,20 +75,20 @@ class Exam(models.Model):
     course = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
     conducted_by = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
-    # Time in minutes
     date = models.DateField()
+    # Time in minutes
     time = models.TimeField(blank=True, null=True)
     max_time = models.IntegerField()
     max_score = models.IntegerField()
 
     def __str__(self):
-        return f'{self.course} Exam in {self.date}' if self.course else f'{self.subject} Exam in {self.date}'
+        return f'{self.course} Exam  {self.date.strftime("%d %B %Y")}' if self.course else f'{self.subject} Exam  {self.date.strftime("%d %B %Y")}'
 
 
 class Result(models.Model):
     exam = models.ForeignKey(to=Exam, on_delete=models.CASCADE, blank=True, null=True)
     attended_by = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
-    mark = models.IntegerField()
+    mark = models.IntegerField(blank=True, null=True)
 
 
 class TimeTable(models.Model):

@@ -1,0 +1,93 @@
+{% extends 'base-admin.html' %}
+{% block contents %}
+    {% block breadcome %}
+
+    {% endblock %}
+    <div class="widgets-programs-area">
+        <div class="container-fluid">
+            <div class="row ">
+                <br>
+                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 mt-2">
+                    <div class="hpanel widget-int-shape responsive-mg-b-30">
+                        <div class="panel-body">
+                            <div class="stats-title pull-left">
+                                <h4>{{ exam }}</h4>
+                            </div>
+                            <div class="m-t-xl widget-cl-1">
+                                <h1 class="text-success">{{ exam.max_score }} Marks</h1>
+                                <h1 class="text-success">{{ exam.max_time }} Minutes</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>Results</h4>
+                        <div class="asset-inner">
+                            {% if students_attended %}
+
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Mark</th>
+                                    </tr>
+                                    {% for student in students_attended %}
+                                        <tr>
+                                            <div class="modal fade" id="myModal" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                &times;
+                                                            </button>
+                                                            <h4 class="modal-title">Update mark
+                                                                of {{ student.attended_by }}</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{% url 'update-mark-list' student.id %}"
+                                                                  method="post" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                {% if form.non_field_errors %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        {% for error in form.non_field_errors %}
+                                                                            {{ error }}
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                {% endif %}
+                                                                <div class="form-group">
+                                                                    <input name="mark" type="number"
+                                                                           class="form-control"
+                                                                           placeholder="Mark"
+                                                                           max="{{ exam.max_score }}" min="0" required>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <td>{{ student.attended_by }}</td>
+                                            <td>{% if student.mark %}
+                                                {{ student.mark }}/ {{ exam.max_score }}
+                                            {% else %}
+                                                <a type="button" class="btn btn-primary" data-toggle="modal"
+                                                   data-target="#myModal">Update Result</a>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
