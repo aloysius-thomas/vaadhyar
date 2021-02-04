@@ -3,8 +3,8 @@ from django.db import models
 from accounts.models import Course
 from accounts.models import Subject
 from accounts.models import User
-from institute.choices import LEAVE_STATUS
 from institute.choices import FEES_CHOICES
+from institute.choices import LEAVE_STATUS
 from institute.choices import MONTH_CHOICES
 from institute.choices import STATUS
 from institute.choices import STUDY_MATERIAL_TYPE
@@ -29,6 +29,9 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f'Feedback from {self.user}'
+
+    class Meta:
+        ordering = ['-id', ]
 
 
 class Complaint(models.Model):
