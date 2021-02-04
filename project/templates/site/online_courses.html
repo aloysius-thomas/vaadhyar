@@ -1,0 +1,44 @@
+{% extends 'base-main.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero_slide">
+        <div class="hero_slide_background" style="background-image:url(/static/images/tu.jpg);"></div>
+        <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+        </div>
+    </div>
+    <BR>
+    <BR>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="section_title text-center">
+                    <h1><b>Online tuition made fun and easy with Vadhyar</b></h1>
+                </div>
+            </div>
+            <div class="col-6">
+                <video width="100%" height="100%" controls autoplay>
+                    <source src="{% static 'img/logos/vad.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-6">
+                <div class="">
+                    <h2 class="cl"><b> Why Vadhyar </b></h2>
+                    <p class="pd_tp"></p>
+                    <h3> Need some additional coaching along with your normal learning? Excellence provides you for
+                        schools
+                        of various boards of education like State, CBSE, ICSE starting from standard 1 to standard 12
+                        and
+                        Degree as well as crash course for B.Tech students with arrears.We,at Vadhyar, combine school
+                        homework, self-study and tuition classes in one. Just log on to Vadhyar and study from the
+                        comfort
+                        of your home. Interactive audio and video sessions make lessons easy. Access to a personalize
+                        online
+                        teacher at a pre-decided time and location makes learning interesting, So get started today
+                        ..............!
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

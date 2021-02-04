@@ -10,6 +10,7 @@ from accounts.views import home_view
 from accounts.views import dashboard_view
 from accounts.views import login_view
 from accounts.views import logout_view
+from accounts.views import online_courses
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,6 +19,9 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('about-us/', about_us, name='about-us'),
+    path('online-courses/', online_courses, name='online-courses'),
+
+
     path('change-password/', change_password, name='change-password'),
     path('accounts/', include('accounts.urls')),
     path('institute/', include('institute.urls')),
