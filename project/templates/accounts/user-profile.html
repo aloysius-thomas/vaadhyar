@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            {% if user.is_superuser %}
+            {% if user.is_superuser or user_obj == user %}
                 {% if user_obj.user_type == 'teacher' or user_obj.user_type == 'hod' or user_obj.user_type == 'trainer' %}
                     <br>
                     <div class="row">
