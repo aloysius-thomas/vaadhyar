@@ -65,7 +65,7 @@ def ansys(request):
 
 
 def catia(request):
-    return render(request, "publicapp/autocad.html", {})
+    return render(request, "publicapp/catia.html", {})
 
 
 def ds(request):
