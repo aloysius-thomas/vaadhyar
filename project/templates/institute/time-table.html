@@ -9,11 +9,6 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                             <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
                                 <div class="panel-body custom-panel-jw">
-                                    <div class="social-media-in">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    </div>
                                     <img alt="logo" class="img-circle m-b" src="{{ item.teacher.image.url }}"
                                          width="76px" height="76px">
                                     <h3><a href="">
@@ -24,7 +19,8 @@
                                         {% endif %}
                                     </a></h3>
                                     <p class="all-pro-ad">{{ item.teacher.get_department_display }}</p>
-                                    <p><b>Time:</b>{{ item.teacher.get_profile.get_available_time_display }}</p>
+                                    <p ><b>Time: </b>{{ item.teacher.get_profile.get_available_time_display }}</p>
+                                    <p><b>Date: </b>{{ item.date }}</p>
                                 </div>
                                 <div class="panel-footer contact-footer">
                                     <div class="professor-stds-int">
