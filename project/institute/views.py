@@ -120,14 +120,33 @@ def complaint_create_list_view(request):
 @login_required()
 def complaint_list_view(request, user_type):
     list_items = Complaint.objects.filter(user__user_type=user_type)
-    if request.user.user_type in ['hod', 'teacher', 'trainer']:
-        list_items = list_items.filter(user__department=request.user.department)
+    if request.user.user_type == 'hod':
+        list_items = list_items.filter(user__department=request.user.department, complaint_to='hod')
+    elif request.user.is_superuser:
+        list_items = list_items.filter(complaint_to='admin')
+    else:
+        list_items = []
 
     context = {
         'title': f"Complaints of {user_type.title()}",
         'list_items': list_items,
     }
     return render(request, 'institute/complaint-list.html', context)
+
+
+@login_required()
+def complaint_response(request, c_id):
+    response = request.POST.get('response')
+    print(response)
+    print(request.POST)
+    try:
+        complaint = Complaint.objects.get(id=c_id)
+    except Complaint.DoesNotExist:
+        return HttpResponseNotFound()
+    complaint.response = response
+    complaint.save()
+    messages.success(request, "Success")
+    return redirect('complaint-list',  complaint.user.user_type)
 
 
 @login_required()

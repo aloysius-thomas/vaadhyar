@@ -51,19 +51,62 @@
                                     <th>To</th>
                                     <th>Complaint</th>
                                     <th>Response</th>
+                                    {% if user.is_superuser or user.user_type == 'hod' %}
+                                        <th>Action</th>
+                                    {% endif %}
                                 </tr>
                                 {% for item in list_items %}
+                                    <div class="modal fade" id="responseModal" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">Response</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{% url 'complaint-response' item.id %}" method="post"
+                                                          enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        {% if form.non_field_errors %}
+                                                            <div class="alert alert-danger" role="alert">
+                                                                {% for error in form.non_field_errors %}
+                                                                    {{ error }}
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endif %}
+                                                        <div class="form-row">
+                                                            <div class="form-group">
+                                                                <textarea name="response" placeholder="Response"
+                                                                          required></textarea>
+                                                            </div>
+                                                            <div>
+                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <tr>
                                         <td>{{ item.id }}</td>
                                         <td>{{ item.get_complaint_to_display }}</td>
                                         <td>{{ item.complaint }}</td>
                                         <td>
                                             {% if item.response %}
-                                                {{ item.subject }}
+                                                {{ item.response }}
                                             {% else %}
                                                 No Response yet
                                             {% endif %}
                                         </td>
+                                        {% if user.is_superuser or user.user_type == 'hod' %}
+                                            <td>
+                                            <a type="button" class="btn btn-primary" data-toggle="modal"
+                                               data-target="#responseModal">Response</a>
+                                        {% endif %}
                                     </tr>
                                 {% endfor %}
                             </table>
@@ -73,4 +116,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
