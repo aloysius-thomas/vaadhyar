@@ -57,7 +57,7 @@ urlpatterns = [
     path('change-password/', change_password, name='change-password'),
     path('accounts/', include('accounts.urls')),
     path('institute/', include('institute.urls')),
-    url(r'^viewteacher$', viewteacher, name='viewteacher'),
+    path('viewteacher/', viewteacher, name='viewteacher'),
     url(r'^courseslist', courseslist, name='courseslist'),
     url(r'^civil', civil, name='civil'),
     url(r'^cs', cs, name='cs'),

@@ -1,190 +1,133 @@
 {% extends 'base-main.html' %}
 {% block content %}
 
-<style>
-  table {
-  background:url(trainer.jpg);
-  background-size:cover;
-  
-  }
+    <style>
+        table {
+            background: url(/static/trainer.jpg);
+            background-size: cover;
 
-  h3 {
-    color: black;
-    line-height: .7cm;
-    text-align: justify;
-  }
-  h2 {
-    color:#f7d410;
-  }
-  h1{
-    color:#f7d410;
-    text-align:center;
-    font-size: 40;
-  }
-</style>
-<!-- section -->
-<br>
-<div class="hero_slide">
-  <div class="hero_slide_background" style="background-image:url(static/publicapp/img/logos/pri.png);"></div>
-  <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
-    
-  </div>
-</div>
+        }
+
+        h3 {
+            color: black;
+            line-height: .7cm;
+            text-align: justify;
+        }
+
+        h2 {
+            color: #f7d410;
+        }
+
+        h1 {
+            color: #f7d410;
+            text-align: center;
+            font-size: 40;
+        }
+    </style>
+    <!-- section -->
+    <br>
+    <div class="hero_slide">
+        <div class="hero_slide_background" style="background-image:url(/static/publicapp/img/logos/pri.png);"></div>
+        <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+
+        </div>
+    </div>
 
 
     <div class="section padding_layout_1">
-      <div class="container">
-        <div class="row">
-        <div class="col-md-12">
-          <div class="full">
-          <div class="main_heading text_align_center">
-            <h1><U>PRIMAVERA</U></h1>
-            <p class="large"></p>
-          </div>
-          </div>
-        </div>
-        </div>
-        </div>
-          <!-- ##### About Us Area Start ##### -->
-    <section class="about-us-area">
-      <div class="container">
-          <div class="row align-items-center">
-              <div class="col-12 col-lg-6">
-                  <div class="about-text mb-100">
-                      <div class="section-heading">
-                          <div class="line-"></div>
-                          <h2></h2>
-                      </div>
-                      <p><H3>Primavera is a Project management software which has been developed  by Primavera Systems Inc. , it includes project management , scheduling , risk analysis , resource management , collaboration and control capabilities
-            </H3>
-
-                        </p>
-                        <br>
-                      <h2>About The Course</h2> 
-                      <p><h3> Primavera is a project management software that is used globally for planning, managing and controlling project charges, and their activities, with more efficiency and ease. The Software is widely used and more seen in the fields like Architecture, Engineering and Construction industry. Primavera includes other enterprise software such as Oracle and SAP’s ERP systems for better quality functioning and the software mainly focuses on project portfolio management and its solutions. Primavera's software pack includes P6, Pro sight, Contract Manager, Cost Manager, Pertmaster, SureTrak, Evolve and Inspire. The newest addition of primavera is Primavera P6, which is an integrated PPM solution that provides a real-time view of portfolio performance.
-                        
-                      </h3>
-                      </p>
-                      <h2>Who You Can Become</h2>
-                      <p><h3>
-                        Getting hand-on experience in ‘NavisWorks’ will open door to vast number of opportunities, the roles to which you'll get hired are:- <br><br>
-
-
-                          1.Project Engineer<br>
-                          2.Planning Engineer
-
-                        </h3>
-                        </p>
-                      <h2>Who Should Go For This Course</h2>
-                      <p><h3>Any graduate can learn primavera software as it has been used in wide range projects, having various aspects. This software is widely used in the industries pertaining to engineering, transport, construction, energy, IT, aerospace, security, etc.Therefore, Project Engineers and Planning Engineers will be mostly using this software to maintain and manage the complex projects into simplest,
-                    
-                      </p>
-
-                  </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="single-blog-post mb-100 wow fadeInUp" data-wow-delay="300ms">
-                  <!-- Post Thumb -->
-                  <div class="register_section d-flex flex-column align-items-center justify-content-center">
-                    <div class="register_content text-center">
-                      <h1 class="register_title">Register now and get a discount <span>50%</span> discount until 31 January</h1>
-                      <p class="register_text">Excellence has been the leading company in Kerala. Our efficient services has benefited well-known companies all over the world.Our Heartiest welcome goes to you.</p>
-                      <div class="button button_1 register_button mx-auto trans_200"><a href="{% url 'student-register' %}">register now</a></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="main_heading text_align_center">
+                            <h1><U>PRIMAVERA</U></h1>
+                            <p class="large"></p>
+                        </div>
                     </div>
-                  </div>
-        
-                
-                  </div>
-              </div>
-                  </div>
-              </div>
-              
-          </div>
-      </div>
-  </section>
- <br>
- <br>
-  
-  
- <!-- Testimonials -->
+                </div>
+            </div>
+        </div>
+        <!-- ##### About Us Area Start ##### -->
+        <section class="about-us-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-6">
+                        <div class="about-text mb-100">
+                            <div class="section-heading">
+                                <div class="line-"></div>
+                                <h2></h2>
+                            </div>
+                            <p>
+                            <H3>Primavera is a Project management software which has been developed by Primavera Systems
+                                Inc. , it includes project management , scheduling , risk analysis , resource management
+                                , collaboration and control capabilities
+                            </H3>
 
- <div class="testimonials page_section">
-	<!-- <div class="testimonials_background" style="background-image:url(images/testimonials_background.jpg)"></div> -->
-	<div class="testimonials_background_container prlx_parent">
-		<div class="testimonials_background prlx" style="background-image:url(static/publicapp/img/logos/IMG1.png)"></div>
-	</div>
-	<div class="container">
+                            </p>
+                            <br>
+                            <h2>About The Course</h2>
+                            <p>
+                            <h3> Primavera is a project management software that is used globally for planning, managing
+                                and controlling project charges, and their activities, with more efficiency and ease.
+                                The Software is widely used and more seen in the fields like Architecture, Engineering
+                                and Construction industry. Primavera includes other enterprise software such as Oracle
+                                and SAP’s ERP systems for better quality functioning and the software mainly focuses on
+                                project portfolio management and its solutions. Primavera's software pack includes P6,
+                                Pro sight, Contract Manager, Cost Manager, Pertmaster, SureTrak, Evolve and Inspire. The
+                                newest addition of primavera is Primavera P6, which is an integrated PPM solution that
+                                provides a real-time view of portfolio performance.
 
-		<div class="row">
-			<div class="col">
-				<div class="section_title text-center">
-					<h1>What our students say</h1>
-				</div>
-			</div>
-		</div>
+                            </h3>
+                            </p>
+                            <h2>Who You Can Become</h2>
+                            <p>
+                            <h3>
+                                Getting hand-on experience in ‘NavisWorks’ will open door to vast number of
+                                opportunities, the roles to which you'll get hired are:- <br><br>
 
-		<div class="row">
-			<div class="col-lg-10 offset-lg-1">
-				
-				<div class="testimonials_slider_container">
 
-					<!-- Testimonials Slider -->
-					<div class="owl-carousel owl-theme testimonials_slider">
-						
-						<!-- Testimonials Item -->
-						<div class="owl-item">
-							<div class="testimonials_item text-center">
-								<div class="quote">“</div>
-								<p class="testimonials_text">"2 friends along with me enrolled for digital marketing course here. After 2/3 classes I felt not satisfied with the tutor and teaching. I addressed the issue to General manager Sandeep sir . He told me not to worry and within few weeks he appointed two well trained staff for us, Linta miss and Arun sir. They had really great method of teaching and showed me career path and possibilities. Placement assistance was  given and  amrutha (HR) helped me throughout the process . I got selected as Digital Marketing Executive at a Kenzine Garden centre and I am really excited to pursue my new journey. Had a great experience all together. Friendly approach towards the students make them stand out from other training centre's. My two other friends are also satisfied by the experience. At my first impression I felt the place is not that good and later I realised that "a big business starts small". All the best to Sandeep sir a really talented business man. Amidst the COVID -19 chaos their efforts to educate students has really impressed me."</p>
-								<div class="testimonial_user">
-									<div class="testimonial_image mx-auto">
-										<img src="static/publicapp/images/c3.jpg" alt="">
-									</div>
-									<div class="testimonial_name">Anoop Varghese,</div>
-									<div class="testimonial_title">Digital Marketing</div>
-								</div>
-							</div>
-						</div>
+                                1.Project Engineer<br>
+                                2.Planning Engineer
 
-						<!-- Testimonials Item -->
-						<div class="owl-item">
-							<div class="testimonials_item text-center">
-								<div class="quote">“</div>
-								<p class="testimonials_text">Excellent student support service and Job oriented training.Good classroom facilities,Good syllabus. Overall satisfaction.</p>
-								<div class="testimonial_user">
-									<div class="testimonial_image mx-auto">
-										<img src="static/publicapp/images/c5.jpg" alt="">
-									</div>
-									<div class="testimonial_name">VIVEK RAM,</div>
-									<div class="testimonial_title">Autocad Student</div>
-								</div>
-							</div>
-						</div>
+                            </h3>
+                            </p>
+                            <h2>Who Should Go For This Course</h2>
+                            <p>
+                            <h3>Any graduate can learn primavera software as it has been used in wide range projects,
+                                having various aspects. This software is widely used in the industries pertaining to
+                                engineering, transport, construction, energy, IT, aerospace, security, etc.Therefore,
+                                Project Engineers and Planning Engineers will be mostly using this software to maintain
+                                and manage the complex projects into simplest,
 
-						<!-- Testimonials Item -->
-						<div class="owl-item">
-							<div class="testimonials_item text-center">
-								<div class="quote">“</div>
-								<p class="testimonials_text"> Good services and clear good communication of customers excellent performance </p>
-								<div class="testimonial_user">
-									<div class="testimonial_image mx-auto">
-										<img src="static/publicapp/images/c2.jpg" alt="">
-									</div>
-									<div class="testimonial_name">AIBIN BABU,</div>
-									<div class="testimonial_title">Python Student</div>
-								</div>
-							</div>
-						</div>
+                            </p>
 
-					</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="single-blog-post mb-100 wow fadeInUp" data-wow-delay="300ms">
+                            <!-- Post Thumb -->
+                            <div class="register_section d-flex flex-column align-items-center justify-content-center">
+                                <div class="register_content text-center">
+                                    <h1 class="register_title">Register now and get a discount <span>50%</span> discount
+                                        until 31 January</h1>
+                                    <p class="register_text">Excellence has been the leading company in Kerala. Our
+                                        efficient services has benefited well-known companies all over the world.Our
+                                        Heartiest welcome goes to you.</p>
+                                    <div class="button button_1 register_button mx-auto trans_200"><a
+                                            href="{% url 'student-register' %}">register now</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-				</div>
-			</div>
-		</div>
+    <br>
+    <br>
+{% block testimony %}
 
-	</div>
-</div>					
-</div>
-</div>
+{% endblock %}
 
-{%  endblock  %}
+    {% endblock %}
