@@ -21,6 +21,7 @@ from accounts.views import trainees_list_view
 from accounts.views import trainer_creation_view
 from accounts.views import trainers_list_view
 from accounts.views import user_profile_view
+from accounts.views import contact_us
 from institute.views import class_details_view
 
 urlpatterns = [
@@ -45,4 +46,5 @@ urlpatterns = [
     path('subjects/', subject_create_list_view, name='subject-create-list'),
     path('available-class/', available_class_view, name='available-class'),
     path('select_class_view/<int:teacher_id>/', select_class_view, name='select-class'),
+    path('contact_us/', contact_us, name='contact_us'),
 ]

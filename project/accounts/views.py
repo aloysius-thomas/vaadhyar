@@ -436,3 +436,5 @@ def user_profile_view(request, user_id):
             'fee_form': FeeForm()
         }
         return render(request, 'accounts/user-profile.html', context)
+
+
