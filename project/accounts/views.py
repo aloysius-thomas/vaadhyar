@@ -449,8 +449,9 @@ def update_student_limit(request, user_id):
         return HttpResponseNotFound()
     else:
         limit = request.POST.get('limit')
-        user.get_profile().student_limit = limit
-        user.get_profile().save()
+        profile = user.get_profile()
+        profile.student_limit = limit
+        profile.save()
         if user.user_type == 'teacher':
             return redirect('teachers-list')
         else:
