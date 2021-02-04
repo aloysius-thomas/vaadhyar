@@ -1,5 +1,6 @@
 from django.urls import path
 
+from institute.views import attendance_list_view
 from institute.views import complaint_create_list_view
 from institute.views import complaint_list_view
 from institute.views import exam_create_list_view
@@ -18,4 +19,5 @@ urlpatterns = [
     path('exams/', exam_create_list_view, name='exam-create-list'),
     path('time-table/', time_table_view, name='time-table'),
     path('feedback/', feedback_view, name='feedback'),
+    path('attendance/list/<str:user_type>/', attendance_list_view, name='attendance-list-view'),
 ]

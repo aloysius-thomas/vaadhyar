@@ -57,6 +57,13 @@ class User(AbstractUser):
         profile = self.get_profile()
         return profile.subject
 
+    @property
+    def get_course(self):
+        if self.user_type != 'trainer':
+            return None
+        profile = self.get_profile()
+        return profile.course
+
 
 class Course(models.Model):
     name = models.CharField(max_length=128)
@@ -139,6 +146,12 @@ class Trainers(models.Model):
 
     def __str__(self):
         return f'{self.user} profile'
+
+    @property
+    def my_students(self):
+        my_class = SelectedClass.objects.filter(teacher=self.user)
+        student_id = [student.student.id for student in my_class]
+        return User.objects.filter(id__in=student_id)
 
 
 class Trainee(models.Model):

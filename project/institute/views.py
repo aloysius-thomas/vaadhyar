@@ -12,6 +12,7 @@ from institute.forms import FeedbackForm
 from institute.forms import InterviewForm
 from institute.forms import LeaveForm
 from institute.forms import StudyMaterialForm
+from institute.models import Attendance
 from institute.models import Complaint
 from institute.models import Exam
 from institute.models import Feedback
@@ -19,6 +20,7 @@ from institute.models import Interview
 from institute.models import Leave
 from institute.models import StudyMaterial
 from institute.models import TimeTable
+from institute.utils import generate_attendance
 from institute.utils import generate_time_table
 
 
@@ -220,3 +222,45 @@ def feedback_view(request):
         'btn_text': f"Add Today's Feedback",
     }
     return render(request, 'institute/feedback.html', context)
+
+
+def attendance_list_view(request, user_type):
+    generate_attendance()
+    today = datetime.now().date()
+    user = request.user
+    date = request.GET.get('date', None)
+    month = request.GET.get('month', None)
+    year = request.GET.get('year', None)
+    department = request.GET.get('department', None)
+
+    if month or date or year or department:
+        if month:
+            attendance = Attendance.objects.filter(user__user_type=user_type, date__month=month)
+        if date:
+            attendance = Attendance.objects.filter(user__user_type=user_type, date__day=date)
+        if year:
+            attendance = Attendance.objects.filter(user__user_type=user_type, date__year=year)
+        if department:
+            attendance = Attendance.objects.filter(user__user_type=user_type, user__department=department)
+    else:
+        attendance = Attendance.objects.filter(date=today, user__user_type=user_type)
+    if user.is_superuser:
+        attendance = attendance
+    elif user.user_type == 'hod':
+        attendance = attendance.filter(user__department=user.department)
+    elif user.user_type == 'teacher':
+        my_students = user.get_profile().my_students
+        attendance = attendance.filter(user__in=my_students, subject=user.get_subject)
+    elif user.user_type == 'trainer':
+        my_students = user.get_profile().my_students
+        attendance = attendance.filter(user__in=my_students, subject=user.get_course)
+    elif user.user_type in ['student', 'trainee']:
+        attendance = attendance.filter(user=user)
+    else:
+        attendance = []
+
+    context = {
+        "title": f"Attendance of {today.strftime('%d %B %Y')}",
+        "data_list": attendance
+    }
+    return render(request, 'accounts/attendance-list.html', context)
