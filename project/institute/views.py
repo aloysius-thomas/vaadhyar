@@ -27,6 +27,127 @@ from institute.models import TimeTable
 from institute.utils import generate_attendance
 from institute.utils import generate_time_table
 
+def viewteacher(request):
+    return render(request, "publicapp/viewteacher.html", {})
+
+def courseslist(request):
+    return render(request, "publicapp/courses.html", {})
+
+def civil(request):
+    return render(request, "publicapp/civil.html", {})
+
+def cs(request):
+    return render(request, "publicapp/cs.html", {})
+
+
+def mech(request):
+    return render(request, "publicapp/mech.html", {})
+
+
+def ec(request):
+    return render(request, "publicapp/ec.html", {})
+
+def autocad(request):
+    return render(request, "publicapp/autocad.html", {})
+
+def solid(request):
+    return render(request, "publicapp/solid.html", {})
+
+
+def ansys(request):
+    return render(request, "publicapp/ansys.html", {})
+
+
+def catia(request):
+    return render(request, "publicapp/autocad.html", {})
+
+def ds(request):
+    return render(request, "publicapp/ds.html", {})
+
+
+def revit(request):
+    return render(request, "publicapp/revit.html", {})
+
+
+def googles(request):
+    return render(request, "publicapp/googles.html", {})
+
+
+def stadd(request):
+    return render(request, "publicapp/stadd.html", {})
+
+
+def etab(request):
+    return render(request, "publicapp/etab.html", {})
+
+
+def vray(request):
+    return render(request, "publicapp/vray.html", {})
+
+
+def revitst(request):
+    return render(request, "publicapp/revitst.html", {})
+
+
+def navis(request):
+    return render(request, "publicapp/navis.html", {})
+
+
+def prim(request):
+    return render(request, "publicapp/prim.html", {})
+
+
+def autocadmech(request):
+    return render(request, "publicapp/autocadmech.html", {})
+
+
+def nxcad(request):
+    return render(request, "publicapp/nxcad.html", {})
+
+
+def nxcam(request):
+    return render(request, "publicapp/nxcam.html", {})
+
+
+def nxnas(request):
+    return render(request, "publicapp/nxnas.html", {})
+
+
+def revitmep(request):
+    return render(request, "publicapp/revitmep.html", {})
+
+
+def prime(request):
+    return render(request, "publicapp/prime.html", {})
+
+
+def autocadec(request):
+    return render(request, "publicapp/autocadec.html", {})
+
+
+def ecrevit(request):
+    return render(request, "publicapp/ecrevit.html", {})
+
+
+def ecprim(request):
+    return render(request, "publicapp/ecprim.html", {})
+
+
+def java(request):
+    return render(request, "publicapp/java.html", {})
+
+
+def web(request):
+    return render(request, "publicapp/web.html", {})
+
+
+def python(request):
+    return render(request, "publicapp/python.html", {})
+
+
+def tu(request):
+    return render(request, "publicapp/tu.html", {})
+
 
 @login_required
 def interview_create_list_view(request):
@@ -516,3 +637,4 @@ def class_details_view(request):
         'list_items': time_table
     }
     return render(request, 'institute/time-table.html', context)
+

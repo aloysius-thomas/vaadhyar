@@ -1,0 +1,204 @@
+
+
+
+
+<body>
+     
+
+    <div id="image-container">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <div id="form-container">
+    
+  <form action="/student" method="post">
+  
+    <h1><b>REGISTRATION FORM</b></h1>
+    
+    <fieldset>
+     <div class="container">
+       
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="user_name">
+      
+      <label for="mail">Email:</label>
+      <input type="email" id="mail" name="user_email">
+      
+      <label for="mobile_number">Mobile Number:</label>
+      <input type="tel" id="mobile_number" name="user_mobile_number">
+
+      
+      <label for=>Gender:</label>
+      <input type="radio"  id="male" value="male" name="user_gender" >Male
+        <input type="radio" id="female" value="female" name="user_gender">Female 
+        <br>
+        <br>
+        <br>
+
+    <label for="dob">Date Of Birth:</label>
+    <input type="date" id="dob" name="user_dob"> 
+
+    </fieldset>
+    <button onclick="window.location.href='/index'">Sign Up</button>
+  </form>
+ </div>
+ </div>
+</body>
+</html>
+
+<style>
+
+    #image-container {
+        height: 1000;
+        background: url("static/publicapp/images/slider_background.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
+    #form-container {
+        width:500px;
+        height: 250px;
+        margin: 30px auto 0 auto;
+        opacity: .7;
+     }
+    
+
+*, *:before, *:after {
+    -moz-box-sizing:padding-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    box-shadow: #000000;
+    
+  }
+  
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: #384047;
+  }
+  .bg {
+    
+    background-image: url("rgbg.jpg");
+  
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  form {
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background:#f4f7f8;
+    border-radius: 15px;
+    border-color:#f7d410;
+  }
+  
+  h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    color: #f7d410;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea,
+  select {
+    background: #ffffff;
+    
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 15px;
+    width: 100%;
+    background-color:white;
+    color: #f7d410;
+    box-shadow: 0 1px 0 #ffff inset;
+    margin-bottom: 30px;
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+  }
+  
+  select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+  
+  button {
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    background-color: #f7d410;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #f7d410;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 #f7d410 inset;
+    margin-bottom: 10px;
+  }
+  
+  fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+  
+  legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #000000;
+
+  }
+  
+  label.light {
+    font-weight: 300;
+    display: inline;
+  }
+  
+  .number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 100%;
+  }
+  
+  @media screen and (min-width: 480px) {
+  
+    form {
+      max-width: 480px;
+    }
+  
+  }
+</style>
