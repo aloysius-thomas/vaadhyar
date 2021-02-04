@@ -4,69 +4,69 @@
     <nav id="sidebar" class="">
         <div class="sidebar-header">
             <a href="#"><img class="main-logo" src="{% static 'img/logo/logo.png' %}" alt=""/></a>
-            <strong><a href="#"><img src="{% static 'img/logo/logosn.png' %}" alt=""/></a></strong>
+            <strong><a href="#"><img src="{% static 'img/logo/logo.png' %}" alt=""/></a></strong>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Dashboard" href="#">
+                        <a title="Dashboard" href="{% url 'dashboard' %}">
                             <span class="fa fa-home icon-wrap"></span>
-                            <span class="mini-sub-pro">Dashboard</span>
+                            <span class="mini-click-non ">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a title="Hod" href="{% url 'hod-list' %}">
                             <span class="fa fa-h-square icon-wrap"></span>
-                            <span class="mini-sub-pro">HOD</span>
+                            <span class="mini-click-non">HOD</span>
                         </a>
                     </li>
                     <li>
                         <a title="Teachers" href="{% url 'teachers-list' %}">
                             <span class="fa fa-book icon-wrap"></span>
-                            <span class="mini-sub-pro">Teachers</span>
+                            <span class="mini-click-non">Teachers</span>
                         </a>
                     </li>
                     <li>
                         <a title="Trainers" href="{% url 'trainers-list' %}">
                             <span class="fa fa-child icon-wrap"></span>
-                            <span class="mini-sub-pro">Trainers</span>
+                            <span class="mini-click-non">Trainers</span>
                         </a>
                     </li>
                     <li>
                         <a title="Students" href="{% url 'students-list' %}">
                             <span class="fa fa-child icon-wrap"></span>
-                            <span class="mini-sub-pro">Students</span>
+                            <span class="mini-click-non">Students</span>
                         </a>
                     </li>
                     <li>
                         <a title="Trainees" href="{% url 'trainees-list' %}">
                             <span class="fa fa-book icon-wrap"></span>
-                            <span class="mini-sub-pro">Trainees</span>
+                            <span class="mini-click-non">Trainees</span>
                         </a>
                     </li>
                     <li>
                         <a title="Courses" href="{% url 'courses-list' %}">
                             <span class="fa fa-bookmark icon-wrap"></span>
-                            <span class="mini-sub-pro">Courses</span>
+                            <span class="mini-click-non">Courses</span>
                         </a>
                     </li>
                     <li>
                         <a title="Subjects" href="{% url 'subject-create-list' %}">
                             <span class="fa fa-bookmark icon-wrap"></span>
-                            <span class="mini-sub-pro">Subjects</span>
+                            <span class="mini-click-non">Subjects</span>
                         </a>
                     </li>
                     <li>
                         <a title="Interviews" href="{% url 'interviews' %}">
                             <span class="fa fa-black-tie icon-wrap"></span>
-                            <span class="mini-sub-pro">Interviews</span>
+                            <span class="mini-click-non">Interviews</span>
                         </a>
                     </li>
                     <li>
                         <a title="Videos" href="{% url 'study-materials' 'video' %}">
                             <span class="fa fa-file-video-o icon-wrap"></span>
-                            <span class="mini-sub-pro">Videos</span>
+                            <span class="mini-click-non">Videos</span>
                         </a>
                     </li>
                     <li>
@@ -96,6 +96,19 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a title="Leave Requests" href="{% url 'study-materials' 'video' %}">
+                            <span class="fa fa-sign-out icon-wrap"></span>
+                            <span class="mini-click-non">Leave</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a title="Attendance" href="{% url 'study-materials' 'video' %}">
+                            <span class="fa fa-toggle-right icon-wrap"></span>
+                            <span class="mini-click-non">Attendance</span>
+                        </a>
                     </li>
                 </ul>
             </nav>

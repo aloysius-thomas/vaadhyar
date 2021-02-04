@@ -11,25 +11,25 @@
                 <ul class="metismenu" id="menu1">
                     <li>
                         <a title="Dashboard" href="{% url 'dashboard' %}">
-                            <span class="fa fa-home"></span>
+                            <span class="fa fa-home icon-wrap"></span>
                             <span class="mini-click-non">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a title="Students" href="{% url 'students-list' %}">
-                            <span class="fa fa-child"></span>
+                            <span class="fa fa-child icon-wrap"></span>
                             <span class="mini-click-non">Students</span>
                         </a>
                     </li>
                     <li>
                         <a title="Trainees" href="#">
-                            <span class="fa fa-tablet"></span>
+                            <span class="fa fa-tablet icon-wrap"></span>
                             <span class="mini-click-non">Class Details</span>
                         </a>
                     </li>
                     <li>
                         <a title="Exam" href="{% url 'exam-create-list' %}">
-                            <span class="fa fa-book"></span>
+                            <span class="fa fa-book icon-wrap"></span>
                             <span class="mini-click-non">Exams</span>
                         </a>
                     </li>
@@ -58,14 +58,14 @@
                     </li>
                     <li>
                         <a title="Apply Leave" href="{% url 'leave-request-create-list' %}">
-                            <span class="fa fa-sign-out"></span>
+                            <span class="fa fa-sign-out icon-wrap"></span>
                             <span class="mini-click-non">Apply Leave</span>
                         </a>
                     </li>
 
                     <li>
                         <a title="Complaints" class="has-arrow" href="#">
-                            <span class="fa fa-stop-circle"></span>
+                            <span class="fa fa-stop-circle icon-wrap"></span>
                             <span class="mini-click-non">Complaints</span>
                         </a>
                         <ul class="submenu-angle" aria-expanded="true">
@@ -74,16 +74,17 @@
                                     <span class="mini-sub-pro">Register a Complaint</span>
                                 </a>
                             </li>
-                            <li>
-                                <a title="Students Complaints" href="{% url 'complaint-list' 'student' %}">
-                                    <span class="mini-sub-pro">Students Complaint</span>
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     <li>
                         <a title="Salary" href="#">
-                            <span class="fa fa-money"></span>
+                            <span class="fa fa-feed icon-wrap"></span>
+                            <span class="mini-click-non">Feedback</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Salary" href="#">
+                            <span class="fa fa-money icon-wrap"></span>
                             <span class="mini-click-non">Salary</span>
                         </a>
                     </li>

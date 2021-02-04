@@ -1,98 +1,109 @@
 {% extends 'base-admin.html' %}
 {% load crispy_forms_tags %}
 {% block contents %}
-    <div class="product-status-wrap drp-lst">
-        <h4>{{ title }}</h4>
-        {% if user.is_superuser %}
-            {% if btn_text %}
-                <div class="add-product">
-                    <a type="button" class="btn btn-primary" data-toggle="modal"
-                       data-target="#myModal">{{ btn_text }}</a>
-                </div>
-            {% endif %}
-        {% endif %}
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{ btn_text }}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            {% if form.non_field_errors %}
-                                <div class="alert alert-danger" role="alert">
-                                    {% for error in form.non_field_errors %}
-                                        {{ error }}
-                                    {% endfor %}
+
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>{{ title }}</h4>
+                        {% if user.is_superuser %}
+                            {% if btn_text %}
+                                <div class="add-product">
+                                    <a type="button" class="btn btn-primary" data-toggle="modal"
+                                       data-target="#myModal">{{ btn_text }}</a>
                                 </div>
                             {% endif %}
-                            <div class="form-row">
-                                <div class="form-group col-md-6 mb-0">
-                                    {{ form.company|as_crispy_field }}
-                                </div>
+                        {% endif %}
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">{{ btn_text }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            {% if form.non_field_errors %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {% for error in form.non_field_errors %}
+                                                        {{ error }}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 mb-0">
+                                                    {{ form.company|as_crispy_field }}
+                                                </div>
 
-                                <div class="form-group col-md-6 mb-0">
-                                    {{ form.course|as_crispy_field }}
-                                </div>
+                                                <div class="form-group col-md-6 mb-0">
+                                                    {{ form.course|as_crispy_field }}
+                                                </div>
 
-                                <div class="form-group col-md-12 mb-0">
-                                    {{ form.description|as_crispy_field }}
-                                </div>
-                                <div class="form-group col-md-6 mb-0">
-                                    <label for="id_date" class="control-label  requiredField">
-                                        Date
-                                    </label>
-                                    <input type="date" name="date" class="dateinput form-control" required=""
-                                           id="id_date" placeholder="date">
-                                </div>
-                                <div class="form-group col-md-6 mb-0">
-                                    <div id="div_id_time" class="form-group">
-                                        <label for="id_time" class="control-label  requiredField">
-                                            Time<span class="asteriskField">*</span>
-                                        </label>
-                                        <div class="controls ">
-                                            <input type="time" name="time" class="timeinput form-control" required=""
-                                                   id="id_time">
-                                        </div>
+                                                <div class="form-group col-md-12 mb-0">
+                                                    {{ form.description|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-6 mb-0">
+                                                    <label for="id_date" class="control-label  requiredField">
+                                                        Date
+                                                    </label>
+                                                    <input type="date" name="date" class="dateinput form-control"
+                                                           required=""
+                                                           id="id_date" placeholder="date">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-0">
+                                                    <div id="div_id_time" class="form-group">
+                                                        <label for="id_time" class="control-label  requiredField">
+                                                            Time<span class="asteriskField">*</span>
+                                                        </label>
+                                                        <div class="controls ">
+                                                            <input type="time" name="time"
+                                                                   class="timeinput form-control" required=""
+                                                                   id="id_time">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
                             </div>
-                        </form>
+                        </div>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th># ID</th>
+                                    <th>Company</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    {% if user.is_superuser %}
+                                        <th>Course</th>
+                                    {% endif %}
+                                </tr>
+                                {% for item in list_items %}
+                                    <tr>
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.company }}</td>
+                                        <td>{{ item.description }}</td>
+                                        <td>{{ item.date }}</td>
+                                        <td>{{ item.time }}</td>
+                                        {% if user.is_superuser %}
+                                            <td>{{ item.course }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="asset-inner">
-            <table>
-                <tr>
-                    <th>No</th>
-                    <th>Company</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    {% if user.is_superuser %}
-                        <th>Course</th>
-                    {% endif %}
-                </tr>
-                {% for item in list_items %}
-                    <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.company }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>{{ item.date }}</td>
-                        <td>{{ item.time }}</td>
-                        {% if user.is_superuser %}
-                            <td>{{ item.course }}</td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-            </table>
         </div>
     </div>
 {% endblock %}
