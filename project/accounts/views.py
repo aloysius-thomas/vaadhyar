@@ -83,10 +83,12 @@ def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            print('form valid')
             email = form.cleaned_data.get('email')
             user = User.objects.get(email=email)
             auth.login(request, user)
+            if user.user_type in ['student', 'trainee']:
+                if not user.is_class_selected:
+                    return redirect('available-class')
             return redirect('dashboard')
     else:
         form = LoginForm()

@@ -198,8 +198,6 @@ class TraineeRegistrationForm(UserForm):
     father_name = forms.CharField()
     mother_name = forms.CharField()
     guardian_number = forms.IntegerField()
-    course = forms.ModelChoiceField(queryset=Course.objects.all())
-    board = forms.CharField()
     school_name = forms.CharField()
 
     def save_user(self):
@@ -210,10 +208,9 @@ class TraineeRegistrationForm(UserForm):
         father_name = self.cleaned_data.get('father_name')
         mother_name = self.cleaned_data.get('mother_name')
         guardian_number = self.cleaned_data.get('guardian_number')
-        course = self.cleaned_data.get('course')
         school_name = self.cleaned_data.get('school_name')
         profile = Trainee(user=user, father_name=father_name, mother_name=mother_name,
-                          guardian_number=guardian_number, course=course, school_name=school_name)
+                          guardian_number=guardian_number, school_name=school_name)
         profile.save()
         return user
 

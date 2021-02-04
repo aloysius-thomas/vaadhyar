@@ -41,7 +41,7 @@ class User(AbstractUser):
 
     @property
     def is_class_selected(self):
-        if SelectedClass.objects.filter(user=self).count() == 0:
+        if SelectedClass.objects.filter(student=self).count() == 0:
             return False
         else:
             return True
@@ -169,7 +169,6 @@ class Trainee(models.Model):
     father_name = models.CharField(max_length=128)
     mother_name = models.CharField(max_length=128)
     guardian_number = models.CharField(validators=[phone_regex], max_length=20, blank=True, null=True)
-    course = models.ForeignKey(to=Course, on_delete=models.CASCADE)
     school_name = models.CharField(max_length=256)
     fee = models.IntegerField(blank=True, null=True)
 
