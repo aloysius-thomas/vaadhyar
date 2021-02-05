@@ -65,13 +65,19 @@
                     <li>
                         <a title="Feedback" href="{% url 'feedback' %}">
                             <span class="fa fa-feed icon-wrap"></span>
-                            <span class="mini-sub-pro">Feedback</span>
+                            <span class="mini-click-non">Feedback</span>
                         </a>
                     </li>
                     <li>
                         <a title="Complaint" href="{% url 'complaint-create-list' %}">
                             <span class="fa fa-stop-circle icon-wrap"></span>
-                            <span class="mini-sub-pro">Complaint</span>
+                            <span class="mini-click-non">Complaint</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Students Complaints" href="{% url 'attendance-list-view' 'student' %}">
+                            <span class="fa fa-check icon-wrap"></span>
+                            <span class="mini-click-non">Attendance</span>
                         </a>
                     </li>
                 </ul>

@@ -36,34 +36,38 @@
                                                                placeholder="Month">
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <select name="department" class="form-control">
-                                                            <option value="none" selected="" disabled="">Select
-                                                                Department
-                                                            </option>
-                                                            <option value="tuition">Tuition</option>
-                                                            <option value="1-4">Lower Primary</option>
-                                                            <option value="5-7">Upper Primary</option>
-                                                            <option value="8-10">High School</option>
-                                                            <option value="+1-science'">+1 Science</option>
-                                                            <option value="+2-science">+2 science</option>
-                                                            <option value="+1-commerce">+1 Commerce</option>
-                                                            <option value="+2-commerce">+2 Commerce</option>
-                                                            <option value="b.com/m.com">B.com/ M.com</option>
-                                                            <option value="civil-engineering">Civil Engineering</option>
-                                                            <option value="mechanical-engineering">Mechanical
-                                                                Engineering
-                                                            </option>
-                                                            <option value="electrical&electronics-engineering">
-                                                                Electrical&Electronics Engineering
-                                                            </option>
-                                                            <option value="computer-science-engineering">Computer
-                                                                Science Engineering
-                                                            </option>
-                                                        </select>
+                                                {% if user.is_superuser %}
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <select name="department" class="form-control">
+                                                                <option value="none" selected="" disabled="">Select
+                                                                    Department
+                                                                </option>
+                                                                <option value="tuition">Tuition</option>
+                                                                <option value="1-4">Lower Primary</option>
+                                                                <option value="5-7">Upper Primary</option>
+                                                                <option value="8-10">High School</option>
+                                                                <option value="+1-science'">+1 Science</option>
+                                                                <option value="+2-science">+2 science</option>
+                                                                <option value="+1-commerce">+1 Commerce</option>
+                                                                <option value="+2-commerce">+2 Commerce</option>
+                                                                <option value="b.com/m.com">B.com/ M.com</option>
+                                                                <option value="civil-engineering">Civil Engineering
+                                                                </option>
+                                                                <option value="mechanical-engineering">Mechanical
+                                                                    Engineering
+                                                                </option>
+                                                                <option value="electrical&electronics-engineering">
+                                                                    Electrical&Electronics Engineering
+                                                                </option>
+                                                                <option value="computer-science-engineering">Computer
+                                                                    Science Engineering
+                                                                </option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
+
+                                                {% endif %}
                                                 <div>
                                                     <button type="submit" class="btn btn-primary">Submit
                                                     </button>
