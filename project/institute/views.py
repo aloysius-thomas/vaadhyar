@@ -480,7 +480,10 @@ def attendance_list_view(request, user_type):
     if user.is_superuser:
         attendance = attendance
     elif user.user_type == 'hod':
-        attendance = attendance.filter(user__department=user.department)
+        if user.department == 'tuition':
+            attendance = attendance.filter(user__department__in=TUITION_DEPARTMENTS)
+        else:
+            attendance = attendance.filter(user__department=user.department)
     elif user.user_type == 'teacher':
         my_students = user.get_profile().my_students
         attendance = attendance.filter(user__in=my_students, subject=user.get_subject)

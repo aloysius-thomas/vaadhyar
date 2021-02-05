@@ -46,12 +46,6 @@
                         </a>
                     </li>
                     <li>
-                        <a title="Interviews" href="{% url 'interviews' %}">
-                            <span class="fa fa-black-tie icon-wrap"></span>
-                            <span class="mini-click-non">Interviews</span>
-                        </a>
-                    </li>
-                    <li>
                         <a title="Videos" href="{% url 'study-materials' 'video' %}">
                             <span class="fa fa-file-video-o icon-wrap"></span>
                             <span class="mini-click-non">Videos</span>
@@ -119,10 +113,22 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Salary" href="{% url 'salary-history' %}">
-                            <span class="fa fa-dollar icon-wrap"></span>
-                            <span class="mini-click-non">Salary</span>
+                        <a title="Attendance" class="has-arrow" href="#">
+                            <span class="fa fa-check icon-wrap"></span>
+                            <span class="mini-click-non">Attendance</span>
                         </a>
+                        <ul class="submenu-angle" aria-expanded="true">
+                            <li>
+                                <a title="Teachers Complaints" href="{% url 'attendance-list-view' 'teacher' %}">
+                                    <span class="mini-sub-pro">Teachers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Trainers Complaints" href="{% url 'attendance-list-view' 'trainer' %}">
+                                    <span class="mini-sub-pro">Trainers</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
