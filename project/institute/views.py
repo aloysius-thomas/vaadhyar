@@ -201,7 +201,7 @@ def study_material_list_add_view(request, material_type):
             if request.user.user_type == 'teacher':
                 material.subject = request.user.get_subject
             elif request.user.user_type == 'trainer':
-                material.subject = request.user.get_course
+                material.course = request.user.get_course
             else:
                 pass
             if material_type != 'video':
