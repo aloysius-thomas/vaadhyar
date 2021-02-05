@@ -78,7 +78,7 @@
                                                         class="fa fa-eye" aria-hidden="true"></i> View
                                                 </button>
                                             </a>
-                                            {% if item.user_type == 'teacher' %}
+                                            {% if item.user_type == 'teacher' or item.user_type == 'trainer' %}
                                                 <a type="button" class="btn btn-info" data-toggle="modal"
                                                    data-target="#myModal">Update Student Limit
                                                 </a>
