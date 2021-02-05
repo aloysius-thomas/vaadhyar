@@ -80,7 +80,7 @@ class Course(models.Model):
     department = models.CharField(choices=DEPARTMENT_CHOICES[1:], max_length=64)
 
     def __str__(self):
-        return self.name
+        return f"{self.name.title()} {self.get_department_display()}"
 
 
 class Subject(models.Model):
@@ -88,7 +88,7 @@ class Subject(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return f"{self.name.title()} {self.get_department_display()}"
 
 
 class HOD(models.Model):
