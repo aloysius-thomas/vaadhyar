@@ -215,6 +215,8 @@ def available_class_view(request):
     teacher_id_list = []
     for teacher in teachers:
         if teacher.get_profile().student_limit <= teacher.get_profile().my_students.count():
+            print(teacher.get_profile().student_limit)
+            print(teacher.get_profile().my_students.count())
             continue
         if teacher.get_subject in subjects:
             teacher_id_list.append(teacher.id)
