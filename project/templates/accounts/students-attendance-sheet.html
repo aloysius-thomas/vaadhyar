@@ -33,7 +33,7 @@
                                                     Are you sure you want to mark {{ item.user }} as present?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{% url 'leave-approve-view' item.id %}"
+                                                    <a href="{% url 'mark-as-present-view' item.id %}"
                                                        class="btn btn-primary">
                                                         Yes
                                                     </a>
@@ -54,9 +54,9 @@
                                                     Are you sure you want to mark {{ item.user }} as absent?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{% url 'leave-approve-view' item.id %}"
+                                                    <a href="{% url 'mark-as-absent-view' item.id %}"
                                                        class="btn btn-primary">
-                                                        Yes Approve
+                                                        Yes
                                                     </a>
                                                 </div>
                                             </div>
@@ -83,21 +83,19 @@
                                             <div class="btn-group-sm">
                                                 {% if item.status != 'present' %}
                                                     {% if item.status != 'absent' %}
-                                                        {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
-                                                            <a type="button" class="btn btn-success" data-toggle="modal"
-                                                               data-target="#presentModal{{ item.id }}">Present
-                                                            </a>
-                                                            <a type="button" class="btn btn-danger" data-toggle="modal"
-                                                               data-target="#absentModal{{ item.id }}">Absent
-                                                            </a>
-                                                        {% endif %}
+                                                        <a type="button" class="btn btn-success" data-toggle="modal"
+                                                           data-target="#presentModal{{ item.id }}">Present
+                                                        </a>
+                                                        <a type="button" class="btn btn-danger" data-toggle="modal"
+                                                           data-target="#absentModal{{ item.id }}">Absent
+                                                        </a>
                                                     {% endif %}
                                                 {% endif %}
                                             </div>
                                         </td>
                                     </tr>
                                 {% empty %}
-                                    <td colspan="6">
+                                    <td colspan="7">
                                         <div class="alert alert-info alert-st-two" role="alert">
                                             <i class="fa fa-info-circle edu-inform admin-check-pro"
                                                aria-hidden="true"></i>

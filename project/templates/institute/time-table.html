@@ -2,7 +2,9 @@
 {% block contents %}
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
-            <h3>{{ title|title }}</h3>
+            <h3>{{ title|title }}<a href="{% url 'teachers-attendance-sheet' %}">
+                <button class="btn btn-primary pull-right">Mark Attendance</button></a>
+            </h3>
             {% if list_items %}
                 <div class="row">
                     {% for item in list_items %}
@@ -19,7 +21,7 @@
                                         {% endif %}
                                     </a></h3>
                                     <p class="all-pro-ad">{{ item.teacher.get_department_display }}</p>
-                                    <p ><b>Time: </b>{{ item.teacher.get_profile.get_available_time_display }}</p>
+                                    <p><b>Time: </b>{{ item.teacher.get_profile.get_available_time_display }}</p>
                                     <p><b>Date: </b>{{ item.date }}</p>
                                 </div>
                                 <div class="panel-footer contact-footer">

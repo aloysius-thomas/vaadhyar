@@ -503,6 +503,7 @@ def attendance_list_view(request, user_type):
 
 @login_required()
 def students_attendance_sheet(request):
+    generate_attendance()
     today = datetime.now().date()
     user = request.user
     if user.user_type not in ['teacher', 'trainer']:
@@ -523,13 +524,14 @@ def students_attendance_sheet(request):
 
 
 def teachers_attendance_sheet(request):
+    generate_attendance()
     today = datetime.now().date()
     user = request.user
-    if user.user_type == 'hod':
+    if user.user_type != 'hod':
         return HttpResponseNotFound()
     attendance = Attendance.objects.filter(date=today, user__user_type__in=['teacher', 'trainer'])
     if user.department == 'tuition':
-        attendance = attendance.filter(user__department__in=[TUITION_DEPARTMENTS])
+        attendance = attendance.filter(user__department__in=TUITION_DEPARTMENTS)
     else:
         attendance = attendance.filter(user__department=user.department)
     context = {
@@ -548,7 +550,10 @@ def mark_as_present_view(request, attendance_id):
     else:
         attendance.status = 'present'
         attendance.save()
-        return redirect('students-attendance-sheet')
+        if request.user.user_type == 'hod':
+            return redirect('teachers-attendance-sheet')
+        else:
+            return redirect('students-attendance-sheet')
 
 
 @login_required()
@@ -560,7 +565,10 @@ def mark_as_absent_view(request, attendance_id):
     else:
         attendance.status = 'absent'
         attendance.save()
-        return redirect('students-attendance-sheet')
+        if request.user.user_type == 'hod':
+            return redirect('teachers-attendance-sheet')
+        else:
+            return redirect('students-attendance-sheet')
 
 
 @login_required()
