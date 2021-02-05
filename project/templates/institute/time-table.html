@@ -2,8 +2,17 @@
 {% block contents %}
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
-            <h3>{{ title|title }}<a href="{% url 'teachers-attendance-sheet' %}">
-                <button class="btn btn-primary pull-right">Mark Attendance</button></a>
+            <h3>{{ title|title }}
+                {% if user.user_type == 'hod' %}
+                    <a href="{% url 'teachers-attendance-sheet' %}">
+                        <button class="btn btn-primary pull-right">Mark Attendance</button>
+                    </a>
+                {% endif %}
+                {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
+                    <a href="{% url 'students-attendance-sheet' %}">
+                        <button class="btn btn-primary pull-right">Mark Attendance</button>
+                    </a>
+                {% endif %}
             </h3>
             {% if list_items %}
                 <div class="row">
