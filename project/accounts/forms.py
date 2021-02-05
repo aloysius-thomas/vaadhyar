@@ -35,8 +35,10 @@ class LoginForm(forms.Form):
         return super(LoginForm, self).clean()
 
 
-class CourseForm(forms.Form):
-    course = forms.CharField(max_length=120)
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = '__all__'
 
 
 class SubjectForm(forms.ModelForm):
