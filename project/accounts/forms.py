@@ -147,6 +147,7 @@ class HODForm(UserForm):
 
 
 class TeacherForm(UserForm):
+    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES[1:])
     qualification = forms.CharField(required=False)
     experience = forms.CharField(required=False)
     available_time = forms.ChoiceField(choices=AVAILABLE_TIME_CHOICES)
@@ -218,6 +219,7 @@ class TraineeRegistrationForm(UserForm):
 
 
 class TrainerForm(UserForm):
+    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES[1:])
     qualification = forms.CharField(required=False)
     experience = forms.CharField(required=False)
     available_time = forms.ChoiceField(choices=AVAILABLE_TIME_CHOICES)

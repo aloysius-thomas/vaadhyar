@@ -24,7 +24,6 @@ DEPARTMENT_CHOICES = (
 
 ADMIN_DEPARTMENT_CHOICES = (
     ('tuition', 'Tuition'),
-    ('b.com/m.com', 'B.com/ M.com'),
     ('civil-engineering', 'Civil Engineering'),
     ('mechanical-engineering', 'Mechanical Engineering'),
     ('electrical&electronics-engineering', 'Electrical&Electronics Engineering'),
