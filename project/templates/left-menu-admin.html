@@ -1,5 +1,12 @@
 <!-- Start Left menu area -->
 {% load static %}
+{% if user.is_superuser %}
+    <style>
+        .comment-scrollbar, .timeline-scrollbar, .messages-scrollbar, .project-list-scrollbar {
+            height: 580px;
+        }
+    </style>
+{% endif %}
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
