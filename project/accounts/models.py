@@ -114,6 +114,11 @@ class Teacher(models.Model):
         return f'{self.user} profile'
 
     @property
+    def my_exams(self):
+        from institute.models import Exam
+        return Exam.objects.filter(conducted_by=self.user)
+
+    @property
     def my_students(self):
         my_class = SelectedClass.objects.filter(teacher=self.user)
         student_id = [student.student.id for student in my_class]
@@ -165,6 +170,11 @@ class Trainers(models.Model):
         my_class = SelectedClass.objects.filter(teacher=self.user)
         student_id = [student.student.id for student in my_class]
         return User.objects.filter(id__in=student_id)
+
+    @property
+    def my_exams(self):
+        from institute.models import Exam
+        return Exam.objects.filter(conducted_by=self.user)
 
 
 class Trainee(models.Model):

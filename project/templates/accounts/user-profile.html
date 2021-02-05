@@ -70,6 +70,51 @@
                     </div>
                 </div>
             </div>
+            {% if user_obj.user_type == 'teacher' or user_obj.user_type == 'trainer' %}
+                {% if user_obj != user %}
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="product-status-wrap drp-lst">
+                                <h4>Exams Conducted</h4>
+                                <div class="asset-inner">
+                                    <table>
+                                        <tr>
+                                            {% if user.user_type == 'teacher' %}
+                                                <th>Subject</th>
+                                            {% endif %}
+                                            {% if user.user_type == 'trainer' %}
+                                                <th>Course</th>
+                                            {% endif %}
+                                            <th>Max Score</th>
+                                            <th>Max Time</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        {% for item in user_obj.get_profile.my_exams %}
+                                            <tr>
+                                                {% if user.user_type == 'teacher' %}
+                                                    <td>{{ item.subject }}</td>
+                                                {% endif %}
+                                                {% if user.user_type == 'trainer' %}
+                                                    <td>{{ item.course }}</td>
+                                                {% endif %}
+                                                <td>{{ item.max_score }} Marks</td>
+                                                <td>{{ item.max_time }} Minutes</td>
+                                                <td>{{ item.date|date }}</td>
+                                                <td>{{ item.time|time }}</td>
+                                                <td><a href="{% url 'exam-mark-list'  item.id %}"
+                                                       class="btn btn-primary">Mark List</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
 
             {% if user.is_superuser or user_obj == user %}
                 {% if user_obj.user_type == 'teacher' or user_obj.user_type == 'hod' or user_obj.user_type == 'trainer' %}
