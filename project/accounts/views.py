@@ -213,6 +213,8 @@ def available_class_view(request):
     teachers = User.objects.filter(user_type='teacher')
     teacher_id_list = []
     for teacher in teachers:
+        if teacher.get_profile().student_limit > teacher.get_profile().my_students.count():
+            continue
         if teacher.get_subject in subjects:
             teacher_id_list.append(teacher.id)
 
