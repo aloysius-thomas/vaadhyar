@@ -391,7 +391,8 @@ def exam_create_list_view(request):
     if user.user_type in ['teacher', 'trainer']:
         list_items = Exam.objects.filter(conducted_by=user)
     elif user.user_type in ['student', 'trainee']:
-        list_items = Exam.objects.filter(conducted_by__department=user.department)
+        my_teachers = user.get_profile().my_teachers
+        list_items = Exam.objects.filter(conducted_by__in=my_teachers)
     else:
         list_items = []
     context = {

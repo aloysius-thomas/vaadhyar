@@ -143,6 +143,12 @@ class Student(models.Model):
         return subjects
 
     @property
+    def my_teachers(self):
+        my_class = SelectedClass.objects.filter(student=self.user)
+        teacher_id = [teacher.teacher.id for teacher in my_class]
+        return User.objects.filter(id__in=teacher_id)
+
+    @property
     def my_exam_results(self):
         from institute.models import Result
         return Result.objects.filter(attended_by=self.user)
@@ -196,6 +202,12 @@ class Trainee(models.Model):
     def get_subjects_selected(self):
         subjects = SelectedClass.objects.filter(student=self.user)
         return subjects
+
+    @property
+    def my_teachers(self):
+        my_class = SelectedClass.objects.filter(student=self.user)
+        teacher_id = [teacher.teacher.id for teacher in my_class]
+        return User.objects.filter(id__in=teacher_id)
 
     @property
     def my_exam_results(self):
