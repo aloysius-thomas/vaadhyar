@@ -88,15 +88,10 @@
                                             <td width="30%">{{ student.exam }}</td>
                                             <td width="30%">{{ student.attended_by }}</td>
                                             <td>
-                                                {% if exam_finished %}
-                                                    {% if student.mark %}
-                                                        {{ student.mark }}/ {{ exam.max_score }}
-                                                    {% else %}
-                                                        <a type="button" class="btn btn-primary" data-toggle="modal"
-                                                           data-target="#myModal">Update Result</a>
-                                                    {% endif %}
+                                                {% if student.mark %}
+                                                    {{ student.mark }}/ {{ exam.max_score }}
                                                 {% else %}
-                                                    Check on {{ student.exam.date|date:" d, M Y" }} after
+                                                    Check after {{ student.exam.date|date:" d, M Y" }} after
                                                     {{ student.exam.time }}
                                                 {% endif %}
                                             </td>

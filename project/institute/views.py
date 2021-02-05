@@ -619,7 +619,7 @@ def mark_list(request, exam_id):
         my_students = exam.conducted_by.get_profile().my_students
         for student in my_students:
             Result.objects.get_or_create(exam=exam, attended_by=student)
-        if today.date() > exam.date and today.time() > exam.time:
+        if today.date() > exam.date:
             exam_finished = True
         context = {
             'exam': exam,
