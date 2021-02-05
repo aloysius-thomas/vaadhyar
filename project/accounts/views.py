@@ -210,7 +210,7 @@ def student_register_view(request):
 
 def available_class_view(request):
     subjects = Subject.objects.filter(department=request.user.department)
-    teachers = User.objects.filter(user_type='teacher')
+    teachers = User.objects.filter(user_type__in=['teacher', 'trainer'])
     teacher_id_list = []
     for teacher in teachers:
         if teacher.get_profile().student_limit > teacher.get_profile().my_students.count():
@@ -233,11 +233,11 @@ def select_class_view(request, teacher_id):
     else:
         user = request.user
         if user.user_type == 'student':
-            selected = SelectedClass.objects.create(student=user, subject=teacher.get_profile().subject,
-                                                    teacher=teacher)
+            selected, _ = SelectedClass.objects.get_or_create(student=user, subject=teacher.get_profile().subject,
+                                                              teacher=teacher)
         else:
-            selected = SelectedClass.objects.create(student=user, course=teacher.get_profile().course,
-                                                    teacher=teacher)
+            selected, _ = SelectedClass.objects.get_or_create(student=user, course=teacher.get_profile().course,
+                                                              teacher=teacher)
         selected.save()
         messages.success(request, "Class selected")
         messages.success(request, "Something went wrong")
