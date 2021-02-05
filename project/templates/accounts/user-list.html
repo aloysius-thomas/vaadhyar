@@ -21,7 +21,11 @@
                                     <th>Email</th>
                                     <th>Mobile Number</th>
                                     <th>Department</th>
-                                    <th>Student Limit</th>
+                                    {% for item in list_items %}
+                                        {% if item.user_type == 'teacher' or item.user_type == 'trainer' %}
+                                            <th>Student Limit</th>
+                                        {% endif %}
+                                    {% endfor %}
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -64,7 +68,9 @@
                                         <td>{{ item.email }}</td>
                                         <td>{{ item.mobile_number }}</td>
                                         <td>{{ item.get_department_display }}</td>
-                                        <td>{{ item.get_profile.student_limit }}</td>
+                                        {% if item.user_type == 'teacher' or item.user_type == 'trainer' %}
+                                            <td>{{ item.get_profile.student_limit }}</td>
+                                        {% endif %}
                                         <td><img src="{{ item.image.url }}" width="250px" alt=""></td>
                                         <td>
                                             <a href="{% url 'user-profile-details' item.id %}">
