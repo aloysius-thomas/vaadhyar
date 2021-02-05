@@ -164,13 +164,9 @@ def interview_create_list_view(request):
     if user.is_superuser:
         list_items = Interview.objects.all()
     elif user.user_type == 'trainer':
-        profile = user.get_profile
-        list_items = Interview.objects.filter(course=profile.course)
+        list_items = Interview.objects.filter(course__department=user.department)
     elif user.user_type == 'trainee':
-        profile = user.get_profile()
-        selected_subject = profile.get_subjects_selected()
-        course_id_list = [course.course_id for course in selected_subject]
-        list_items = Interview.objects.filter(course__in=course_id_list)
+        list_items = Interview.objects.filter(course__department=user.department)
     else:
         list_items = []
     if request.method == 'POST':
@@ -215,14 +211,11 @@ def study_material_list_add_view(request, material_type):
     list_items = StudyMaterial.objects.filter(material_type=material_type)
     if user.user_type in ['teacher', 'trainer']:
         list_items = list_items.filter(teacher=user)
-    elif user.user_type == 'student':
-        profile = user.get_profile()
-        subjects = [subject.id for subject in profile.get_subjects_selected()]
-        list_items = list_items.filter(subject_id__in=subjects)
-    elif user.user_type == 'trainee':
-        profile = user.get_profile()
-        courses = [course.id for course in profile.get_subjects_selected()]
-        list_items = list_items.filter(course_id__in=courses)
+    elif user.user_type == 'student' or user.user_type == 'trainee':
+        teachers = [selected.teacher.id for selected in user.selected_class]
+        list_items = list_items.filter(teacher_id_in=teachers)
+    elif user.user_type == 'hod':
+        list_items = list_items.filter(teacher__department=user.department)
     else:
         list_items = list_items
     context = {

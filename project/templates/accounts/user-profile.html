@@ -89,7 +89,7 @@
                                             <td width="30%">{{ student.attended_by }}</td>
                                             <td>
                                                 {% if student.mark %}
-                                                    {{ student.mark }}/ {{ exam.max_score }}
+                                                    {{ student.mark }}/ {{ student.exam.max_score }}
                                                 {% else %}
                                                     Check after {{ student.exam.date|date:" d, M Y" }} after
                                                     {{ student.exam.time }}
