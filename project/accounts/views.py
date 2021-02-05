@@ -380,14 +380,13 @@ def subject_add(request):
 @login_required()
 def edit_course(request, id):
     obj = Course.objects.get(id=id)
-    form = CourseForm(request.POST, obj)
     if request.method == 'POST':
-
+        form = CourseForm(request.POST, instance=obj)
         if form.is_valid():
-            obj.name = form.cleaned_data.get('course')
-            obj.save()
-            return redirect('/accounts/courses/list/')
-    form = CourseForm(instance=obj)
+            form.save()
+            return redirect('course-add')
+    else:
+        form = CourseForm(instance=obj)
     return render(request, 'courses/edit-course.html', {"form": form, "obj": obj})
 
 
