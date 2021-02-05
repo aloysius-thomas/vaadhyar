@@ -23,12 +23,16 @@ from accounts.models import Subject
 from accounts.models import User
 from institute.forms import FeeForm
 from institute.forms import SalaryForm
+from institute.utils import generate_attendance
+from institute.utils import generate_time_table
 from project.email import send_email
 
 tuition_departments = TUITION_DEPARTMENTS
 
 
 def home_view(request):
+    generate_attendance()
+    generate_time_table()
     return render(request, 'home.html', {})
 
 

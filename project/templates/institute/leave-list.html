@@ -113,23 +113,48 @@
                                         </td>
                                         <td>
                                             <div class="btn-group-sm">
-                                                {% if item.status != 'approved' %}
-                                                    {% if item.status != 'rejected' %}
-                                                        {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
-                                                            {% if item.status != 'recommended' %}
-                                                                <a type="button" class="btn btn-info"
+                                                {% if user.is_superuser %}
+                                                    {% if item.status != 'approved' %}
+                                                        {% if item.status != 'rejected' %}
+                                                            {% if item.user.user_type == 'hod' %}
+                                                                <a type="button" class="btn btn-success"
                                                                    data-toggle="modal"
-                                                                   data-target="#recommendModal{{ item.id }}">Recommend
+                                                                   data-target="#approveModal{{ item.id }}">Approve
+                                                                </a>
+                                                                <a type="button" class="btn btn-danger"
+                                                                   data-toggle="modal"
+                                                                   data-target="#rejectModal{{ item.id }}">Reject
                                                                 </a>
                                                             {% endif %}
-                                                        {% else %}
-                                                            <a type="button" class="btn btn-success" data-toggle="modal"
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if user.user_type == 'hod' %}
+                                                    {% if item.status != 'approved' %}
+                                                        {% if item.status != 'rejected' %}
+                                                            <a type="button" class="btn btn-success"
+                                                               data-toggle="modal"
                                                                data-target="#approveModal{{ item.id }}">Approve
                                                             </a>
+                                                            <a type="button" class="btn btn-danger"
+                                                               data-toggle="modal"
+                                                               data-target="#rejectModal{{ item.id }}">Reject
+                                                            </a>
                                                         {% endif %}
-                                                        <a type="button" class="btn btn-danger" data-toggle="modal"
-                                                           data-target="#rejectModal{{ item.id }}">Reject
-                                                        </a>
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if user.user_type == 'teacher' or user.user_type == 'trainer' %}
+                                                    {% if item.status != 'recommended' %}
+                                                        {% if item.status != 'rejected' %}
+                                                            <a type="button" class="btn btn-info"
+                                                               data-toggle="modal"
+                                                               data-target="#recommendModal{{ item.id }}">Recommend
+                                                            </a>
+                                                            <a type="button" class="btn btn-danger"
+                                                               data-toggle="modal"
+                                                               data-target="#rejectModal{{ item.id }}">Reject
+                                                            </a>
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             </div>

@@ -98,10 +98,37 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Leave Requests" href="{% url 'leave-request-list' 'hod' %}">
+                        <a title="Leave" class="has-arrow" href="#">
                             <span class="fa fa-sign-out icon-wrap"></span>
                             <span class="mini-click-non">Leave</span>
                         </a>
+                        <ul class="submenu-angle" aria-expanded="true">
+                            <li>
+                                <a title="HOD Leave" href="{% url 'leave-request-list' 'hod' %}">
+                                    <span class="mini-sub-pro">HOD</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Students Leave" href="{% url 'leave-request-list' 'student' %}">
+                                    <span class="mini-sub-pro">Students</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Trainees Leave" href="{% url 'leave-request-list' 'trainee' %}">
+                                    <span class="mini-sub-pro">Trainees</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Teachers Leave" href="{% url 'leave-request-list' 'teacher' %}">
+                                    <span class="mini-sub-pro">Teachers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="Trainers Leave" href="{% url 'leave-request-list' 'trainer' %}">
+                                    <span class="mini-sub-pro">Trainers</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li>
