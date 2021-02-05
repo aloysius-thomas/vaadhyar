@@ -45,4 +45,4 @@ GENDER_CHOICE = (
     ('female', 'Female'),
 )
 
-TUITION_DEPARTMENTS = ['1-4', '5-7', '8-10', '+1-science', '+2-science', '+1-commerce', '+2-commerce']
+TUITION_DEPARTMENTS = ['1-4', '5-7', '8-10', '+1-science', '+2-science', '+1-commerce', '+2-commerce', 'b.com/m.com']
