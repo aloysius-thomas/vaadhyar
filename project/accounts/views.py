@@ -227,6 +227,7 @@ def available_class_view(request):
         'title': f'available classes for {request.user}',
         'list_items': teachers.filter(id__in=teacher_id_list)
     }
+    print(context.get('list_items'))
     return render(request, 'accounts/available-class.html', context)
 
 
