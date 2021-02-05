@@ -56,7 +56,7 @@
                                     {% endif %}
                                 </tr>
                                 {% for item in list_items %}
-                                    <div class="modal fade" id="responseModal" role="dialog">
+                                    <div class="modal fade" id="responseModal{{ item.id }}" role="dialog">
                                         <div class="modal-dialog">
                                             <!-- Modal content-->
                                             <div class="modal-content">
@@ -105,7 +105,7 @@
                                         {% if user.is_superuser or user.user_type == 'hod' %}
                                             <td>
                                             <a type="button" class="btn btn-primary" data-toggle="modal"
-                                               data-target="#responseModal">Response</a>
+                                               data-target="#responseModal{{ item.id }}">Response</a>
                                         {% endif %}
                                     </tr>
                                 {% endfor %}

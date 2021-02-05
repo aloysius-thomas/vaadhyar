@@ -30,7 +30,7 @@
                                     <th>Action</th>
                                 </tr>
                                 {% for item in list_items %}
-                                    <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal fade" id="myModal{{ item.id }}" role="dialog">
                                         <div class="modal-dialog">
                                             <!-- Modal content-->
                                             <div class="modal-content">
@@ -81,7 +81,7 @@
                                             {% if user.is_superuser %}
                                                 {% if item.user_type == 'teacher' or item.user_type == 'trainer' %}
                                                     <a type="button" class="btn btn-info" data-toggle="modal"
-                                                       data-target="#myModal">Update Student Limit
+                                                       data-target="#myModal{{ item.id }}">Update Student Limit
                                                     </a>
                                                 {% endif %}
                                             {% endif %}
