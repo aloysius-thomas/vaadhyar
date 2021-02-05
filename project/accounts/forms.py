@@ -176,7 +176,7 @@ class StudentRegistrationForm(UserForm):
     mother_name = forms.CharField()
     guardian_number = forms.IntegerField()
     standard = forms.CharField()
-    board = forms.CharField()
+    board = forms.CharField(required=False)
     school_name = forms.CharField()
 
     def save_user(self):
