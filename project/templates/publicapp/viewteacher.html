@@ -1,126 +1,52 @@
 {% extends 'base-main.html' %}
 {% load static %}
 {% block content %}
-<div class="hero_slide">
-    <div class="hero_slide_background" style="background-image:url(/static/publicapp/images/teachers.jpg);"></div>
-    <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
-      
+    <div class="hero_slide">
+        <div class="hero_slide_background" style="background-image:url(/static/publicapp/images/teachers.jpg);"></div>
+        <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+
+        </div>
     </div>
-  </div>
-
-
-<BR>
     <BR>
-        <br>
-	
-		<div class="container">
-		  <div class="row">
-			<div class="col">
-			  <div class="section_title text-center">
-				<h1> OUR TEACHERS</h1>
-			  </div>
-			</div>
-		  </div>
-		  </div>
-		  
-<!-- Teachers -->
+    <BR>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title text-center">
+                    <h1> OUR TEACHERS</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teachers -->
 
 
     <div class="container">
         <div class="row">
-            
-            <!-- Teacher -->
-            <div class="col-lg-4 teacher">
-                <div class="card">
-                    <div class="card_img">
-                        
-                        <img class="card-img-top trans_200" src="{% static 'img/fevicon/vijitha.PNG' %}" alt="https://unsplash.com/@michaeldam">
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="card-title"><a href="">VIJITHA K.V.</a></div>
-                        <div class="card-text">Python Trainer</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Teacher -->
-            <div class="col-lg-4 teacher">
-                <div class="card">
-                    <div class="card_img">
-                        
-                        <img class="card-img-top trans_200" src="{% static 'img/fevicon/anju.PNG' %}" alt="https://unsplash.com/@jcpeacock">
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="card-title"><a href="">ANJU P.K.</a></div>
-                        <div class="card-text">RevitMEP Trainer</div>
-                        
+            {% for teacher in teachers %}
+                <div class="col-lg-4 teacher">
+                    <div class="card">
+                        <div class="card_img">
+                            <img class="card-img-top trans_200" src="{{ teacher.image.url }}"
+                                 alt="https://unsplash.com/@michaeldam">
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="card-title"><a href="">{{ teacher|upper }}</a></div>
+                            <div class="card-text">
+                                {% if teacher.user_type == 'teacher' %}
+                                    {{ teacher.get_profile.subject }} Teacher
+                                {% else %}
+                                    {{ teacher.get_profile.course }} Trainer
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Teacher -->
-            <div class="col-lg-4 teacher">
-                <div class="card">
-                    <div class="card_img">
-                        
-                        <img class="card-img-top trans_200" src="{% static 'img/fevicon/charles.PNG' %}" alt="https://unsplash.com/photos/n8jeOSxCRfQ">
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="card-title"><a href="">CHARLES</a></div>
-                        <div class="card-text">AutoCAD Trainer</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Teacher -->
-            <div class="col-lg-4 teacher">
-                <div class="card">
-                    <div class="card_img">
-                        
-                        <img class="card-img-top trans_200" src="{% static 'img/fevicon/kailash.PNG' %}" alt="https://unsplash.com/@seteales">
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="card-title"><a href="">KAILASANATH O.</a></div>
-                        <div class="card-text">Primevera Trainer</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Teacher -->
-            <div class="col-lg-4 teacher">
-                <div class="card">
-                    <div class="card_img">
-                        
-                        <img class="card-img-top trans_200" src="{% static 'img/fevicon/rohith.PNG' %}" alt="https://unsplash.com/@jaredsluyter">
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="card-title"><a href="">ROHITH UNIKRISHNAN</a></div>
-                        <div class="card-text">Java Trainer</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Teacher -->
-            <div class="col-lg-4 teacher">
-                <div class="card">
-                    <div class="card_img">
-                        
-                        <img class="card-img-top trans_200" src="{% static 'img/fevicon/abhijith.PNG' %}" alt="https://unsplash.com/@mehdizadeh">
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="card-title"><a href="">ABHIJITH K.A.</a></div>
-                        <div class="card-text">Google Sketchup Trainer</div>
-                        
-                    </div>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
- <br>
- <br>
-{%  endblock  %}
+    <br>
+    <br>
+{% endblock %}

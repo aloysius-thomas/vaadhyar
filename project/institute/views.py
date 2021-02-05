@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 
 from accounts.choices import TUITION_DEPARTMENTS
+from accounts.models import User
 from institute.forms import ComplaintForm
 from institute.forms import ExamForm
 from institute.forms import FeedbackForm
@@ -29,7 +30,8 @@ from institute.utils import generate_time_table
 
 
 def viewteacher(request):
-    return render(request, "publicapp/viewteacher.html", {})
+    teachers = User.objects.filter(user_type__in=['teacher', 'trainer'])
+    return render(request, "publicapp/viewteacher.html", {'teachers': teachers})
 
 
 def courseslist(request):
