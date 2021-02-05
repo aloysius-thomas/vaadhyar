@@ -290,8 +290,8 @@ def teachers_list_view(request):
 @login_required()
 def students_list_view(request):
     title = 'Students'
-    if request.user.user_type == 'teacher':
-        user_list = User.objects.filter(user_type='student', department=request.user.department)
+    if request.user.user_type == 'teacher' or request.user.user_type == 'trainer':
+        user_list = request.user.get_profile().my_students
     elif request.user.user_type == 'hod':
         if request.user.department == 'tuition':
             user_list = User.objects.filter(user_type='student', department__in=tuition_departments)
