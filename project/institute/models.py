@@ -90,6 +90,28 @@ class Result(models.Model):
     attended_by = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
     mark = models.IntegerField(blank=True, null=True)
 
+    @property
+    def grade(self):
+        if self.mark:
+            avg = (self.mark / self.exam.max_score) * 100
+            if 91 <= avg <= 100:
+                return 'A+'
+            elif 81 <= avg < 91:
+                return 'A'
+            elif 71 <= avg < 81:
+                return 'B+'
+            elif 61 <= avg < 71:
+                return 'B'
+            elif 51 <= avg < 61:
+                return 'C+'
+            elif 41 <= avg < 51:
+                return 'C'
+            elif 33 <= avg < 41:
+                return 'D+'
+            else:
+                return 'Failed'
+        return 'Mark Not Published'
+
 
 class TimeTable(models.Model):
     subject = models.ForeignKey(to=Subject, on_delete=models.CASCADE, blank=True, null=True)
