@@ -213,7 +213,7 @@ def study_material_list_add_view(request, material_type):
         list_items = list_items.filter(teacher=user)
     elif user.user_type == 'student' or user.user_type == 'trainee':
         teachers = [selected.teacher.id for selected in user.selected_class]
-        list_items = list_items.filter(teacher_id_in=teachers)
+        list_items = list_items.filter(teacher_id__in=teachers)
     elif user.user_type == 'hod':
         list_items = list_items.filter(teacher__department=user.department)
     else:

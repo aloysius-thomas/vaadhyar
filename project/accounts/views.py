@@ -40,9 +40,6 @@ def about_us(request):
     return render(request, 'site/about-us.html', {})
 
 
-# --------------------------------------------------------------------
-
-
 def contact_us(request):
     return render(request, 'site/contact-us.html', {})
 
@@ -73,9 +70,6 @@ def electronic_electrical(request):
 
 def computer_science(request):
     return render(request, 'site/computer_science.html', {})
-
-
-# --------------------------------------------------------------------
 
 
 @login_required
@@ -207,6 +201,7 @@ def student_register_view(request):
     }
     return render(request, 'accounts/student-registration.html', context)
 
+
 @login_required()
 def available_class_view(request):
     subjects = Subject.objects.filter(department=request.user.department)
@@ -215,8 +210,6 @@ def available_class_view(request):
     teacher_id_list = []
     for teacher in teachers:
         if teacher.get_profile().student_limit <= teacher.get_profile().my_students.count():
-            print(teacher.get_profile().student_limit)
-            print(teacher.get_profile().my_students.count())
             continue
         if teacher.get_subject in subjects:
             teacher_id_list.append(teacher.id)
