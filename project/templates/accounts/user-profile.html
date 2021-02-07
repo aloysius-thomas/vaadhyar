@@ -62,6 +62,30 @@
                                         </div>
                                     {% endif %}
                                 {% endif %}
+                                {% if user_obj.user_type == 'trainee' or user_obj.user_type == 'student' %}
+                                    {% if user_obj.get_profile.father_name %}
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                                            <div class="cards">
+                                                <p><b>Father Name:</b> {{ user_obj.get_profile.father_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if user_obj.get_profile.mother_name %}
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                                            <div class="cards">
+                                                <p><b>Mother Name:</b> {{ user_obj.get_profile.mother_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if user_obj.get_profile.guardian_number %}
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                                            <div class="cards">
+                                                <p><b>Guardian Number:</b> {{ user_obj.get_profile.guardian_number }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
                                 {% if user_obj %}
 
                                 {% endif %}

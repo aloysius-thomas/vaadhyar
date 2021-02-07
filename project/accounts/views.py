@@ -468,10 +468,13 @@ def edit_profile(request, user_id):
     except User.DoesNotExist:
         return HttpResponseNotFound()
     else:
-        form = UserEditForm(request.POST or None, instance=instance)
+        if request.method == 'POST':
+            form = UserEditForm(request.POST, request.FILES or None, instance=instance)
+            if form.is_valid():
+                form.save()
+                return redirect('user-profile-details', user_id)
+        else:
+            form = UserEditForm(instance=instance)
 
-        if form.is_valid():
-            form.save()
-            return redirect('user-profile-details', user_id)
     context = {'form': form}
     return render(request, 'edit-profile.html', context)

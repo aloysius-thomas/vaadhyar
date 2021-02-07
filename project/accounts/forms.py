@@ -243,6 +243,8 @@ class TrainerForm(UserForm):
 
 
 class UserEditForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
+
     class Meta:
         model = User
         fields = {
