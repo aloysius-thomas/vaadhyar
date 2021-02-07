@@ -2,6 +2,7 @@ from django.urls import path
 
 from accounts.views import available_class_view
 from accounts.views import course_add
+from accounts.views import edit_profile
 from accounts.views import subject_add
 from accounts.views import courses
 from accounts.views import edit_course
@@ -26,6 +27,7 @@ from institute.views import class_details_view
 
 urlpatterns = [
     path('<int:user_id>/profile/', user_profile_view, name='user-profile-details'),
+    path('<int:user_id>/edit/', edit_profile, name='user-profile-edit'),
     path('student/register/', student_register_view, name='student-register'),
     path('trainee/register/', trainee_register_view, name='trainee-register'),
     path('hod/list/', hod_list_view, name='hod-list'),

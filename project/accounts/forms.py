@@ -240,3 +240,15 @@ class TrainerForm(UserForm):
                            salary=salary, available_time=available_time, course=course)
         profile.save()
         return user
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = {
+            'image',
+            'mobile_number',
+            'address',
+            'place',
+            'pin_code',
+        }

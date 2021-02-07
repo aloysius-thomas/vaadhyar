@@ -9,6 +9,10 @@
     <li><a href="{% url 'change-password' %}"><span
             class="edu-icon edu-locked author-log-ic"></span>Change Password</a>
     </li>
+    <li>
+        <li><a href="{% url 'user-profile-edit' user.id %}"><span
+            class="edu-icon edu-locked author-log-ic"></span>Update Profile</a>
+    </li>
     <li><a href="{% url 'logout' %}"><span
             class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
     </li>

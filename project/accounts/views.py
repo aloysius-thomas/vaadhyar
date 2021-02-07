@@ -17,6 +17,7 @@ from accounts.forms import SubjectForm
 from accounts.forms import TeacherForm
 from accounts.forms import TraineeRegistrationForm
 from accounts.forms import TrainerForm
+from accounts.forms import UserEditForm
 from accounts.models import Course
 from accounts.models import SelectedClass
 from accounts.models import Subject
@@ -439,7 +440,7 @@ def user_profile_view(request, user_id):
         context = {
             'user_obj': user,
             'salary_form': SalaryForm(),
-            'fee_form': FeeForm()
+            'fee_form': FeeForm(),
         }
         return render(request, 'accounts/user-profile.html', context)
 
@@ -459,3 +460,18 @@ def update_student_limit(request, user_id):
             return redirect('teachers-list')
         else:
             return redirect('trainers-list')
+
+
+def edit_profile(request, user_id):
+    try:
+        instance = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return HttpResponseNotFound()
+    else:
+        form = UserEditForm(request.POST or None, instance=instance)
+
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile-details', user_id)
+    context = {'form': form}
+    return render(request, 'edit-profile.html', context)
