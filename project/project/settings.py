@@ -18,9 +18,12 @@ INSTALLED_APPS = [
     'accounts',
     'institute',
     'crispy_forms',
+    "crispy_bootstrap3",
 ]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
+
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,3 +103,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'email@gmail.com'
 EMAIL_HOST_PASSWORD = '9tes'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

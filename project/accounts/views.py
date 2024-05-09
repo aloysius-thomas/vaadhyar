@@ -264,7 +264,8 @@ def hod_list_view(request):
     title = 'HOD'
     hod_list = User.objects.filter(user_type='hod')
     url = reverse('hod-create')
-    context = {'title': title, 'list_items': hod_list, 'btn_text': "Add HOD", 'add_url': url}
+    context = {'title': title, 'list_items': hod_list,
+               'btn_text': "Add HOD", 'add_url': url}
     return render(request, 'accounts/user-list.html', context)
 
 
@@ -278,13 +279,16 @@ def teachers_list_view(request):
         teacher_list = User.objects.filter(id__in=teacher_list)
     elif request.user.user_type == 'hod':
         if request.user.department == 'tuition':
-            teacher_list = User.objects.filter(user_type='teacher', department__in=tuition_departments)
+            teacher_list = User.objects.filter(
+                user_type='teacher', department__in=tuition_departments)
         else:
-            teacher_list = User.objects.filter(user_type='teacher', department=request.user.department)
+            teacher_list = User.objects.filter(
+                user_type='teacher', department=request.user.department)
     else:
         teacher_list = User.objects.filter(user_type='teacher')
     url = reverse('teachers-create')
-    context = {'title': title, 'list_items': teacher_list, 'btn_text': "Add Teacher", 'add_url': url}
+    context = {'title': title, 'list_items': teacher_list,
+               'btn_text': "Add Teacher", 'add_url': url}
     return render(request, 'accounts/user-list.html', context)
 
 
@@ -295,9 +299,11 @@ def students_list_view(request):
         user_list = request.user.get_profile().my_students
     elif request.user.user_type == 'hod':
         if request.user.department == 'tuition':
-            user_list = User.objects.filter(user_type='student', department__in=tuition_departments)
+            user_list = User.objects.filter(
+                user_type='student', department__in=tuition_departments)
         else:
-            user_list = User.objects.filter(user_type='student', department=request.user.department)
+            user_list = User.objects.filter(
+                user_type='student', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='student')
     context = {'title': title, 'list_items': user_list}
@@ -308,12 +314,15 @@ def students_list_view(request):
 def trainees_list_view(request):
     title = 'Trainees'
     if request.user.user_type == 'trainer':
-        user_list = User.objects.filter(user_type='trainee', department=request.user.department)
+        user_list = User.objects.filter(
+            user_type='trainee', department=request.user.department)
     elif request.user.user_type == 'hod':
         if request.user.department == 'tuition':
-            user_list = User.objects.filter(user_type='trainee', department__in=tuition_departments)
+            user_list = User.objects.filter(
+                user_type='trainee', department__in=tuition_departments)
         else:
-            user_list = User.objects.filter(user_type='trainee', department=request.user.department)
+            user_list = User.objects.filter(
+                user_type='trainee', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='trainee')
     context = {'title': title, 'list_items': user_list}
@@ -324,16 +333,20 @@ def trainees_list_view(request):
 def trainers_list_view(request):
     title = 'Trainers'
     if request.user.user_type == 'trainee':
-        user_list = User.objects.filter(user_type='trainer', department=request.user.department)
+        user_list = User.objects.filter(
+            user_type='trainer', department=request.user.department)
     elif request.user.user_type == 'hod':
         if request.user.department == 'tuition':
-            user_list = User.objects.filter(user_type='trainer', department__in=tuition_departments)
+            user_list = User.objects.filter(
+                user_type='trainer', department__in=tuition_departments)
         else:
-            user_list = User.objects.filter(user_type='trainer', department=request.user.department)
+            user_list = User.objects.filter(
+                user_type='trainer', department=request.user.department)
     else:
         user_list = User.objects.filter(user_type='trainer')
     url = reverse('trainers-create')
-    context = {'title': title, 'list_items': user_list, 'btn_text': "Add Trainers", 'add_url': url}
+    context = {'title': title, 'list_items': user_list,
+               'btn_text': "Add Trainers", 'add_url': url}
     return render(request, 'accounts/user-list.html', context)
 
 
@@ -469,7 +482,8 @@ def edit_profile(request, user_id):
         return HttpResponseNotFound()
     else:
         if request.method == 'POST':
-            form = UserEditForm(request.POST, request.FILES or None, instance=instance)
+            form = UserEditForm(
+                request.POST, request.FILES or None, instance=instance)
             if form.is_valid():
                 form.save()
                 return redirect('user-profile-details', user_id)

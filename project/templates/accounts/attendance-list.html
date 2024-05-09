@@ -1,126 +1,125 @@
 {% extends 'base-admin.html' %}
 {% load crispy_forms_tags %}
 {% block contents %}
-    <div class="product-status mg-b-15">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="product-status-wrap drp-lst">
-                        <h4>{{ title }}</h4>
-                        {% if btn_text %}
-                            <div class="add-product">
-                                <a type="button" class="btn btn-primary" data-toggle="modal"
-                                   data-target="#myModal">{{ btn_text }}</a>
-                            </div>
-                        {% endif %}
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">{{ btn_text }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{% url 'attendance-list-view' user_type %}" method="get">
-                                            <div class="form-row">
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <input name="date" type="number" class="form-control"
-                                                               placeholder="Date" max="31" min="1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <input name="month" type="month" class="form-control"
-                                                               placeholder="Month">
-                                                    </div>
-                                                </div>
-                                                {% if user.is_superuser %}
-                                                    <div class="col-2">
-                                                        <div class="form-group">
-                                                            <select name="department" class="form-control">
-                                                                <option value="none" selected="" disabled="">Select
-                                                                    Department
-                                                                </option>
-                                                                <option value="tuition">Tuition</option>
-                                                                <option value="1-4">Lower Primary</option>
-                                                                <option value="5-7">Upper Primary</option>
-                                                                <option value="8-10">High School</option>
-                                                                <option value="+1-science'">+1 Science</option>
-                                                                <option value="+2-science">+2 science</option>
-                                                                <option value="+1-commerce">+1 Commerce</option>
-                                                                <option value="+2-commerce">+2 Commerce</option>
-                                                                <option value="b.com/m.com">B.com/ M.com</option>
-                                                                <option value="civil-engineering">Civil Engineering
-                                                                </option>
-                                                                <option value="mechanical-engineering">Mechanical
-                                                                    Engineering
-                                                                </option>
-                                                                <option value="electrical&electronics-engineering">
-                                                                    Electrical&Electronics Engineering
-                                                                </option>
-                                                                <option value="computer-science-engineering">Computer
-                                                                    Science Engineering
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                {% endif %}
-                                                <div>
-                                                    <button type="submit" class="btn btn-primary">Submit
-                                                    </button>
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap drp-lst">
+                    <h4>{{ title }}</h4>
+                    {% if btn_text %}
+                    <div class="add-product">
+                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">{{ btn_text
+                            }}</a>
+                    </div>
+                    {% endif %}
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">{{ btn_text }}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'attendance-list-view' user_type %}" method="get">
+                                        <div class="form-row">
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <input name="date" type="number" class="form-control"
+                                                        placeholder="Date" max="31" min="1">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <input name="month" type="month" class="form-control"
+                                                        placeholder="Month">
+                                                </div>
+                                            </div>
+                                            {% if user.is_superuser %}
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <select name="department" class="form-control">
+                                                        <option value="none" selected="" disabled="">Select
+                                                            Department
+                                                        </option>
+                                                        <option value="tuition">Tuition</option>
+                                                        <option value="1-4">Lower Primary</option>
+                                                        <option value="5-7">Upper Primary</option>
+                                                        <option value="8-10">High School</option>
+                                                        <option value="+1-science'">+1 Science</option>
+                                                        <option value="+2-science">+2 science</option>
+                                                        <option value="+1-commerce">+1 Commerce</option>
+                                                        <option value="+2-commerce">+2 Commerce</option>
+                                                        <option value="b.com/m.com">B.com/ M.com</option>
+                                                        <option value="civil-engineering">Civil Engineering
+                                                        </option>
+                                                        <option value="mechanical-engineering">Mechanical
+                                                            Engineering
+                                                        </option>
+                                                        <option value="electrical&electronics-engineering">
+                                                            Electrical&Electronics Engineering
+                                                        </option>
+                                                        <option value="computer-science-engineering">Computer
+                                                            Science Engineering
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            {% endif %}
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="asset-inner">
-                            <table>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Name</th>
-                                    <th>User Type</th>
-                                    <th>Department</th>
-                                    <th>Course</th>
-                                    <th>Attendance Status</th>
-                                </tr>
-                                {% for item in list_items %}
-                                    <tr>
-                                        <td>{{ item.date|date }}</td>
-                                        <td>{{ item.user }}</td>
-                                        <td>{{ item.user.get_user_type_display }}</td>
-                                        <td>{{ item.user.get_department_display }}</td>
-                                        <td>
-                                            {% if item.user.user_type == 'student' %}
-                                                {{ item.subject }}
-                                            {% elif item.user.user_type == 'trainee' %}
-                                                {{ item.course }}
-                                            {% elif item.user.user_type == 'teacher' %}
-                                                {{ item.user.get_subject }}
-                                            {% else %}
-                                                {{ item.user.get_course }}
-                                            {% endif %}
-                                        </td>
-                                        <td>{{ item.get_status_display }}</td>
-                                    </tr>
-                                {% empty %}
-                                    <td colspan="6">
-                                        <div class="alert alert-info alert-st-two" role="alert">
-                                            <i class="fa fa-info-circle edu-inform admin-check-pro"
-                                               aria-hidden="true"></i>
-                                            <p class="message-mg-rt">Nothing found..</p>
-                                        </div>
-                                    </td>
-                                {% endfor %}
-                            </table>
-                        </div>
+                    </div>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>User Type</th>
+                                <th>Department</th>
+                                <th>Course</th>
+                                <th>Attendance Status</th>
+                            </tr>
+                            {% for item in list_items %}
+                            <tr>
+                                <td>{{ item.date|date }}</td>
+                                <td>{{ item.user }}</td>
+                                <td>{{ item.user.get_user_type_display }}</td>
+                                <td>{{ item.user.get_department_display }}</td>
+                                <td>
+                                    {% if item.user.user_type == 'student' %}
+                                    {{ item.subject }}
+                                    {% elif item.user.user_type == 'trainee' %}
+                                    {{ item.course }}
+                                    {% elif item.user.user_type == 'teacher' %}
+                                    {{ item.user.get_subject }}
+                                    {% else %}
+                                    {{ item.user.get_course }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.get_status_display }}</td>
+                            </tr>
+                            {% empty %}
+                            <td colspan="6">
+                                <div class="alert alert-info alert-st-two" role="alert">
+                                    <i class="fa fa-info-circle edu-inform admin-check-pro" aria-hidden="true"></i>
+                                    <p class="message-mg-rt">Nothing found..</p>
+                                </div>
+                            </td>
+                            {% endfor %}
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

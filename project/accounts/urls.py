@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 
 from accounts.views import available_class_view
 from accounts.views import course_add
@@ -23,7 +24,6 @@ from accounts.views import trainer_creation_view
 from accounts.views import trainers_list_view
 from accounts.views import user_profile_view
 from accounts.views import contact_us
-from institute.views import class_details_view
 
 urlpatterns = [
     path('<int:user_id>/profile/', user_profile_view, name='user-profile-details'),
@@ -48,5 +48,6 @@ urlpatterns = [
     path('subjects/', subject_create_list_view, name='subject-create-list'),
     path('available-class/', available_class_view, name='available-class'),
     path('select_class_view/<int:teacher_id>/', select_class_view, name='select-class'),
+    
     path('contact_us/', contact_us, name='contact_us'),
 ]
